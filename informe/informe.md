@@ -146,3 +146,49 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
   - Has Picture
   - Link Availibility
   - Promotional keywords 
+
+
+### Análisis de los algoritmos disponibles.
+
+¿Qué algoritmos podemos usar para este problema de clasificación?
+
+Para un problema de clasificación existen varios algoritmos que podemos considerar:
+
+- **Regresión Logística:** es un algoritmo lineal utilizado para la clasificación binaria. Estima la probabilidad de pertenecer a una clase específica.
+- **Árboles de Decisión:** este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una característica y cada rama representa una decisión o un resultado. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
+- **Bosques Aleatorios (Random Forest):** es un conjunto de árboles de decisión que trabajan en paralelo y generan predicciones. Cada árbol en el bosque vota por la clase a la que pertenece, y la clase con más votos se selecciona como la predicción final.
+- **Máquinas de Vectores de Soporte (SVM):** este algoritmo encuentra un hiperplano óptimo que separa las clases en un espacio de alta dimensión. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
+- **Naive Bayes:** este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí. Es rápido y eficiente en términos de recursos computacionales.
+- **Redes Neuronales Artificiales (ANN):** estas son estructuras que imitan el funcionamiento del cerebro humano. Pueden ser utilizadas para problemas de clasificación tanto binaria como multiclase, pero pueden requerir más datos y recursos computacionales.
+
+Cabe destacar que la elección del algoritmo adecuado depende del problema específico, los datos disponibles y las características del conjunto de datos.
+
+
+**Regresión Logística o Regresión Lineal.**
+
+Este algoritmo es una buena opción para este problema de clasificación pero debido a que queremos aprovechar el dataset amplio del que disponemos.
+
+**Árboles de decisión.**
+
+Debido a la gran cantidad de valores que tenemos en el dataset buscaremos usar un algoritmo que pueda encontrar las relaciones no obvias en el dataset, además de que es sensible al sobreajuste.
+
+**Bósques aleatorios (Random Forest)**
+
+Este algoritmo nos parece el ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset.
+
+**Máquinas de Vectores de Soporte.**
+
+El algoritmo MVS da excelentes resultados en estos problemas de clasificación pero no tiene buena performance con datasets grandes, como es nuestro caso. Además de que requiere una gran capacidad de cómputo por su complejidad temporal de O(dn<sup>2</sup>), lo cual se volvería muy costoso debido al tamaño del dataset.
+
+**Algoritmo Naive Bayes.**
+
+El principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente.
+
+**Redes Neuronales.**
+
+Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
+
+
+#### Conclusión.
+
+Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
