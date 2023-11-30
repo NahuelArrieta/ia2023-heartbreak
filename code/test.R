@@ -1,13 +1,15 @@
 library(dplyr)
 
 ## test the model
-test <- function(model, train_variables) {
+test <- function(model, train_variables, file_name) {
     ## get validation dataframe
     test_dataframe <- get_test_df()
 
     ## preprocess the dataframe
-    test_dataframe <- preprocess(test_dataframe, TRUE)
-
+    preprocess_data <- preprocess(test_dataframe, train_variables)
+    test_dataframe <- preprocess_data$dataframe
+    message <- preprocess_data$message
+   
     ## predict the test dataframe
     test_dataframe$prediction_class <- predict(model, newdata = test_dataframe, type = "class")
 
@@ -29,14 +31,30 @@ test <- function(model, train_variables) {
     negative_predictive_value <- TN / (TN + FN)
 
     ## Print the metrics
-    print("\nMetrics:")
-    print("| | **Predicted Positive**| **Predicted Negative** | |")
-    print("|:--:|:--:|:--:|:--:|")
-    print(paste("| **Actual Positive**", "| TP: ", TP, " | FN: ", FN, " | Sensitivity: ", recall, " |"))
-    print(paste("| **Actual Negative**", "| FP: ", FP, " | TN: ", TN, " | Specificity: ", specificity, " |"))
-    print(paste("| | Precision: ", precision, " | Negative Predictive Value: ", negative_predictive_value, " | **Accuracy**: ", accuracy, " |"))
+    metrics <- "\n ## Metrics:\n"
+    metrics <- paste(metrics, "| | **Predicted Positive**| **Predicted Negative** | |\n")
+    metrics <- paste(metrics, "|:--:|:--:|:--:|:--:|\n")
+    metrics <- paste(metrics, "| **Actual Positive**", "| TP: ", TP, " | FN: ", FN, " | Sensitivity: ", recall, " |\n")
+    metrics <- paste(metrics, "| **Actual Negative**", "| FP: ", FP, " | TN: ", TN, " | Specificity: ", specificity, " |\n")
+    metrics <- paste(metrics, "| | Precision: ", precision, " | Negative Predictive Value: ", negative_predictive_value, " | **Accuracy**: ", accuracy, " |\n")
     
+    ## Save the message and metrics
+    title <- paste("# Test results for ", file_name, "\n")
+    message_to_save <- paste(title,message, metrics)
+    file_name <- paste("results/", file_name, sep = "")
 
+    # Check if file already exists
+    if (file.exists(file_name)) {
+        # Find a new file name by appending a number
+        i <- 1
+        while (file.exists(paste0(file_name, ".", i))) {
+            i <- i + 1
+        }
+        file_name <- paste0(file_name, ".", i)
+    }
 
-    
+    ## Add sufix
+    file_name <- paste0(file_name, ".md")
+
+    write(message_to_save, file = file_name, append = FALSE, sep = "\n")
 }

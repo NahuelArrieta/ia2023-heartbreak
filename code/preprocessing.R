@@ -1,4 +1,4 @@
-preprocess <- function(dataframe, show_message) {
+preprocess <- function(dataframe, train_variables) {
     ## Set class as boolean
     dataframe$is_fake <- ifelse(dataframe$class == "f", TRUE, FALSE)
 
@@ -6,7 +6,8 @@ preprocess <- function(dataframe, show_message) {
     dataframe <- dataframe[, -which(names(dataframe) == "class")]
 
     ## start message as empty
-    message <- "The following preprocessing steps will be applied: \n"
+    message_title <- "\n ## The following preprocessing steps will be applied: \n"
+    message <- ""
 
     ## Modify the dataframe according to the train variables
     if (train_variables$remove_non_image_post_percentage) {
@@ -34,9 +35,16 @@ preprocess <- function(dataframe, show_message) {
         message <- paste(message, "- Add follow difference \n")
     }
 
-    if (show_message) {
-        print(message)
+    if (message == "") {
+        message <- "No preprocessing steps will be applied\n"
     }
+    message <- paste(message_title, message)
+    
 
-    return(dataframe)
+    preprocess_data <- list(
+        dataframe = dataframe,
+        message = message
+    )
+
+    return(preprocess_data)
 }

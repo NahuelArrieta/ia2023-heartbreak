@@ -5,7 +5,8 @@ train_model <- function(train_variables, ntree, mtry) {
     dataframe <- get_train_df()
 
     ## Preprocess the dataframe
-    dataframe <- preprocess(dataframe, FALSE)
+    preprocess_data <- preprocess(dataframe, train_variables)
+    dataframe <- preprocess_data$dataframe
 
     ## Train the model
     model <- randomForest(

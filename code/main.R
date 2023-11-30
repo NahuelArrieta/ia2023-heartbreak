@@ -13,9 +13,12 @@ ntree <- 100
 ## Set number of variables
 mtry <- 5
 
+## Set file name
+file_name <- "test"
+
 ## train the model
 model <- train_model(train_variables, ntree, mtry)
 
 ## test the model
-test(model, test_variables)
+test(model, train_variables, file_name)
 

@@ -20,4 +20,3 @@ get_test_df <- function() {
     return(dataframe)
 }
 
-train <- get_train_df()
