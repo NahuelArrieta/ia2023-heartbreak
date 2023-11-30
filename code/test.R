@@ -43,6 +43,9 @@ test <- function(model, train_variables, file_name) {
     today <- format(today, "%Y-%m-%d %H:%M:%S")
     date <- paste("Date: ", today, "\n")
 
+    ## Get the var used
+    var <- paste("Variables: ", train_variables$ntree, " trees, ", train_variables$mtry, " mtry\n")
+
 
     ## Print the importance of the variables
     importance <- "\n ## Variable importance:\n"
@@ -58,7 +61,7 @@ test <- function(model, train_variables, file_name) {
 
     ## Save the message and metrics
     title <- paste("# Test results for", file_name)
-    message_to_save <- paste(title, date,message, metrics, importance, sep = "\n")
+    message_to_save <- paste(title, date, var,message, metrics, importance, sep = "\n")
     file_name <- paste("results/", file_name, sep = "")
 
     # Check if file already exists
