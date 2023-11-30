@@ -14,7 +14,7 @@ ntree <- 100
 mtry <- 5
 
 ## Set file name
-file_name <- "modify_columns"
+file_name <- "test"
 
 ## train the model
 model <- train_model(train_variables, ntree, mtry)
