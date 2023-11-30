@@ -11,30 +11,31 @@ preprocess <- function(dataframe, train_variables) {
 
     ## Modify the dataframe according to the train variables
     if (train_variables$remove_non_image_post_percentage) {
-        ## Remove non image post percentage
+        dataframe <- remove_non_image_post_percentage(dataframe)
         message <- paste(message, "- Remove non image post percentage \n")
     }
 
     if (train_variables$remove_location_tag_percentage) {
-        ## Remove location tag percentage
+        dataframe <- remove_location_tag_percentage(dataframe)
         message <- paste(message, "- Remove location tag percentage \n")
     }
 
     if (train_variables$remove_comments_engagement_rate) {
-        ## Remove comments engagement rate
+        dataframe <- remove_comments_engagement_rate(dataframe)
         message <- paste(message, "- Remove comments engagement rate \n")
     }
 
     if (train_variables$remove_caption_zero) {
-        ## Remove caption zero
+        dataframe <- remove_caption_zero(dataframe)
         message <- paste(message, "- Remove caption zero \n")
     }
 
     if (train_variables$add_follow_difference) {
-        ## Add follow difference
+        dataframe <- add_follow_difference(dataframe)
         message <- paste(message, "- Add follow difference \n")
     }
 
+## If no preprocessing steps are applied, set message to "No preprocessing steps will be applied"
     if (message == "") {
         message <- "No preprocessing steps will be applied\n"
     }

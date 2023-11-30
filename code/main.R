@@ -1,10 +1,10 @@
 ## create train_variables 
 train_variables <- list(
-    remove_non_image_post_percentage = FALSE,
-    remove_location_tag_percentage = FALSE,
-    remove_comments_engagement_rate = FALSE,
-    remove_caption_zero = FALSE,
-    add_follow_difference = FALSE
+    remove_non_image_post_percentage = TRUE,
+    remove_location_tag_percentage = TRUE,
+    remove_comments_engagement_rate = TRUE,
+    remove_caption_zero = TRUE, 
+    add_follow_difference = TRUE
 )
 
 ## Set number of trees
@@ -14,7 +14,7 @@ ntree <- 100
 mtry <- 5
 
 ## Set file name
-file_name <- "test"
+file_name <- "modify_columns"
 
 ## train the model
 model <- train_model(train_variables, ntree, mtry)

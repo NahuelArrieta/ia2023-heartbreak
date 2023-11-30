@@ -38,6 +38,11 @@ test <- function(model, train_variables, file_name) {
     metrics <- paste(metrics, "| **Actual Negative**", "| FP: ", FP, " | TN: ", TN, " | Specificity: ", specificity, " |\n")
     metrics <- paste(metrics, "| | Precision: ", precision, " | Negative Predictive Value: ", negative_predictive_value, " | **Accuracy**: ", accuracy, " |\n")
     
+    ## Get today date as yyyy-mm-dd hh:mm:ss
+    today <- Sys.time()
+    today <- format(today, "%Y-%m-%d %H:%M:%S")
+    date <- paste("Date: ", today, "\n")
+
 
     ## Print the importance of the variables
     importance <- "\n ## Variable importance:\n"
@@ -53,7 +58,7 @@ test <- function(model, train_variables, file_name) {
 
     ## Save the message and metrics
     title <- paste("# Test results for", file_name)
-    message_to_save <- paste(title,message, metrics, importance, sep = "\n")
+    message_to_save <- paste(title, date,message, metrics, importance, sep = "\n")
     file_name <- paste("results/", file_name, sep = "")
 
     # Check if file already exists
@@ -64,6 +69,8 @@ test <- function(model, train_variables, file_name) {
             i <- i + 1
         }
         file_name <- paste0(file_name, "_", i, ".md")
+    } else {
+        file_name <- paste0(file_name, ".md")
     }
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
