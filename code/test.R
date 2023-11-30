@@ -38,23 +38,33 @@ test <- function(model, train_variables, file_name) {
     metrics <- paste(metrics, "| **Actual Negative**", "| FP: ", FP, " | TN: ", TN, " | Specificity: ", specificity, " |\n")
     metrics <- paste(metrics, "| | Precision: ", precision, " | Negative Predictive Value: ", negative_predictive_value, " | **Accuracy**: ", accuracy, " |\n")
     
+
+    ## Print the importance of the variables
+    importance <- "\n ## Variable importance:\n"
+    importance <- paste(importance, "| Variable | Importance |\n")
+    importance <- paste(importance, "|:--:|:--:|\n")
+    
+    ## iterate over the importance getting the key and the value
+    names <- rownames(model$importance)
+    for (i in 1:length(names)) {
+        importance <- paste(importance, "| ", names[i], " | ", model$importance[i, 1], " |\n")
+    }
+
+
     ## Save the message and metrics
-    title <- paste("# Test results for ", file_name, "\n")
-    message_to_save <- paste(title,message, metrics)
+    title <- paste("# Test results for", file_name)
+    message_to_save <- paste(title,message, metrics, importance, sep = "\n")
     file_name <- paste("results/", file_name, sep = "")
 
     # Check if file already exists
-    if (file.exists(file_name)) {
+    if (file.exists(paste0(file_name, ".md"))) {
         # Find a new file name by appending a number
         i <- 1
-        while (file.exists(paste0(file_name, ".", i))) {
+        while (file.exists(paste0(file_name, "_", i, ".md"))) {
             i <- i + 1
         }
-        file_name <- paste0(file_name, ".", i)
+        file_name <- paste0(file_name, "_", i, ".md")
     }
-
-    ## Add sufix
-    file_name <- paste0(file_name, ".md")
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
 }
