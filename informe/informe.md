@@ -166,11 +166,11 @@ Cabe destacar que la elección del algoritmo adecuado depende del problema espec
 
 **Regresión Logística o Regresión Lineal.**
 
-Este algoritmo es una buena opción para este problema de clasificación pero debido a que queremos aprovechar el dataset amplio del que disponemos.
+Este algoritmo es una buena opción para este problema de clasificación pero debido a que queremos aprovechar el dataset amplio del que disponemos, buscaremos usar un algoritmo más potente cómo Random Forest.
 
 **Árboles de decisión.**
 
-Debido a la gran cantidad de valores que tenemos en el dataset buscaremos usar un algoritmo que pueda encontrar las relaciones no obvias en el dataset, además de que es sensible al sobreajuste.
+Debido a la gran cantidad de valores que tenemos en el dataset buscaremos usar un algoritmo que pueda encontrar las relaciones no obvias en el dataset, además de que es sensible al sobreajuste. Para esquivar estas desventajas buscaremos usar Random Forest que es más dificil de realizar un sobreajuste y además es menos sensible al cambio de las variables.
 
 **Bósques aleatorios (Random Forest)**
 
