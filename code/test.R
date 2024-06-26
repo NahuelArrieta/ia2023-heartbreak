@@ -66,7 +66,7 @@ test <- function(model, train_variables, file_name) {
 
     # Check if file already exists
     if (file.exists(paste0(file_name, ".md"))) {
-        # Find a new file name by appending a number
+        # Find a new file name by appending a number to the name
         i <- 1
         while (file.exists(paste0(file_name, "_", i, ".md"))) {
             i <- i + 1
