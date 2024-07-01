@@ -5,11 +5,9 @@ source("code/train.R")
 source("code/test.R")
 source("code/utils.R")
 
-## Add readr library if not already loaded
-if (!requireNamespace("readr", quietly = TRUE)) {
-    install.packages("readr")
-}
 library(readr)
+library(randomForest)
+library(dplyr)
 
 ## create train_variables 
 train_variables <- list(
@@ -19,13 +17,13 @@ train_variables <- list(
     remove_location_tag_percentage = TRUE,
     remove_comments_engagement_rate = TRUE,
     remove_caption_zero = TRUE, 
-    add_follow_difference = TRUE,
+    add_follow_difference = TRUE
     add_follow_rate = TRUE
 )
 
 
 ## Set file name
-file_name <- "test"
+file_name <- "follow_rate"
 
 ## train the model
 model <- train_model(train_variables)
