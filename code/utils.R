@@ -27,3 +27,9 @@ add_follow_difference <- function(dataframe) {
     dataframe$fd <- dataframe$flg - dataframe$flw
     return(dataframe)
 }
+
+## Add follow rate
+add_follow_rate <- function(dataframe) {
+    dataframe$fr <- dataframe$flw / dataframe$flg
+    return(dataframe)
+}

@@ -149,8 +149,9 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
 
 - Las siguientes características se podrían añadir para denotar más relaciones entre las características del dataset:
 
-  - Rate of follows: followers and following rate es la cantidad de followers dividida la cantidad de following.
-  - Post frecuency: la cantidad de posts dividida el post interval(intervalo de posteos). 
+  - Follow difference: Diferencia entre el número de seguidores y seguidos.
+  - Rate of follows: Cantidad de followers dividida la cantidad de following.
+  - Post frecuency: Cantidad de posts dividida el post interval(intervalo de posteos). 
 
 ### Análisis de los algoritmos disponibles.
 

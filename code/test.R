@@ -46,7 +46,6 @@ test <- function(model, train_variables, file_name) {
     ## Get the var used
     var <- paste("Variables: ", train_variables$ntree, " trees, ", train_variables$mtry, " mtry\n")
 
-
     ## Print the importance of the variables
     importance <- "\n ## Variable importance:\n"
     importance <- paste(importance, "| Variable | Importance |\n")

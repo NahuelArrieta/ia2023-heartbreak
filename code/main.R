@@ -5,6 +5,12 @@ source("code/train.R")
 source("code/test.R")
 source("code/utils.R")
 
+## Add readr library if not already loaded
+if (!requireNamespace("readr", quietly = TRUE)) {
+    install.packages("readr")
+}
+library(readr)
+
 ## create train_variables 
 train_variables <- list(
     ntree = 100,
@@ -13,7 +19,8 @@ train_variables <- list(
     remove_location_tag_percentage = TRUE,
     remove_comments_engagement_rate = TRUE,
     remove_caption_zero = TRUE, 
-    add_follow_difference = TRUE
+    add_follow_difference = TRUE,
+    add_follow_rate = TRUE
 )
 
 
