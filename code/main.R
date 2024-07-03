@@ -17,7 +17,7 @@ train_variables <- list(
     remove_location_tag_percentage = TRUE,
     remove_comments_engagement_rate = TRUE,
     remove_caption_zero = TRUE, 
-    add_follow_difference = TRUE
+    add_follow_difference = TRUE,
     add_follow_rate = TRUE
 )
 

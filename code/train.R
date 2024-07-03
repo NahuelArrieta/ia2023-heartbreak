@@ -17,8 +17,11 @@ train_model <- function(train_variables) {
         formula = is_fake ~ .,
         data = dataframe,
         ntree = ntree,
-        mtry = mtry
+        mtry = mtry,
+        na.action = na.omit
     )
+
+    print("Train model complete.")
 
     return(model)
 

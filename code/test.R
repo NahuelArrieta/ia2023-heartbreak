@@ -17,11 +17,14 @@ test <- function(model, train_variables, file_name) {
     test_dataframe <- test_dataframe %>%
         mutate(prediction_class = ifelse(prediction_class > 0.5, TRUE, FALSE))
 
+    ## Create confusion matrix
+    confusion_matrix <- table(test_dataframe$is_fake, test_dataframe$prediction_class)
+
     ## Calculate the metrics
-    FP <- sum(test_dataframe$prediction_class == TRUE & test_dataframe$is_fake == FALSE)
-    TP <- sum(test_dataframe$prediction_class == TRUE & test_dataframe$is_fake == TRUE)
-    FN <- sum(test_dataframe$prediction_class == FALSE & test_dataframe$is_fake == TRUE)
-    TN <- sum(test_dataframe$prediction_class == FALSE & test_dataframe$is_fake == FALSE)
+    FP <- confusion_matrix[2, 1]
+    FN <- confusion_matrix[1, 2]
+    TP <- confusion_matrix[1, 1]
+    TN <- confusion_matrix[2, 2]
 
     ## Calculate the metrics
     accuracy <- (TP + TN) / (TP + TN + FP + FN)
@@ -30,7 +33,7 @@ test <- function(model, train_variables, file_name) {
     specificity <- TN / (TN + FP)
     negative_predictive_value <- TN / (TN + FN)
 
-    ## Print the metrics
+    # ## Print the metrics
     metrics <- "\n ## Metrics:\n"
     metrics <- paste(metrics, "| | **Predicted Positive**| **Predicted Negative** | |\n")
     metrics <- paste(metrics, "|:--:|:--:|:--:|:--:|\n")
@@ -76,4 +79,6 @@ test <- function(model, train_variables, file_name) {
     }
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
+
+    print("Test complete.")
 }
