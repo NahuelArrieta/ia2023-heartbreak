@@ -18,12 +18,12 @@ train_variables <- list(
     remove_comments_engagement_rate = FALSE,
     remove_caption_zero = FALSE, 
     add_follow_difference = FALSE,
-    add_follow_rate = FALSE
+    add_follow_rate = TRUE
 )
 
 
 ## Set file name of the output md
-file_name <- "no_preprocessing"
+file_name <- "only_follow_rate"
 
 ## train the model
 model <- train_model(train_variables)
