@@ -64,12 +64,19 @@ test <- function(model, train_variables, file_name) {
     ## Save the message and metrics
     title <- paste("# Test results for", file_name)
     message_to_save <- paste(title, date, var,message, metrics, importance, sep = "\n")
-    file_name <- paste("results/", file_name, sep = "")
-
-    # Add number as prefix
+    
+    ## Add number as prefix
     current_files <- list.files("results")
     number <- length(current_files) + 1
-    file_name <- paste(number, "-", file_name, ".md", sep = "")
+
+    ## Add 0 before the number if it is less than 1000
+    if (number < 10) {
+        number <- paste("00", number, sep = "")
+    } else if (number < 100) {
+        number <- paste("0", number, sep = "")
+    }
+    
+    file_name <- paste("results/", number, "-", file_name, ".md", sep = "")
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
 

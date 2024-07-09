@@ -13,17 +13,17 @@ library(dplyr)
 train_variables <- list(
     ntree = 100,
     mtry = 5,
-    remove_non_image_post_percentage = TRUE,
-    remove_location_tag_percentage = TRUE,
-    remove_comments_engagement_rate = TRUE,
-    remove_caption_zero = TRUE, 
-    add_follow_difference = TRUE,
-    add_follow_rate = TRUE
+    remove_non_image_post_percentage = FALSE,
+    remove_location_tag_percentage = FALSE,
+    remove_comments_engagement_rate = FALSE,
+    remove_caption_zero = FALSE, 
+    add_follow_difference = FALSE,
+    add_follow_rate = FALSE
 )
 
 
-## Set file name
-file_name <- "follow_rate"
+## Set file name of the output md
+file_name <- "no_preprocessing"
 
 ## train the model
 model <- train_model(train_variables)
