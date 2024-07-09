@@ -66,17 +66,10 @@ test <- function(model, train_variables, file_name) {
     message_to_save <- paste(title, date, var,message, metrics, importance, sep = "\n")
     file_name <- paste("results/", file_name, sep = "")
 
-    # Check if file already exists
-    if (file.exists(paste0(file_name, ".md"))) {
-        # Find a new file name by appending a number
-        i <- 1
-        while (file.exists(paste0(file_name, "_", i, ".md"))) {
-            i <- i + 1
-        }
-        file_name <- paste0(file_name, "_", i, ".md")
-    } else {
-        file_name <- paste0(file_name, ".md")
-    }
+    # Add number as prefix
+    current_files <- list.files("results")
+    number <- length(current_files) + 1
+    file_name <- paste(number, "-", file_name, ".md", sep = "")
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
 
