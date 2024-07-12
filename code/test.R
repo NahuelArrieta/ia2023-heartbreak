@@ -17,11 +17,14 @@ test <- function(model, train_variables, file_name) {
     test_dataframe <- test_dataframe %>%
         mutate(prediction_class = ifelse(prediction_class > 0.5, TRUE, FALSE))
 
+    ## Create confusion matrix
+    confusion_matrix <- table(test_dataframe$is_fake, test_dataframe$prediction_class)
+
     ## Calculate the metrics
-    FP <- sum(test_dataframe$prediction_class == TRUE & test_dataframe$is_fake == FALSE)
-    TP <- sum(test_dataframe$prediction_class == TRUE & test_dataframe$is_fake == TRUE)
-    FN <- sum(test_dataframe$prediction_class == FALSE & test_dataframe$is_fake == TRUE)
-    TN <- sum(test_dataframe$prediction_class == FALSE & test_dataframe$is_fake == FALSE)
+    FP <- confusion_matrix[2, 1]
+    FN <- confusion_matrix[1, 2]
+    TP <- confusion_matrix[1, 1]
+    TN <- confusion_matrix[2, 2]
 
     ## Calculate the metrics
     accuracy <- (TP + TN) / (TP + TN + FP + FN)
@@ -30,7 +33,7 @@ test <- function(model, train_variables, file_name) {
     specificity <- TN / (TN + FP)
     negative_predictive_value <- TN / (TN + FN)
 
-    ## Print the metrics
+    # ## Print the metrics
     metrics <- "\n ## Metrics:\n"
     metrics <- paste(metrics, "| | **Predicted Positive**| **Predicted Negative** | |\n")
     metrics <- paste(metrics, "|:--:|:--:|:--:|:--:|\n")
@@ -45,7 +48,6 @@ test <- function(model, train_variables, file_name) {
 
     ## Get the var used
     var <- paste("Variables: ", train_variables$ntree, " trees, ", train_variables$mtry, " mtry\n")
-
 
     ## Print the importance of the variables
     importance <- "\n ## Variable importance:\n"
@@ -62,19 +64,21 @@ test <- function(model, train_variables, file_name) {
     ## Save the message and metrics
     title <- paste("# Test results for", file_name)
     message_to_save <- paste(title, date, var,message, metrics, importance, sep = "\n")
-    file_name <- paste("results/", file_name, sep = "")
+    
+    ## Add number as prefix
+    current_files <- list.files("results")
+    number <- length(current_files) + 1
 
-    # Check if file already exists
-    if (file.exists(paste0(file_name, ".md"))) {
-        # Find a new file name by appending a number
-        i <- 1
-        while (file.exists(paste0(file_name, "_", i, ".md"))) {
-            i <- i + 1
-        }
-        file_name <- paste0(file_name, "_", i, ".md")
-    } else {
-        file_name <- paste0(file_name, ".md")
+    ## Add 0 before the number if it is less than 1000
+    if (number < 10) {
+        number <- paste("00", number, sep = "")
+    } else if (number < 100) {
+        number <- paste("0", number, sep = "")
     }
+    
+    file_name <- paste("results/", number, "-", file_name, ".md", sep = "")
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
+
+    print("Test complete.")
 }

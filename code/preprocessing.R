@@ -35,7 +35,12 @@ preprocess <- function(dataframe, train_variables) {
         message <- paste(message, "- Add follow difference \n")
     }
 
-## If no preprocessing steps are applied, set message to "No preprocessing steps will be applied"
+    if (train_variables$add_follow_rate) {
+        dataframe <- add_follow_rate(dataframe)
+        message <- paste(message, "- Add follow rate \n")
+    }
+
+    ## If no preprocessing steps are applied, set message to "No preprocessing steps will be applied"
     if (message == "") {
         message <- "No preprocessing steps will be applied\n"
     }
