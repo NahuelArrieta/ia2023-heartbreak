@@ -53,6 +53,11 @@ preprocess <- function(dataframe, train_variables) {
         message <- paste(message, "- Add following frequency \n")
     }
 
+    if (train_variables$add_image_frequency) {
+        dataframe <- add_image_frequency(dataframe)
+        message <- paste(message, "- Add image frecuency \n")
+    }
+
     ## Remove account age if not needed
     if (!train_variables$add_account_age) {
         dataframe <- remove_account_age(dataframe)

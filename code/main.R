@@ -21,7 +21,8 @@ train_variables <- list(
     add_follow_rate = FALSE,
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
-    add_following_frequency = TRUE
+    add_following_frequency = FALSE,
+    add_image_frequency = TRUE
 )
 
 

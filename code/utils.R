@@ -63,3 +63,13 @@ add_following_frequency <- function(dataframe) {
                             round(dataframe$flg / dataframe$age,4))
     return(dataframe)
 }
+
+## Add Image frequency
+add_image_frequency <- function(dataframe) {
+    ## Images are calculated as the number of post minus the number of non image post
+    ## If age is zero, there was any post, so the image frequency is zero
+    dataframe$ifq <- ifelse(dataframe$age == 0, 
+                            0,                
+                            round((dataframe$pos - (dataframe$pos * dataframe$ni)) / dataframe$age,4))
+    return(dataframe)
+}
