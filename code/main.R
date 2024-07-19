@@ -20,7 +20,8 @@ train_variables <- list(
     add_follow_difference = FALSE,
     add_follow_rate = FALSE,
     add_account_age = FALSE,
-    add_follower_frequency = TRUE
+    add_follower_frequency = FALSE,
+    add_following_frequency = TRUE
 )
 
 

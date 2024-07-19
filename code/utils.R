@@ -54,3 +54,12 @@ add_follower_frequency <- function(dataframe) {
                             round(dataframe$flw / dataframe$age,4))
     return(dataframe)
 }
+
+## Add following frequency
+add_following_frequency <- function(dataframe) {
+    ## if age is 0, then the following frequency is the number of following
+    dataframe$fgf <- ifelse(dataframe$age == 0, 
+                            dataframe$flg ,
+                            round(dataframe$flg / dataframe$age,4))
+    return(dataframe)
+}

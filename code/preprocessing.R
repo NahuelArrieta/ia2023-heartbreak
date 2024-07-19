@@ -48,6 +48,11 @@ preprocess <- function(dataframe, train_variables) {
         message <- paste(message, "- Add follower frequency \n")
     }
 
+    if (train_variables$add_following_frequency) {
+        dataframe <- add_following_frequency(dataframe)
+        message <- paste(message, "- Add following frequency \n")
+    }
+
     ## Remove account age if not needed
     if (!train_variables$add_account_age) {
         dataframe <- remove_account_age(dataframe)
