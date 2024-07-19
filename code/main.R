@@ -19,12 +19,13 @@ train_variables <- list(
     remove_caption_zero = FALSE, 
     add_follow_difference = FALSE,
     add_follow_rate = FALSE,
-    add_account_age = TRUE
+    add_account_age = FALSE,
+    add_follower_frequency = TRUE
 )
 
 
 ## Set file name of the output md
-file_name <- "account_age"
+file_name <- "follower_frequency"
 
 ## train the model
 model <- train_model(train_variables)

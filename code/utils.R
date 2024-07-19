@@ -45,3 +45,12 @@ remove_account_age <- function(dataframe) {
     dataframe <- dataframe[, -which(names(dataframe) == "age")]
     return(dataframe)
 }
+
+## Add follower frequency
+add_follower_frequency <- function(dataframe) {
+    ## if age is 0, then the follower frequency is the number of followers
+    dataframe$ff <- ifelse(dataframe$age == 0, 
+                            dataframe$flw ,
+                            round(dataframe$flw / dataframe$age,4))
+    return(dataframe)
+}
