@@ -152,6 +152,10 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
   - Follow difference: Diferencia entre el número de seguidores y seguidos.
   - Rate of follows: Cantidad de followers dividida la cantidad de following.
   - Post frecuency: Cantidad de posts dividida el post interval(intervalo de posteos). 
+  - Account age: Antigüedad de la cuenta. Se puede calcular en base a la cantidad de posts y el post interval.
+  - Follower frequency: Cantidad de followers dividida la antigüedad de la cuenta.
+  - Following frequency: Cantidad de following dividida la antigüedad de la cuenta.
+  - Images frequency: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 ### Análisis de los algoritmos disponibles.
 

@@ -9,6 +9,9 @@ preprocess <- function(dataframe, train_variables) {
     message_title <- "\n ## The following preprocessing steps will be applied: \n"
     message <- ""
 
+    ## Always add account age for avoid calculating it multiple times
+    dataframe <- add_account_age(dataframe)
+
     ## Modify the dataframe according to the train variables
     if (train_variables$remove_non_image_post_percentage) {
         dataframe <- remove_non_image_post_percentage(dataframe)
@@ -38,6 +41,13 @@ preprocess <- function(dataframe, train_variables) {
     if (train_variables$add_follow_rate) {
         dataframe <- add_follow_rate(dataframe)
         message <- paste(message, "- Add follow rate \n")
+    }
+
+    ## Remove account age if not needed
+    if (!train_variables$add_account_age) {
+        dataframe <- remove_account_age(dataframe)
+    } else {
+        message <- paste(message, "- Add account age \n")
     }
 
     ## If no preprocessing steps are applied, set message to "No preprocessing steps will be applied"

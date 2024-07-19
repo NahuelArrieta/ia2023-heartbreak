@@ -18,12 +18,13 @@ train_variables <- list(
     remove_comments_engagement_rate = FALSE,
     remove_caption_zero = FALSE, 
     add_follow_difference = FALSE,
-    add_follow_rate = TRUE
+    add_follow_rate = FALSE,
+    add_account_age = TRUE
 )
 
 
 ## Set file name of the output md
-file_name <- "only_follow_rate"
+file_name <- "account_age"
 
 ## train the model
 model <- train_model(train_variables)

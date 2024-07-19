@@ -33,3 +33,15 @@ add_follow_rate <- function(dataframe) {
     dataframe$fr <- dataframe$flw / dataframe$flg
     return(dataframe)
 }
+
+## Account age
+add_account_age <- function(dataframe) {
+    ## Calculated as post interval * number of posts
+    dataframe$age <- dataframe$pi * dataframe$pos
+    return(dataframe)
+}
+
+remove_account_age <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "age")]
+    return(dataframe)
+}
