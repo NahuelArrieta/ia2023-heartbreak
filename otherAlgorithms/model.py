@@ -31,7 +31,6 @@ class Model:
             self.train(X_train, y_train)
             train_time += time.time() - start
 
-
             accuracy += self.test(X_test, y_test)
 
         self.avg_time = train_time / n
