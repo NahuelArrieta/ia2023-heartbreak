@@ -33,3 +33,43 @@ add_follow_rate <- function(dataframe) {
     dataframe$fr <- dataframe$flw / dataframe$flg
     return(dataframe)
 }
+
+## Account age
+add_account_age <- function(dataframe) {
+    ## Calculated as post interval * number of posts
+    dataframe$age <- dataframe$pi * dataframe$pos
+    return(dataframe)
+}
+
+remove_account_age <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "age")]
+    return(dataframe)
+}
+
+## Add follower frequency
+add_follower_frequency <- function(dataframe) {
+    ## if age is 0, then the follower frequency is the number of followers
+    dataframe$ff <- ifelse(dataframe$age == 0, 
+                            dataframe$flw ,
+                            round(dataframe$flw / dataframe$age,4))
+    return(dataframe)
+}
+
+## Add following frequency
+add_following_frequency <- function(dataframe) {
+    ## if age is 0, then the following frequency is the number of following
+    dataframe$fgf <- ifelse(dataframe$age == 0, 
+                            dataframe$flg ,
+                            round(dataframe$flg / dataframe$age,4))
+    return(dataframe)
+}
+
+## Add Image frequency
+add_image_frequency <- function(dataframe) {
+    ## Images are calculated as the number of post minus the number of non image post
+    ## If age is zero, there was any post, so the image frequency is zero
+    dataframe$ifq <- ifelse(dataframe$age == 0, 
+                            0,                
+                            round((dataframe$pos - (dataframe$pos * dataframe$ni)) / dataframe$age,4))
+    return(dataframe)
+}
