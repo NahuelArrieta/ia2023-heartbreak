@@ -1,4 +1,4 @@
-# Test results for follower_frequency
+# Test results for following_frequency
 Date:  2024-07-18 22:11:51 
 
 Variables:  100  trees,  5  mtry
