@@ -1,3 +1,10 @@
+## Scale the data
+scale_data <- function(dataframe) {
+    scaled_dataframe <- as.data.frame(scale(dataframe))
+    names(scaled_dataframe) <- names(dataframe)
+    return(scaled_dataframe)
+}
+
 ## Remove caption zero
 remove_caption_zero <- function(dataframe) {
     dataframe <- dataframe[, -which(names(dataframe) == "cz")]

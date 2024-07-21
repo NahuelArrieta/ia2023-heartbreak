@@ -13,6 +13,11 @@ preprocess <- function(dataframe, train_variables) {
     dataframe <- add_account_age(dataframe)
 
     ## Modify the dataframe according to the train variables
+    if (train_variables$scale_data) {
+        dataframe <- scale_data(dataframe)
+        message <- paste(message, "- Scale data \n")
+    }
+
     if (train_variables$remove_non_image_post_percentage) {
         dataframe <- remove_non_image_post_percentage(dataframe)
         message <- paste(message, "- Remove non image post percentage \n")

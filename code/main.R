@@ -13,6 +13,7 @@ library(dplyr)
 train_variables <- list(
     ntree = 100,
     mtry = 5,
+    scale_data = TRUE,
     remove_non_image_post_percentage = FALSE,
     remove_location_tag_percentage = FALSE,
     remove_comments_engagement_rate = FALSE,
@@ -22,12 +23,12 @@ train_variables <- list(
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
     add_following_frequency = FALSE,
-    add_image_frequency = TRUE
+    add_image_frequency = FALSE
 )
 
 
 ## Set file name of the output md
-file_name <- "follower_frequency"
+file_name <- "scaling"
 
 ## train the model
 model <- train_model(train_variables)
