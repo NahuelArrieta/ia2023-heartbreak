@@ -201,3 +201,51 @@ Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
+
+## Entrenamiento del modelo
+En base a la investigación realizada, se procedió a entrenar el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
+
+A continuación se presentan los resultados obtenidos en las pruebas realizadas:
+
+### 1- Modelo sin preprocesamiento
+El primer modelo se entrenó sin realizar ningún tipo de preprocesamiento en los datos, con el objetivo de evaluar las modificaciones que se pueden realizar en el dataset para mejorar el rendimiento del modelo. Se utilizaron 100 árboles y 5 variables predictoras en cada árbol.
+
+Los resultados de la matriz de confusión fueron las siguientes:
+ | | **Predicted Positive**| **Predicted Negative** | |
+ |:--:|:--:|:--:|:--:|
+ | **Actual Positive** | TP:  6224  | FN:  285  | Sensitivity:  0.956214472269166  |
+ | **Actual Negative** | FP:  1083  | TN:  5474  | Specificity:  0.834833002897667  |
+ | | Precision:  0.851785958669769  | Negative Predictive Value:  0.95051224170863  | **Accuracy**:  0.895300780652074  |
+
+Además se obtuvo la importancia de las variables:
+ | Variable | Importance |
+ |:--:|:--:|
+ |  Num posts |  459.761258190958  |
+ |  Num followers  |  735.805088278248  |
+ |  Num following  |  2091.16579555838  |
+ |  Bio length  |  627.457577048002  |
+ |  Has picture  |  13.2295974190987  |
+ |  Link zvailability  |  2153.48815752171  |
+ |  Avg caption length  |  534.722734277606  |
+ |  Caption zero  |  266.496444291937  |
+ |  Non image percentage  |  168.669221114669  |
+ |  Like engagement rate  |  1448.20487223423  |
+ |  Comments engagement rate  |  2152.98693259071  |
+ |  Location tag percentage  |  600.213569894813  |
+ |  Average hashtag count  |  199.270343752644  |
+ |  Promotional keywords   |  195.66162222508  |
+ |  Followers keywords  |  122.984566460685  |
+ |  Cosine similarity  |  354.513301793794  |
+ |  Post interval  |  495.154604529331  |
+
+Las primeras conclusiones que se pueden obtener de este modelo son:
+- Contrariamente a lo que se esperaba, la característica "Comments engagement rate" resultó ser una de las más importantes para la clasificación de las cuentas.
+- Las características "Follower keywords",  "Has Picture" y "Non image percentage" son las menos importantes para el modelo.
+- Las variables "Location tag percentage", "Bio length", "Post interval" y "Promotional keywords" no tuvieron el impacto que esperábamos cuando analizamos el dataset.
+
+### 2- Dataset con followers-following ratio
+En esta prueba se agregó una nueva característica al dataset denominada "follow_rate" que representa la relación entre el número de seguidores y seguidos de una cuenta. 
+
+La importancia que tuvo esta nueva característica en el modelo fue de 2366.98, siendo la más importante de todas las variables. Además se notó una importante disminución en la importancia de las variables "Num followers" (de 735.80 a 413.23) y "Num following" (de 2091.17 a 1104.46). 
+
+En cuanto a los resultados, el se obtuvo una pequeña mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
