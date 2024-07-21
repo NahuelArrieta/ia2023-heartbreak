@@ -249,3 +249,8 @@ En esta prueba se agregó una nueva característica al dataset denominada "follo
 La importancia que tuvo esta nueva característica en el modelo fue de 2366.98, siendo la más importante de todas las variables. Además se notó una importante disminución en la importancia de las variables "Num followers" (de 735.80 a 413.23) y "Num following" (de 2091.17 a 1104.46). 
 
 En cuanto a los resultados, el se obtuvo una pequeña mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
+
+### 3- Dataset con antigüedad de la cuenta
+En esta prueba se agregó una nueva característica al dataset denominada "account_age" que representa la antigüedad de la cuenta. Se calculó multiplicando el número de publicaciones por el intervalo de tiempo entre publicaciones, lo cual nos da un indicio de cuánto tiempo lleva la cuenta activa; sin embargo si la cuenta no ha publicado nada, la antigüedad será 0.
+
+Esta nueva feature no fue muy útil ya que su importancia fue de 437.20 y el la accuracy disminuyó ligéramente a 0.8941.
