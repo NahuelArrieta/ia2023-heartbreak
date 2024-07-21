@@ -13,11 +13,11 @@ library(dplyr)
 train_variables <- list(
     ntree = 100,
     mtry = 5,
-    scale_data = TRUE,
-    remove_non_image_post_percentage = FALSE,
-    remove_location_tag_percentage = FALSE,
-    remove_comments_engagement_rate = FALSE,
-    remove_caption_zero = FALSE, 
+    scale_data = FALSE,
+    remove_non_image_post_percentage = TRUE,
+    remove_location_tag_percentage = TRUE,
+    remove_comments_engagement_rate = TRUE,
+    remove_caption_zero = TRUE, 
     add_follow_difference = FALSE,
     add_follow_rate = FALSE,
     add_account_age = FALSE,
@@ -28,7 +28,7 @@ train_variables <- list(
 
 
 ## Set file name of the output md
-file_name <- "scaling"
+file_name <- "remove_features"
 
 ## train the model
 model <- train_model(train_variables)
