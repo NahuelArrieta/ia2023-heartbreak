@@ -13,12 +13,30 @@
 ## Descripción
 
 ### Sobre el proyecto
+En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un módelo capaz de detectar cuentas falsas de Instagram.
 
-``` json
-// TODO: Separar sobre el proyecto y info del dataset
-``` 
+Instagram es una red social con una gran popularidad, cuya principal función es compartir fotos y videos. El sistema de interacción se basa en seguir a otros usarios, por lo cual cada cuenta tiene seguidores y seguidos. Además de las publicaciones, cada cuenta tiene una biografía, una imagen de perfil y puede tener un link externo.
 
-El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la red social Instagram es falsa (ya sea un bot o tenga seguidores comprados). Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual prueba ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos de utilidad como: 
+## Objetivo
+La masificación de las redes sociales ha llevado a la creación de cuentas falsas que buscan engañar a los usuarios. 
+
+Detectar estas cuentas es de vital importancia por varias razones:
+- En primer lugar, las cuentas falsas pueden ser utilizadas para difundir información errónea o engañosa, lo cual puede tener consecuencias negativas para los usuarios y la sociedad en general. 
+- Además, estas cuentas a menudo están involucradas en actividades fraudulentas, como estafas y phishing, que ponen en riesgo la seguridad y privacidad de los usuarios legítimos. 
+- Las cuentas falsas también pueden inflar artificialmente los números de seguidores y engagement, lo que distorsiona las métricas y afecta la credibilidad de influencers y marcas. Esto puede llevar a decisiones empresariales erróneas basadas en datos falsos. 
+- Finalmente, la proliferación de cuentas falsas puede afectar la experiencia general del usuario, reduciendo la confianza en la plataforma y llevando a una menor interacción y satisfacción de los usuarios auténticos. 
+
+Por todas estas razones, contar con un modelo que permita a Instagram detectar cuentas falsas de manera automática y eficiente es de suma importancia. El mismo contribuiría a mantener la confianza de los usuarios en la plataforma, promoviendo una experiencia más auténtica y satisfactoria. 
+
+
+### ¿Qué es una cuenta falsa? 
+Una cuenta falsa es una cuenta de usuario en una red social que no representa a una persona real. Si bien pueden parecer fácil de identificar debido a ciertas características, como la falta de una imagen de perfil o poca actividad, muchos usuarios reales poseen también este comportamiento.  Dar una definición precisa de que es una cuenta falsa no es sencillo, ya que no existe un criterio único que permita identificarlas de manera inequívoca. Esto va a decantar en un gran desafío a la hora de testear la performance del modelo en un entorno real.
+
+Por lo tanto, el modelo que se propone en este proyecto no tiene como objetivo identificar cuentas falsas de manera absoluta, sino detectar patrones y características comunes en cuentas que han sido identificadas como falsas en el pasado.
+
+
+### Implementación
+Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual resulta ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos muy interesantes como: 
 
 - Average Caption length: Longitud promedio de descripción en publicaciones.
 
@@ -54,15 +72,6 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
 
 - Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
 
-### ¿Qué es una cuenta falsa? 
-``` json
-// TODO: Descrbirir el objetivo del proyecto.
-``` 
-
-### Objetivo 
-``` json
-// TODO: Descrbirir el objetivo del proyecto.
-``` 
 
 ## Metodología
 
