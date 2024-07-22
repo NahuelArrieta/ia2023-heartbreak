@@ -281,3 +281,11 @@ En base al primer análisis de las variables del dataset se consideró eliminar 
 - Caption zero
 
 Las diferencias entre el resultado de este modelo y el modelo sin preprocesamiento no fueron significativas, mas allá de que la accuracy decreció a 0.8733 y que la importancia de "Post Interval" cambió de 495.15 a 877.80.
+
+### 9- Dataset con diferencia entre followers y following
+En este modelo se añadió una feature al dataset llamada "follow_differece" obtenida de la resta entre el número de seguidores y seguidos de una cuenta.
+
+Esta prueba tuvo un buen resultado: La accuracy mejoró a 0.8966 y la importancia de la variable fue de 1967.10. Además cabe destaccar que la importancia de "Num following" bajó a la mitad (de 2091.16 a 1002.19), mientras que la de "Num followers" se mantuvo.
+
+
+
