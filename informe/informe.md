@@ -244,13 +244,24 @@ Las primeras conclusiones que se pueden obtener de este modelo son:
 - Las variables "Location tag percentage", "Bio length", "Post interval" y "Promotional keywords" no tuvieron el impacto que esperábamos cuando analizamos el dataset.
 
 ### 2- Dataset con followers-following ratio
-En esta prueba se agregó una nueva característica al dataset denominada "follow_rate" que representa la relación entre el número de seguidores y seguidos de una cuenta. 
+Al dataset se le incluyó una feature denominada "follow_rate" que representa la relación entre el número de seguidores y seguidos de una cuenta. 
 
 La importancia que tuvo esta nueva característica en el modelo fue de 2366.98, siendo la más importante de todas las variables. Además se notó una importante disminución en la importancia de las variables "Num followers" (de 735.80 a 413.23) y "Num following" (de 2091.17 a 1104.46). 
 
 En cuanto a los resultados, el se obtuvo una pequeña mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
 
 ### 3- Dataset con antigüedad de la cuenta
-En esta prueba se agregó una nueva característica al dataset denominada "account_age" que representa la antigüedad de la cuenta. Se calculó multiplicando el número de publicaciones por el intervalo de tiempo entre publicaciones, lo cual nos da un indicio de cuánto tiempo lleva la cuenta activa; sin embargo si la cuenta no ha publicado nada, la antigüedad será 0.
+Se agregó una característica al dataset denominada "account_age" que representa la antigüedad de la cuenta. Se calculó multiplicando el número de publicaciones por el intervalo de tiempo entre publicaciones, lo cual nos da un indicio de cuánto tiempo lleva la cuenta activa; sin embargo si la cuenta no ha publicado nada, la antigüedad será 0.
 
-Esta nueva feature no fue muy útil ya que su importancia fue de 437.20 y el la accuracy disminuyó ligéramente a 0.8941.
+Esta nueva feature no fue muy útil ya que su importancia fue de 437.20 y la accuracy disminuyó ligéramente a 0.8941.
+
+### 4- Dataset con followers frequency
+En esta prueba se añadió una nueva feature al dataset denominada "followers_frequency" que representa la cantidad de seguidores dividida la antigüedad de la cuenta.
+
+Al igual que la prueba anterior, esta nueva característica tuvo una baja  importancia en el modelo (355.15) y el accuracy disminuyó a 0.8937.
+
+### 5- Dataset con following frequency
+Para este entrenamiento se añadió una feature denominada "following_frequency" que representa la cantidad de seguidos dividida la antigüedad de la cuenta. 
+
+En esta caso la variable tuvo una importancia alta (1177.64) y la importancia de "Num following" disminuyó a 1598.15. La accuracy del modelo fue de 0.8960.
+
