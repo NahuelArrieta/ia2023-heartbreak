@@ -280,12 +280,14 @@ En base al primer análisis de las variables del dataset se consideró eliminar 
 - Comments engagement rate
 - Caption zero
 
-Las diferencias entre el resultado de este modelo y el modelo sin preprocesamiento no fueron significativas, mas allá de que la accuracy decreció a 0.8733 y que la importancia de "Post Interval" cambió de 495.15 a 877.80.
+En este caso la accuracy del modelo decreció notablemente a 0.8733 y la importancia de "Post Interval" cambió de 495.15 a 877.80. El resto de las variables no tuvieron cambios significativos en su importancia.
 
 ### 9- Dataset con diferencia entre followers y following
 En este modelo se añadió una feature al dataset llamada "follow_differece" obtenida de la resta entre el número de seguidores y seguidos de una cuenta.
 
 Esta prueba tuvo un buen resultado: La accuracy mejoró a 0.8966 y la importancia de la variable fue de 1967.10. Además cabe destaccar que la importancia de "Num following" bajó a la mitad (de 2091.16 a 1002.19), mientras que la de "Num followers" se mantuvo.
 
+### 10- Dataset sin non_image_post_percentage, location_tag_percentage y caption_zero
+Esta prueba es similar a la número 8, pero se decidió mantener la variable "Comments engagement rate" debido a la importancia que tuvo en el modelo sin preprocesamiento. 
 
-
+Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, tuvo una accuracy similar al modelo sin preprocesamiento (0.8954) y la importancia de las variables no tuvo cambios significativos.
