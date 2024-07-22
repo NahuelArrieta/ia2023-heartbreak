@@ -203,9 +203,9 @@ Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
 
 ## Entrenamiento del modelo
-En base a la investigación realizada, se procedió a entrenar el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
+En base a la investigación realizada, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
 
-A continuación se presentan los resultados obtenidos en las pruebas realizadas:
+A continuación se presentan los de las pruebas realizadas:
 
 ### 1- Modelo sin preprocesamiento
 El primer modelo se entrenó sin realizar ningún tipo de preprocesamiento en los datos, con el objetivo de evaluar las modificaciones que se pueden realizar en el dataset para mejorar el rendimiento del modelo. Se utilizaron 100 árboles y 5 variables predictoras en cada árbol.
@@ -217,7 +217,7 @@ Los resultados de la matriz de confusión fueron las siguientes:
  | **Actual Negative** | FP:  1083  | TN:  5474  | Specificity:  0.834833002897667  |
  | | Precision:  0.851785958669769  | Negative Predictive Value:  0.95051224170863  | **Accuracy**:  0.895300780652074  |
 
-Además se obtuvo la importancia de las variables:
+Además se obtuvo la importancia de las diferentes variables:
  | Variable | Importance |
  |:--:|:--:|
  |  Num posts |  459.761258190958  |
@@ -248,7 +248,7 @@ Al dataset se le incluyó una feature denominada "follow_rate" que representa la
 
 La importancia que tuvo esta nueva característica en el modelo fue de 2366.98, siendo la más importante de todas las variables. Además se notó una importante disminución en la importancia de las variables "Num followers" (de 735.80 a 413.23) y "Num following" (de 2091.17 a 1104.46). 
 
-En cuanto a los resultados, el se obtuvo una pequeña mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
+En cuanto a los resultados, el se obtuvo una mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
 
 ### 3- Dataset con antigüedad de la cuenta
 Se agregó una característica al dataset denominada "account_age" que representa la antigüedad de la cuenta. Se calculó multiplicando el número de publicaciones por el intervalo de tiempo entre publicaciones, lo cual nos da un indicio de cuánto tiempo lleva la cuenta activa; sin embargo si la cuenta no ha publicado nada, la antigüedad será 0.
@@ -266,7 +266,7 @@ Para este entrenamiento se añadió una feature denominada "following_frequency"
 En esta caso la variable tuvo una importancia alta (1177.64) y la importancia de "Num following" disminuyó a 1598.15. La accuracy del modelo fue de 0.8960.
 
 ### 6- Dataset con image frequency
-Se añadió una nueva feature al dataset denominada "image_frequency" calculada como la cantidad de imágenes dividida la antigüedad de la cuenta. Nuevamente, los resultados no fueron los esperados ya que la importancia de la variable fue de 332.48 y la accuracy del modelo bajó de 0.8944.
+Se añadió una nueva feature al dataset denominada "image_frequency" calculada como la cantidad de imágenes dividida la antigüedad de la cuenta. Nuevamente, los resultados no fueron los esperados ya que la importancia de la variable fue de 332.48 y la accuracy del modelo bajó a 0.8944.
 
 ### 7- Escalado de variables
 En esta prueba se escaló el dataset utilizando la función `scale` de la librería `sklearn.preprocessing`, con el objetivo de normalizar las variables y mejorar el rendimiento del modelo.
@@ -291,3 +291,12 @@ Esta prueba tuvo un buen resultado: La accuracy mejoró a 0.8966 y la importanci
 Esta prueba es similar a la número 8, pero se decidió mantener la variable "Comments engagement rate" debido a la importancia que tuvo en el modelo sin preprocesamiento. 
 
 Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, tuvo una accuracy similar al modelo sin preprocesamiento (0.8954) y la importancia de las variables no tuvo cambios significativos.
+
+### Conclusiones del entrenamiento del modelo
+- La característica "Comments engagement rate" resultó ser una de las más importantes para la clasificación de las cuentas, y su eliminación puede afectar negativamente el rendimiento del modelo.
+- Las características "Follow difference" y "Follow rate" resultaron ser muy importantes para la clasificación de las cuentas, y su inclusión en el modelo mejoró significativamente el rendimiento del modelo.
+- Si se aplican las características "Follow difference" y "Follow rate", las características "Num followers" y "Num following" pierden importancia en el modelo.
+- La eliminación de las características "Non image post percentage", "Location tag percentage" y "Caption zero" tuvo un ligero impacto positivo en el rendimiento del modelo, pero no fue significativo.
+- El escalado de las variables tuvo resultados negativos en el rendimiento del modelo de Random Forest.
+- Las características "Account age", "Followers frequency", "Following frequency" e "Image frequency" no tuvieron un impacto significativo en el rendimiento del modelo.
+- Las features "Follow keywords", "Has Picture", "Bio length", "Has Picture" y "Promotional keywords" han tenido baja importancia en todas las pruebas realizadas, por lo que podrían ser eliminadas en futuras pruebas.
