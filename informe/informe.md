@@ -1,5 +1,9 @@
 # Inteligencia Artificial I - Informe Proyecto Final.
 
+``` json
+// TODO Table of content
+```
+
 ## Heartbreak: Modelo para detectar cuentas falsas de Instagram
 
 **Integrantes:** 
@@ -367,6 +371,11 @@ Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, 
 ``` 
 
 ### Sobre el proyecto
+``` json
+// TODO: 
+``` 
+
+## Bibliografía
 ``` json
 // TODO: 
 ``` 
