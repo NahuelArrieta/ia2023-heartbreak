@@ -8,6 +8,12 @@
 
 ## Descripción
 
+### Sobre el proyecto
+
+``` json
+// TODO: Separar sobre el proyecto y info del dataset
+``` 
+
 El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la red social Instagram es falsa (ya sea un bot o tenga seguidores comprados). Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual prueba ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos de utilidad como: 
 
 - Average Caption length: Longitud promedio de descripción en publicaciones.
@@ -43,6 +49,28 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
 - Post interval: Intervalo de tiempo en horas entre publicaciones.
 
 - Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
+
+### ¿Qué es una cuenta falsa? 
+``` json
+// TODO: Descrbirir el objetivo del proyecto.
+``` 
+
+### Objetivo 
+``` json
+// TODO: Descrbirir el objetivo del proyecto.
+``` 
+
+## Metodología
+
+### Planificación 
+``` json
+// TODO
+``` 
+
+### Realidad
+``` json
+// TODO: Descrbirir el objetivo del proyecto.
+``` 
 
 ## Investigación 
 
@@ -197,10 +225,25 @@ El principal problema del uso de este algoritmo es que se asume que las variable
 
 Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
 
+``` json
+// TODO: Mejorar
+``` 
 
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
+
+## Entorno de trabajo
+
+### Random Forest en R
+``` json
+// TODO: 
+``` 
+
+### Otros algorithmos en Python
+``` json
+// TODO: 
+``` 
 
 ## Entrenamiento del modelo
 En base a la investigación realizada, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
@@ -300,3 +343,30 @@ Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, 
 - El escalado de las variables tuvo resultados negativos en el rendimiento del modelo de Random Forest.
 - Las características "Account age", "Followers frequency", "Following frequency" e "Image frequency" no tuvieron un impacto significativo en el rendimiento del modelo.
 - Las features "Follow keywords", "Has Picture", "Bio length", "Has Picture" y "Promotional keywords" han tenido baja importancia en todas las pruebas realizadas, por lo que podrían ser eliminadas en futuras pruebas.
+
+## Ajustes al modelo
+``` json
+// TODO: 
+``` 
+
+## Resultados
+``` json
+// TODO: 
+``` 
+
+## Conclusiones
+
+### Análisis de resultados
+``` json
+// TODO: 
+``` 
+
+### Por qué este trabajo no es útil en la actualidad
+``` json
+// TODO: 
+``` 
+
+### Sobre el proyecto
+``` json
+// TODO: 
+``` 
