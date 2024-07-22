@@ -17,7 +17,7 @@ En el marco de la materia Inteligencia Artificial I de la Licenciatura en Cienci
 
 Instagram es una red social con una gran popularidad, cuya principal función es compartir fotos y videos. El sistema de interacción se basa en seguir a otros usarios, por lo cual cada cuenta tiene seguidores y seguidos. Además de las publicaciones, cada cuenta tiene una biografía, una imagen de perfil y puede tener un link externo.
 
-## Objetivo
+### Objetivo
 La masificación de las redes sociales ha llevado a la creación de cuentas falsas que buscan engañar a los usuarios. 
 
 Detectar estas cuentas es de vital importancia por varias razones:
