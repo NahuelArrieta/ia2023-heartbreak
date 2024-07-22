@@ -201,3 +201,102 @@ Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
+
+## Entrenamiento del modelo
+En base a la investigación realizada, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
+
+A continuación se presentan los de las pruebas realizadas:
+
+### 1- Modelo sin preprocesamiento
+El primer modelo se entrenó sin realizar ningún tipo de preprocesamiento en los datos, con el objetivo de evaluar las modificaciones que se pueden realizar en el dataset para mejorar el rendimiento del modelo. Se utilizaron 100 árboles y 5 variables predictoras en cada árbol.
+
+Los resultados de la matriz de confusión fueron las siguientes:
+ | | **Predicted Positive**| **Predicted Negative** | |
+ |:--:|:--:|:--:|:--:|
+ | **Actual Positive** | TP:  6224  | FN:  285  | Sensitivity:  0.956214472269166  |
+ | **Actual Negative** | FP:  1083  | TN:  5474  | Specificity:  0.834833002897667  |
+ | | Precision:  0.851785958669769  | Negative Predictive Value:  0.95051224170863  | **Accuracy**:  0.895300780652074  |
+
+Además se obtuvo la importancia de las diferentes variables:
+ | Variable | Importance |
+ |:--:|:--:|
+ |  Num posts |  459.761258190958  |
+ |  Num followers  |  735.805088278248  |
+ |  Num following  |  2091.16579555838  |
+ |  Bio length  |  627.457577048002  |
+ |  Has picture  |  13.2295974190987  |
+ |  Link zvailability  |  2153.48815752171  |
+ |  Avg caption length  |  534.722734277606  |
+ |  Caption zero  |  266.496444291937  |
+ |  Non image percentage  |  168.669221114669  |
+ |  Like engagement rate  |  1448.20487223423  |
+ |  Comments engagement rate  |  2152.98693259071  |
+ |  Location tag percentage  |  600.213569894813  |
+ |  Average hashtag count  |  199.270343752644  |
+ |  Promotional keywords   |  195.66162222508  |
+ |  Followers keywords  |  122.984566460685  |
+ |  Cosine similarity  |  354.513301793794  |
+ |  Post interval  |  495.154604529331  |
+
+Las primeras conclusiones que se pueden obtener de este modelo son:
+- Contrariamente a lo que se esperaba, la característica "Comments engagement rate" resultó ser una de las más importantes para la clasificación de las cuentas.
+- Las características "Follower keywords",  "Has Picture" y "Non image percentage" son las menos importantes para el modelo.
+- Las variables "Location tag percentage", "Bio length", "Post interval" y "Promotional keywords" no tuvieron el impacto que esperábamos cuando analizamos el dataset.
+
+### 2- Dataset con followers-following ratio
+Al dataset se le incluyó una feature denominada "follow_rate" que representa la relación entre el número de seguidores y seguidos de una cuenta. 
+
+La importancia que tuvo esta nueva característica en el modelo fue de 2366.98, siendo la más importante de todas las variables. Además se notó una importante disminución en la importancia de las variables "Num followers" (de 735.80 a 413.23) y "Num following" (de 2091.17 a 1104.46). 
+
+En cuanto a los resultados, el se obtuvo una mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
+
+### 3- Dataset con antigüedad de la cuenta
+Se agregó una característica al dataset denominada "account_age" que representa la antigüedad de la cuenta. Se calculó multiplicando el número de publicaciones por el intervalo de tiempo entre publicaciones, lo cual nos da un indicio de cuánto tiempo lleva la cuenta activa; sin embargo si la cuenta no ha publicado nada, la antigüedad será 0.
+
+Esta nueva feature no fue muy útil ya que su importancia fue de 437.20 y la accuracy disminuyó ligéramente a 0.8941.
+
+### 4- Dataset con followers frequency
+En esta prueba se añadió una nueva feature al dataset denominada "followers_frequency" que representa la cantidad de seguidores dividida la antigüedad de la cuenta.
+
+Al igual que la prueba anterior, esta nueva característica tuvo una baja  importancia en el modelo (355.15) y el accuracy disminuyó a 0.8937.
+
+### 5- Dataset con following frequency
+Para este entrenamiento se añadió una feature denominada "following_frequency" que representa la cantidad de seguidos dividida la antigüedad de la cuenta. 
+
+En esta caso la variable tuvo una importancia alta (1177.64) y la importancia de "Num following" disminuyó a 1598.15. La accuracy del modelo fue de 0.8960.
+
+### 6- Dataset con image frequency
+Se añadió una nueva feature al dataset denominada "image_frequency" calculada como la cantidad de imágenes dividida la antigüedad de la cuenta. Nuevamente, los resultados no fueron los esperados ya que la importancia de la variable fue de 332.48 y la accuracy del modelo bajó a 0.8944.
+
+### 7- Escalado de variables
+En esta prueba se escaló el dataset utilizando la función `scale` de la librería `sklearn.preprocessing`, con el objetivo de normalizar las variables y mejorar el rendimiento del modelo.
+
+Sin embargo, los resultados no fueron los esperados ya que la cantidad de falsos negativos aumentó considerablemente (de 285 a 1805), lo que se tradujo en una disminución de la accuracy del modelo a 0.7766.
+
+### 8- Eliminación de variables 
+En base al primer análisis de las variables del dataset se consideró eliminar las siguientes variables debido a que su distribución era muy similar entre las clases real y fake:
+- Non image post percentage
+- Location tag percentage
+- Comments engagement rate
+- Caption zero
+
+En este caso la accuracy del modelo decreció notablemente a 0.8733 y la importancia de "Post Interval" cambió de 495.15 a 877.80. El resto de las variables no tuvieron cambios significativos en su importancia.
+
+### 9- Dataset con diferencia entre followers y following
+En este modelo se añadió una feature al dataset llamada "follow_differece" obtenida de la resta entre el número de seguidores y seguidos de una cuenta.
+
+Esta prueba tuvo un buen resultado: La accuracy mejoró a 0.8966 y la importancia de la variable fue de 1967.10. Además cabe destaccar que la importancia de "Num following" bajó a la mitad (de 2091.16 a 1002.19), mientras que la de "Num followers" se mantuvo.
+
+### 10- Dataset sin non_image_post_percentage, location_tag_percentage y caption_zero
+Esta prueba es similar a la número 8, pero se decidió mantener la variable "Comments engagement rate" debido a la importancia que tuvo en el modelo sin preprocesamiento. 
+
+Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, tuvo una accuracy similar al modelo sin preprocesamiento (0.8954) y la importancia de las variables no tuvo cambios significativos.
+
+### Conclusiones del entrenamiento del modelo
+- La característica "Comments engagement rate" resultó ser una de las más importantes para la clasificación de las cuentas, y su eliminación puede afectar negativamente el rendimiento del modelo.
+- Las características "Follow difference" y "Follow rate" resultaron ser muy importantes para la clasificación de las cuentas, y su inclusión en el modelo mejoró significativamente el rendimiento del modelo.
+- Si se aplican las características "Follow difference" y "Follow rate", las características "Num followers" y "Num following" pierden importancia en el modelo.
+- La eliminación de las características "Non image post percentage", "Location tag percentage" y "Caption zero" tuvo un ligero impacto positivo en el rendimiento del modelo, pero no fue significativo.
+- El escalado de las variables tuvo resultados negativos en el rendimiento del modelo de Random Forest.
+- Las características "Account age", "Followers frequency", "Following frequency" e "Image frequency" no tuvieron un impacto significativo en el rendimiento del modelo.
+- Las features "Follow keywords", "Has Picture", "Bio length", "Has Picture" y "Promotional keywords" han tenido baja importancia en todas las pruebas realizadas, por lo que podrían ser eliminadas en futuras pruebas.
