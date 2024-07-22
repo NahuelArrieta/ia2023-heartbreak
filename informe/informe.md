@@ -268,3 +268,16 @@ En esta caso la variable tuvo una importancia alta (1177.64) y la importancia de
 ### 6- Dataset con image frequency
 Se añadió una nueva feature al dataset denominada "image_frequency" calculada como la cantidad de imágenes dividida la antigüedad de la cuenta. Nuevamente, los resultados no fueron los esperados ya que la importancia de la variable fue de 332.48 y la accuracy del modelo bajó de 0.8944.
 
+### 7- Escalado de variables
+En esta prueba se escaló el dataset utilizando la función `scale` de la librería `sklearn.preprocessing`, con el objetivo de normalizar las variables y mejorar el rendimiento del modelo.
+
+Sin embargo, los resultados no fueron los esperados ya que la cantidad de falsos negativos aumentó considerablemente (de 285 a 1805), lo que se tradujo en una disminución de la accuracy del modelo a 0.7766.
+
+### 8- Eliminación de variables 
+En base al primer análisis de las variables del dataset se consideró eliminar las siguientes variables debido a que su distribución era muy similar entre las clases real y fake:
+- Non image post percentage
+- Location tag percentage
+- Comments engagement rate
+- Caption zero
+
+Las diferencias entre el resultado de este modelo y el modelo sin preprocesamiento no fueron significativas, mas allá de que la accuracy decreció a 0.8733 y que la importancia de "Post Interval" cambió de 495.15 a 877.80.
