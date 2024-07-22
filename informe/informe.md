@@ -265,3 +265,6 @@ Para este entrenamiento se añadió una feature denominada "following_frequency"
 
 En esta caso la variable tuvo una importancia alta (1177.64) y la importancia de "Num following" disminuyó a 1598.15. La accuracy del modelo fue de 0.8960.
 
+### 6- Dataset con image frequency
+Se añadió una nueva feature al dataset denominada "image_frequency" calculada como la cantidad de imágenes dividida la antigüedad de la cuenta. Nuevamente, los resultados no fueron los esperados ya que la importancia de la variable fue de 332.48 y la accuracy del modelo bajó de 0.8944.
+
