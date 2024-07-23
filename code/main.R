@@ -19,7 +19,7 @@ train_variables <- list(
     remove_comments_engagement_rate = FALSE,
     remove_caption_zero = FALSE, 
     add_follow_difference = FALSE,
-    add_follow_rate = FALSE,
+    add_follow_rate = TRUE,
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
     add_following_frequency = FALSE,
@@ -29,7 +29,7 @@ train_variables <- list(
     remove_follower_keywords = FALSE,
     remove_has_picture = FALSE,
     remove_bio_length = FALSE,
-    remove_post_interval = FALSE,
+    remove_post_interval = TRUE,
     remove_promotional_keywords = TRUE
 )
 
