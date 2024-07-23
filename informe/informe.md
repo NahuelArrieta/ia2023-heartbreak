@@ -1,14 +1,44 @@
 # Inteligencia Artificial I - Informe Proyecto Final.
 
+``` json
+// TODO Table of content
+```
+
 ## Heartbreak: Modelo para detectar cuentas falsas de Instagram
 
 **Integrantes:** 
   - Nahuel Arrieta
   - Leonel Castinelli.
 
+**Repositorio:** https://github.com/NahuelArrieta/ia2023-heartbreak
+
 ## Descripción
 
-El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la red social Instagram es falsa (ya sea un bot o tenga seguidores comprados). Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual prueba ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos de utilidad como: 
+### Sobre el proyecto
+En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un módelo capaz de detectar cuentas falsas de Instagram.
+
+Instagram es una red social con una gran popularidad, cuya principal función es compartir fotos y videos. El sistema de interacción se basa en seguir a otros usarios, por lo cual cada cuenta tiene seguidores y seguidos. Además de las publicaciones, cada cuenta tiene una biografía, una imagen de perfil y puede tener un link externo.
+
+### Objetivo
+La masificación de las redes sociales ha llevado a la creación de cuentas falsas que buscan engañar a los usuarios. 
+
+Detectar estas cuentas es de vital importancia por varias razones:
+- En primer lugar, las cuentas falsas pueden ser utilizadas para difundir información errónea o engañosa, lo cual puede tener consecuencias negativas para los usuarios y la sociedad en general. 
+- Además, estas cuentas a menudo están involucradas en actividades fraudulentas, como estafas y phishing, que ponen en riesgo la seguridad y privacidad de los usuarios legítimos. 
+- Las cuentas falsas también pueden inflar artificialmente los números de seguidores y engagement, lo que distorsiona las métricas y afecta la credibilidad de influencers y marcas. Esto puede llevar a decisiones empresariales erróneas basadas en datos falsos. 
+- Finalmente, la proliferación de cuentas falsas puede afectar la experiencia general del usuario, reduciendo la confianza en la plataforma y llevando a una menor interacción y satisfacción de los usuarios auténticos. 
+
+Por todas estas razones, contar con un modelo que permita a Instagram detectar cuentas falsas de manera automática y eficiente es de suma importancia. El mismo contribuiría a mantener la confianza de los usuarios en la plataforma, promoviendo una experiencia más auténtica y satisfactoria. 
+
+
+### ¿Qué es una cuenta falsa? 
+Una cuenta falsa es una cuenta de usuario en una red social que no representa a una persona real. Si bien pueden parecer fácil de identificar debido a ciertas características, como la falta de una imagen de perfil o poca actividad, muchos usuarios reales poseen también este comportamiento.  Dar una definición precisa de que es una cuenta falsa no es sencillo, ya que no existe un criterio único que permita identificarlas de manera inequívoca. Esto va a decantar en un gran desafío a la hora de testear la performance del modelo en un entorno real.
+
+Por lo tanto, el modelo que se propone en este proyecto no tiene como objetivo identificar cuentas falsas de manera absoluta, sino detectar patrones y características comunes en cuentas que han sido identificadas como falsas en el pasado.
+
+
+### Implementación
+Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual resulta ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos muy interesantes como: 
 
 - Average Caption length: Longitud promedio de descripción en publicaciones.
 
@@ -43,6 +73,65 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
 - Post interval: Intervalo de tiempo en horas entre publicaciones.
 
 - Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
+
+
+## Organización del proyecto
+
+### Planificación de las actividades
+En el anteproyecto se planteó la siguiente planificación:
+
+- **Actividad 1:** Recopilar información.**[5 días]**
+
+- **Actividad 2:** Limpiar la información.**[4 días]**
+
+- **Actividad 3:** Preprocesamiento de datos.**[4 días]**
+
+- **Actividad 4:** Selección de los conjuntos de entrenamiento y prueba.**[4 días]**
+
+- **Actividad 5:** Entrenamiento del modelo. **[5 días]**
+
+- **Actividad 6:** Validación del modelo y análisis de las métricas resultantes. **[3 días]** 
+
+- **Actividad 7:** Ajustes al modelo. **[4 días]**
+
+- **Actividad 8:** Elaboración del informe final. **[4 días]**
+
+![](/images/gantt_heartbreak.png)
+
+### Desarrolo de las actividades
+El proceso de desarrollo del proyecto se vió afectado por la falta de tiempo de los integrantes debido a cuestiones personales y laborales, y se reaizó en dos etapas.
+
+La primera se empezó en noviembre de 2023 y en ella se recopiló información, se limpió y preprocesó los datos, y se seleccionaron los conjuntos de entrenamiento y prueba. Además se comenzó con el entrenamiento del modelo, pero no se conluyó. Se reanudo con el poryecto, en una segunda fase, en junio de 2024 y se completaron las actividades de entrenamiento del modelo, validación y ajustes al modelo. El informe final se fue completando a medida que se realizaban las actividades. 
+
+La carga de trabajo no fue constante a lo largo del proyecto, sino que cadda alumno se encargó de las tareas de forma individual en el momento que le fue posible. A continuación se detallan los tiempos tomados en cada actividad:
+
+- **Actividad 1:** Recopilar información.**[6 días]**
+
+- **Actividad 2:** Limpiar la información.**[1 día]**
+
+- **Actividad 3:** Preprocesamiento de datos.**[1 día]**
+
+- **Actividad 4:** Selección de los conjuntos de entrenamiento y prueba.**[1 día]**
+
+- **Actividad 5:** Entrenamiento del modelo. **[7 días]**
+
+- **Actividad 6:** Validación del modelo y análisis de las métricas resultantes. **[2 días]** 
+
+``` json
+// TODO: Agregar tiempo real de las actividades 7 y 8.
+```
+
+Si bien se ha relizado trabajo por fuera de esta plataforma, todo el código y la documentación se encuentra en el repositorio de github. Por lo tanto el gráfico de contribuciones resulta útil para visualizar los tiempos de trabajo empleados:
+![](images/contributions.png) 
+
+
+``` json
+// TODO: Actualizar gráfico de contribuciones una vez finalizado el proyecto.
+``` 
+
+``` json
+// TODO: Agregar gráfico de Gantt con la planificación real.
+``` 
 
 ## Investigación 
 
@@ -158,7 +247,6 @@ El proyecto consta  de generar un modelo que pueda predecir si una cuenta de la 
   - Images frequency: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 ### Análisis de los algoritmos disponibles.
-
 ¿Qué algoritmos podemos usar para este problema de clasificación?
 
 Para un problema de clasificación existen varios algoritmos que podemos considerar:
@@ -169,6 +257,7 @@ Para un problema de clasificación existen varios algoritmos que podemos conside
 - **Máquinas de Vectores de Soporte (SVM):** este algoritmo encuentra un hiperplano óptimo que separa las clases en un espacio de alta dimensión. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 - **Naive Bayes:** este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí. Es rápido y eficiente en términos de recursos computacionales.
 - **Redes Neuronales Artificiales (ANN):** estas son estructuras que imitan el funcionamiento del cerebro humano. Pueden ser utilizadas para problemas de clasificación tanto binaria como multiclase, pero pueden requerir más datos y recursos computacionales.
+- **K-Nearest Neighbors (KNN):** este algoritmo clasifica un punto de datos basado en la clase de sus vecinos más cercanos. Es simple y fácil de implementar, pero puede ser lento con grandes conjuntos de datos.
 
 Cabe destacar que la elección del algoritmo adecuado depende del problema específico, los datos disponibles y las características del conjunto de datos.
 
@@ -197,10 +286,129 @@ El principal problema del uso de este algoritmo es que se asume que las variable
 
 Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
 
+**K-Nearest Neighbors.**
+La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso.
 
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
+
+Además, para comparar los resultados obtenidos con Random Forest, se realizarán implementaciones sencillas con los siguientes algoritmos: 
+- Regresión Logística.
+- Árboles de Decisión.
+- KNN.
+- Naive Bayes.
+
+## Entorno de trabajo
+
+### Random Forest en R
+Para el entrenamiento del modelo Random Forest en R se utilizó la librería `randomForest`, la cual provee las funciones necesarias para entrenar el modelo y realizar las predicciones sobre el conjunto de test para luego evaluar el rendimiento del modelo.
+
+``` r
+## Train the model
+model <- randomForest(
+    formula = is_fake ~ .,
+    data = dataframe,
+    ntree = ntree,
+    mtry = mtry,
+    na.action = na.omit
+)
+
+## Predict the classes
+test_dataframe$prediction_class <- predict(model, newdata = test_dataframe, type = "class")
+```
+
+Para poder realizar el prepocesamiento necesario en los datos, se definió en el archivo `code/utils.R` todas las funciones necesarias para realizar las transformaciones requeridas. Por ejemplo para poder eliminar las variable 'non_image_post_percentage':
+  
+``` r
+## Remove non image post percentage
+remove_non_image_post_percentage <- function(dataframe) {
+      dataframe <- dataframe[, -which(names(dataframe) == "ni")]
+      return(dataframe)
+}
+```
+
+Se definió una función que dada una lista de parametros denominada `train_variables` se encarga de llamar a esas funciones para realizar el preprocesamiento de los datos.
+
+``` r
+## Set the variables to train the model
+train_variables <- list(
+    ntree = 100,
+    mtry = 5,
+    scale_data = FALSE,
+    remove_non_image_post_percentage = TRUE,
+    remove_location_tag_percentage = TRUE,
+    remove_comments_engagement_rate = FALSE,
+    remove_caption_zero = TRUE, 
+    add_follow_difference = FALSE,
+    add_follow_rate = FALSE,
+    add_account_age = FALSE,
+    add_follower_frequency = FALSE,
+    add_following_frequency = FALSE,
+    add_image_frequency = FALSE
+)
+
+## Train the model
+model <- train_model(train_variables)
+```
+
+Además se creó una función que se encarga de evaluar el rendimiento del modelo y generar un archivo `.md` dentro de la carpeta `results` para cada prueba realizada y así comparar los resultados obtenidos con distintas configuraciones de hiperparámetros.
+Estos archivos contienten información sobre la configuración utilizada, la matriz de confusión y la importancia de cada variable en el modelo. 
+
+
+### Otros algorithmos en Python
+Para los algoritmos de Regresión Logística, Árboles de Decisión, KNN y Naive Bayes se utilizó la librería `sklearn` de Python. La implemetnación se basó en una clase `Model` que contiene los métodos necesarios para entrenar el modelo, realizar las predicciones y evaluar el rendimiento del modelo.
+
+``` python
+
+class Model:
+    def __init__(self, model, name):
+        self.model = model
+        self.name = name
+        self.avg_time = 0
+        self.avg_accuracy = 0
+    
+    def train(self, X_train, y_train):
+        self.model.fit(X_train, y_train)
+
+    def test(self, X_test, y_test):
+        accuracy = self.model.score(X_test, y_test)
+        return accuracy
+    
+    def print_results(self):
+        print('\n')
+        print('Model:', self.name)
+        print('Average accuracy:', self.avg_accuracy)
+        print('Average time (s):', self.avg_time)
+        print('-----------------------------------')
+
+    
+    def run(self, X_train, y_train, X_test, y_test, n):
+        train_time = 0
+        accuracy = 0
+
+        for i in range(n):
+            start = time.time()
+            self.train(X_train, y_train)
+            train_time += time.time() - start
+
+            accuracy += self.test(X_test, y_test)
+
+        self.avg_time = train_time / n
+        self.avg_accuracy = accuracy / n 
+```
+
+Luego de esto, se creó una instancia de la clase `Model` para cada algoritmo y se llamó al método `run` un determinado número de veces para obtener el rendimiento promedio del modelo.
+
+``` python
+## Run the models
+iterations = 5
+models = [logistic_regression, knn, decision_tree, naive_bayes]
+for model in models:
+    model.run(X_train, y_train, X_test, y_test, iterations)
+    model.print_results()
+``` 
+
 
 ## Entrenamiento del modelo
 En base a la investigación realizada, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
@@ -300,3 +508,35 @@ Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, 
 - El escalado de las variables tuvo resultados negativos en el rendimiento del modelo de Random Forest.
 - Las características "Account age", "Followers frequency", "Following frequency" e "Image frequency" no tuvieron un impacto significativo en el rendimiento del modelo.
 - Las features "Follow keywords", "Has Picture", "Bio length", "Has Picture" y "Promotional keywords" han tenido baja importancia en todas las pruebas realizadas, por lo que podrían ser eliminadas en futuras pruebas.
+
+## Ajustes al modelo
+``` json
+// TODO 
+``` 
+
+## Resultados
+``` json
+// TODO 
+``` 
+
+## Conclusiones
+
+### Análisis de resultados
+``` json
+// TODO 
+``` 
+
+### Por qué este trabajo no es útil en la actualidad
+``` json
+// TODO 
+``` 
+
+### Sobre el proyecto
+``` json
+// TODO 
+``` 
+
+## Bibliografía
+``` json
+// TODO 
+``` 
