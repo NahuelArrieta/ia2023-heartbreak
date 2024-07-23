@@ -10,6 +10,8 @@
   - Nahuel Arrieta
   - Leonel Castinelli.
 
+**Repositorio:** https://github.com/NahuelArrieta/ia2023-heartbreak
+
 ## Descripción
 
 ### Sobre el proyecto
@@ -94,7 +96,7 @@ En el anteproyecto se planteó la siguiente planificación:
 
 - **Actividad 8:** Elaboración del informe final. **[4 días]**
 
-![](../anteproyecto/gantt_heartbreak.png)
+![](/images/gantt_heartbreak.png)
 
 ### Desarrolo de las actividades
 El proceso de desarrollo del proyecto se vió afectado por la falta de tiempo de los integrantes debido a cuestiones personales y laborales, y se reaizó en dos etapas.
@@ -118,6 +120,14 @@ La carga de trabajo no fue constante a lo largo del proyecto, sino que cadda alu
 ``` json
 // TODO: Agregar tiempo real de las actividades 7 y 8.
 ```
+
+Si bien se ha relizado trabajo por fuera de esta plataforma, todo el código y la documentación se encuentra en el repositorio de github. Por lo tanto el gráfico de contribuciones (https://github.com/NahuelArrieta/ia2023-heartbreak/graphs/contributors) resulta útil para visualizar los tiempos de trabajo empleados:
+![](images/contributions.png) 
+
+
+``` json
+// TODO: Actualizar gráfico de contribuciones una vez finalizado el proyecto.
+``` 
 
 ``` json
 // TODO: Agregar gráfico de Gantt con la planificación real.
