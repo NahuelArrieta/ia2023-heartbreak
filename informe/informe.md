@@ -73,16 +73,54 @@ Se utilizará un algoritmo de machine learning entrenado con un dataset de la pl
 - Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
 
 
-## Metodología
+## Organización del proyecto
 
-### Planificación 
-``` json
-// TODO
-``` 
+### Planificación de las actividades
+En el anteproyecto se planteó la siguiente planificación:
 
-### Realidad
+- **Actividad 1:** Recopilar información.**[5 días]**
+
+- **Actividad 2:** Limpiar la información.**[4 días]**
+
+- **Actividad 3:** Preprocesamiento de datos.**[4 días]**
+
+- **Actividad 4:** Selección de los conjuntos de entrenamiento y prueba.**[4 días]**
+
+- **Actividad 5:** Entrenamiento del modelo. **[5 días]**
+
+- **Actividad 6:** Validación del modelo y análisis de las métricas resultantes. **[3 días]** 
+
+- **Actividad 7:** Ajustes al modelo. **[4 días]**
+
+- **Actividad 8:** Elaboración del informe final. **[4 días]**
+
+![](../anteproyecto/gantt_heartbreak.png)
+
+### Desarrolo de las actividades
+El proceso de desarrollo del proyecto se vió afectado por la falta de tiempo de los integrantes debido a cuestiones personales y laborales, y se reaizó en dos etapas.
+
+La primera se empezó en noviembre de 2023 y en ella se recopiló información, se limpió y preprocesó los datos, y se seleccionaron los conjuntos de entrenamiento y prueba. Además se comenzó con el entrenamiento del modelo, pero no se conluyó. Se reanudo con el poryecto, en una segunda fase, en junio de 2024 y se completaron las actividades de entrenamiento del modelo, validación y ajustes al modelo. El informe final se fue completando a medida que se realizaban las actividades. 
+
+La carga de trabajo no fue constante a lo largo del proyecto, sino que cadda alumno se encargó de las tareas de forma individual en el momento que le fue posible. A continuación se detallan los tiempos tomados en cada actividad:
+
+- **Actividad 1:** Recopilar información.**[6 días]**
+
+- **Actividad 2:** Limpiar la información.**[1 día]**
+
+- **Actividad 3:** Preprocesamiento de datos.**[1 día]**
+
+- **Actividad 4:** Selección de los conjuntos de entrenamiento y prueba.**[1 día]**
+
+- **Actividad 5:** Entrenamiento del modelo. **[7 días]**
+
+- **Actividad 6:** Validación del modelo y análisis de las métricas resultantes. **[2 días]** 
+
 ``` json
-// TODO: Descrbirir el objetivo del proyecto.
+// TODO: Agregar tiempo real de las actividades 7 y 8.
+```
+
+``` json
+// TODO:  Agregar gráfico de Gantt con la planificación real.
 ``` 
 
 ## Investigación 
