@@ -25,12 +25,17 @@ train_variables <- list(
     add_following_frequency = FALSE,
     add_image_frequency = FALSE,
     remove_num_of_followers = FALSE,
-    remove_num_of_following = FALSE
+    remove_num_of_following = FALSE,
+    remove_follower_keywords = FALSE,
+    remove_has_picture = FALSE,
+    remove_bio_length = FALSE,
+    remove_post_interval = FALSE,
+    remove_promotional_keywords = TRUE
 )
 
 
 ## Set file name of the output md
-file_name <- "follow_diff_without_flg"
+file_name <- "remove_post_interval"
 
 ## train the model
 model <- train_model(train_variables)

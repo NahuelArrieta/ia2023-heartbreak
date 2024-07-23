@@ -73,6 +73,31 @@ preprocess <- function(dataframe, train_variables) {
         message <- paste(message, "- Remove number of following \n")
     }
 
+    if (train_variables$remove_follower_keywords) {
+        dataframe <- remove_follower_keywords(dataframe)
+        message <- paste(message, "- Remove follower keywords \n")
+    }
+
+    if (train_variables$remove_has_picture) {
+        dataframe <- remove_has_picture(dataframe)
+        message <- paste(message, "- Remove has picture \n")
+    }
+
+    if (train_variables$remove_bio_length) {
+        dataframe <- remove_bio_length(dataframe)
+        message <- paste(message, "- Remove bio length \n")
+    }
+
+    if (train_variables$remove_post_interval) {
+        dataframe <- remove_post_interval(dataframe)
+        message <- paste(message, "- Remove post interval \n")
+    }
+
+    if (train_variables$remove_promotional_keywords) {
+        dataframe <- remove_promotional_keywords(dataframe)
+        message <- paste(message, "- Remove promotional keywords \n")
+    }
+
     ## Remove account age if not needed
     if (!train_variables$add_account_age) {
         dataframe <- remove_account_age(dataframe)
