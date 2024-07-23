@@ -120,7 +120,7 @@ La carga de trabajo no fue constante a lo largo del proyecto, sino que cadda alu
 ```
 
 ``` json
-// TODO:  Agregar gráfico de Gantt con la planificación real.
+// TODO: Agregar gráfico de Gantt con la planificación real.
 ``` 
 
 ## Investigación 
@@ -347,9 +347,58 @@ Estos archivos contienten información sobre la configuración utilizada, la mat
 
 
 ### Otros algorithmos en Python
-``` json
-// TODO: 
+Para los algoritmos de Regresión Logística, Árboles de Decisión, KNN y Naive Bayes se utilizó la librería `sklearn` de Python. La implemetnación se basó en una clase `Model` que contiene los métodos necesarios para entrenar el modelo, realizar las predicciones y evaluar el rendimiento del modelo.
+
+``` python
+
+class Model:
+    def __init__(self, model, name):
+        self.model = model
+        self.name = name
+        self.avg_time = 0
+        self.avg_accuracy = 0
+    
+    def train(self, X_train, y_train):
+        self.model.fit(X_train, y_train)
+
+    def test(self, X_test, y_test):
+        accuracy = self.model.score(X_test, y_test)
+        return accuracy
+    
+    def print_results(self):
+        print('\n')
+        print('Model:', self.name)
+        print('Average accuracy:', self.avg_accuracy)
+        print('Average time (s):', self.avg_time)
+        print('-----------------------------------')
+
+    
+    def run(self, X_train, y_train, X_test, y_test, n):
+        train_time = 0
+        accuracy = 0
+
+        for i in range(n):
+            start = time.time()
+            self.train(X_train, y_train)
+            train_time += time.time() - start
+
+            accuracy += self.test(X_test, y_test)
+
+        self.avg_time = train_time / n
+        self.avg_accuracy = accuracy / n 
+```
+
+Luego de esto, se creó una instancia de la clase `Model` para cada algoritmo y se llamó al método `run` un determinado número de veces para obtener el rendimiento promedio del modelo.
+
+``` python
+## Run the models
+iterations = 5
+models = [logistic_regression, knn, decision_tree, naive_bayes]
+for model in models:
+    model.run(X_train, y_train, X_test, y_test, iterations)
+    model.print_results()
 ``` 
+
 
 ## Entrenamiento del modelo
 En base a la investigación realizada, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varias pruebas con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
@@ -452,32 +501,32 @@ Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, 
 
 ## Ajustes al modelo
 ``` json
-// TODO: 
+// TODO 
 ``` 
 
 ## Resultados
 ``` json
-// TODO: 
+// TODO 
 ``` 
 
 ## Conclusiones
 
 ### Análisis de resultados
 ``` json
-// TODO: 
+// TODO 
 ``` 
 
 ### Por qué este trabajo no es útil en la actualidad
 ``` json
-// TODO: 
+// TODO 
 ``` 
 
 ### Sobre el proyecto
 ``` json
-// TODO: 
+// TODO 
 ``` 
 
 ## Bibliografía
 ``` json
-// TODO: 
+// TODO 
 ``` 
