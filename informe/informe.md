@@ -121,7 +121,7 @@ La carga de trabajo no fue constante a lo largo del proyecto, sino que cadda alu
 // TODO: Agregar tiempo real de las actividades 7 y 8.
 ```
 
-Si bien se ha relizado trabajo por fuera de esta plataforma, todo el código y la documentación se encuentra en el repositorio de github. Por lo tanto el gráfico de contribuciones (https://github.com/NahuelArrieta/ia2023-heartbreak/graphs/contributors) resulta útil para visualizar los tiempos de trabajo empleados:
+Si bien se ha relizado trabajo por fuera de esta plataforma, todo el código y la documentación se encuentra en el repositorio de github. Por lo tanto el gráfico de contribuciones resulta útil para visualizar los tiempos de trabajo empleados:
 ![](images/contributions.png) 
 
 
