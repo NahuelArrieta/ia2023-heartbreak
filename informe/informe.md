@@ -237,7 +237,6 @@ La carga de trabajo no fue constante a lo largo del proyecto, sino que cadda alu
   - Images frequency: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 ### Análisis de los algoritmos disponibles.
-
 ¿Qué algoritmos podemos usar para este problema de clasificación?
 
 Para un problema de clasificación existen varios algoritmos que podemos considerar:
@@ -248,6 +247,7 @@ Para un problema de clasificación existen varios algoritmos que podemos conside
 - **Máquinas de Vectores de Soporte (SVM):** este algoritmo encuentra un hiperplano óptimo que separa las clases en un espacio de alta dimensión. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 - **Naive Bayes:** este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí. Es rápido y eficiente en términos de recursos computacionales.
 - **Redes Neuronales Artificiales (ANN):** estas son estructuras que imitan el funcionamiento del cerebro humano. Pueden ser utilizadas para problemas de clasificación tanto binaria como multiclase, pero pueden requerir más datos y recursos computacionales.
+- **K-Nearest Neighbors (KNN):** este algoritmo clasifica un punto de datos basado en la clase de sus vecinos más cercanos. Es simple y fácil de implementar, pero puede ser lento con grandes conjuntos de datos.
 
 Cabe destacar que la elección del algoritmo adecuado depende del problema específico, los datos disponibles y las características del conjunto de datos.
 
@@ -276,13 +276,18 @@ El principal problema del uso de este algoritmo es que se asume que las variable
 
 Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
 
-``` json
-// TODO: Mejorar
-``` 
+**K-Nearest Neighbors.**
+La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso.
 
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
+
+Además, para comparar los resultados obtenidos con Random Forest, se realizarán implementaciones sencillas con los siguientes algoritmos: 
+- Regresión Logística.
+- Árboles de Decisión.
+- KNN.
+- Naive Bayes.
 
 ## Entorno de trabajo
 
