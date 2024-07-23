@@ -63,6 +63,16 @@ preprocess <- function(dataframe, train_variables) {
         message <- paste(message, "- Add image frecuency \n")
     }
 
+    if (train_variables$remove_num_of_followers) {
+        dataframe <- remove_num_of_followers(dataframe)
+        message <- paste(message, "- Remove number of followers \n")
+    }
+
+    if (train_variables$remove_num_of_following) {
+        dataframe <- remove_num_of_following(dataframe)
+        message <- paste(message, "- Remove number of following \n")
+    }
+
     ## Remove account age if not needed
     if (!train_variables$add_account_age) {
         dataframe <- remove_account_age(dataframe)

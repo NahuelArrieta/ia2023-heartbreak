@@ -80,3 +80,16 @@ add_image_frequency <- function(dataframe) {
                             round((dataframe$pos - (dataframe$pos * dataframe$ni)) / dataframe$age,4))
     return(dataframe)
 }
+
+## Remove num of followers
+remove_num_of_followers <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "flg")]
+    return(dataframe)
+}
+
+## Remove num of following
+remove_num_of_following <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "flw")]
+    return(dataframe)
+}
+
