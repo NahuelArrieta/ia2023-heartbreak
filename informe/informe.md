@@ -292,9 +292,59 @@ Además, para comparar los resultados obtenidos con Random Forest, se realizará
 ## Entorno de trabajo
 
 ### Random Forest en R
-``` json
-// TODO: 
-``` 
+Para el entrenamiento del modelo Random Forest en R se utilizó la librería `randomForest`, la cual provee las funciones necesarias para entrenar el modelo y realizar las predicciones sobre el conjunto de test para luego evaluar el rendimiento del modelo.
+
+``` r
+## Train the model
+model <- randomForest(
+    formula = is_fake ~ .,
+    data = dataframe,
+    ntree = ntree,
+    mtry = mtry,
+    na.action = na.omit
+)
+
+## Predict the classes
+test_dataframe$prediction_class <- predict(model, newdata = test_dataframe, type = "class")
+```
+
+Para poder realizar el prepocesamiento necesario en los datos, se definió en el archivo `code/utils.R` todas las funciones necesarias para realizar las transformaciones requeridas. Por ejemplo para poder eliminar las variable 'non_image_post_percentage':
+  
+``` r
+## Remove non image post percentage
+remove_non_image_post_percentage <- function(dataframe) {
+      dataframe <- dataframe[, -which(names(dataframe) == "ni")]
+      return(dataframe)
+}
+```
+
+Se definió una función que dada una lista de parametros denominada `train_variables` se encarga de llamar a esas funciones para realizar el preprocesamiento de los datos.
+
+``` r
+## Set the variables to train the model
+train_variables <- list(
+    ntree = 100,
+    mtry = 5,
+    scale_data = FALSE,
+    remove_non_image_post_percentage = TRUE,
+    remove_location_tag_percentage = TRUE,
+    remove_comments_engagement_rate = FALSE,
+    remove_caption_zero = TRUE, 
+    add_follow_difference = FALSE,
+    add_follow_rate = FALSE,
+    add_account_age = FALSE,
+    add_follower_frequency = FALSE,
+    add_following_frequency = FALSE,
+    add_image_frequency = FALSE
+)
+
+## Train the model
+model <- train_model(train_variables)
+```
+
+Además se creó una función que se encarga de evaluar el rendimiento del modelo y generar un archivo `.md` dentro de la carpeta `results` para cada prueba realizada y así comparar los resultados obtenidos con distintas configuraciones de hiperparámetros.
+Estos archivos contienten información sobre la configuración utilizada, la matriz de confusión y la importancia de cada variable en el modelo. 
+
 
 ### Otros algorithmos en Python
 ``` json
