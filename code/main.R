@@ -18,14 +18,14 @@ train_variables <- list(
     remove_location_tag_percentage = FALSE,
     remove_comments_engagement_rate = FALSE,
     remove_caption_zero = FALSE, 
-    add_follow_difference = TRUE,
+    add_follow_difference = FALSE,
     add_follow_rate = FALSE,
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
     add_following_frequency = FALSE,
     add_image_frequency = FALSE,
     remove_num_of_followers = FALSE,
-    remove_num_of_following = TRUE
+    remove_num_of_following = FALSE
 )
 
 
