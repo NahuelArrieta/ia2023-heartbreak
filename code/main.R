@@ -4,7 +4,11 @@ source("code/get_dataset.R")
 source("code/train.R")
 source("code/test.R")
 source("code/utils.R")
+source("code/cross_validation.R")
+source("code/validate.R")
+source("code/print_results.R")
 
+library(doParallel)
 library(readr)
 library(randomForest)
 library(dplyr)
@@ -13,6 +17,7 @@ library(dplyr)
 train_variables <- list(
     ntree = 100,
     mtry = 5,
+    nfolds = 2,
     scale_data = FALSE,
     remove_non_image_post_percentage = FALSE,
     remove_location_tag_percentage = FALSE,
@@ -33,13 +38,9 @@ train_variables <- list(
     remove_promotional_keywords = TRUE
 )
 
+file_name <- "test"
 
-## Set file name of the output md
-file_name <- "remove_post_interval"
+# train(train_variables, file_name)
 
-## train the model
-model <- train_model(train_variables)
-
-## test the model
-test(model, train_variables, file_name)
+validate(train_variables, file_name)
 
