@@ -80,3 +80,45 @@ add_image_frequency <- function(dataframe) {
                             round((dataframe$pos - (dataframe$pos * dataframe$ni)) / dataframe$age,4))
     return(dataframe)
 }
+
+## Remove num of followers
+remove_num_of_followers <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "flg")]
+    return(dataframe)
+}
+
+## Remove num of following
+remove_num_of_following <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "flw")]
+    return(dataframe)
+}
+
+## Remove follower keywords
+remove_follower_keywords <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "fo")]
+    return(dataframe)
+}
+
+## Remove has picture
+remove_has_picture <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "pic")]
+    return(dataframe)
+}
+
+## Remove bio length
+remove_bio_length <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "bl")]
+    return(dataframe)
+}
+
+## Remove post interval
+remove_post_interval <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "pi")]
+    return(dataframe)
+}
+
+## Remove promotional keywords
+remove_promotional_keywords <- function(dataframe) {
+    dataframe <- dataframe[, -which(names(dataframe) == "pr")]
+    return(dataframe)
+}

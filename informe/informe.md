@@ -507,7 +507,7 @@ Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, 
 - La eliminación de las características "Non image post percentage", "Location tag percentage" y "Caption zero" tuvo un ligero impacto positivo en el rendimiento del modelo, pero no fue significativo.
 - El escalado de las variables tuvo resultados negativos en el rendimiento del modelo de Random Forest.
 - Las características "Account age", "Followers frequency", "Following frequency" e "Image frequency" no tuvieron un impacto significativo en el rendimiento del modelo.
-- Las features "Follow keywords", "Has Picture", "Bio length", "Has Picture" y "Promotional keywords" han tenido baja importancia en todas las pruebas realizadas, por lo que podrían ser eliminadas en futuras pruebas.
+- Las features "Follow keywords", "Picture Availability", "Bio length", "Post Interval" y "Promotional keywords" han tenido baja importancia en todas las pruebas realizadas, por lo que podrían ser eliminadas en futuras pruebas.
 
 ## Ajustes al modelo
 ``` json
