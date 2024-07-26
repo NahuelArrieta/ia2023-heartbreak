@@ -225,10 +225,6 @@ Las librerías de python son:
 
 ![](./images/datasetMetrics/class_dist.png)
 
-#### Features que se pueden añadir.
-
-Ahora veremos qué features se pueden derivar de las actuales para ver si se pueden generar features con relevancia.
-
 - Podría considerarse utilizar como feature la diferencia entre el número de seguidores y seguidos (followers - following).
 
 ![](./images/datasetMetrics/followers_following_diff_1.png)
@@ -252,6 +248,10 @@ Ahora veremos qué features se pueden derivar de las actuales para ver si se pue
   - Has Picture
   - Link Availibility
   - Promotional keywords 
+
+#### Features que se pueden añadir.
+
+Ahora veremos qué features se pueden derivar de las actuales para ver si se pueden generar features con relevancia.
 
 - Las siguientes características se podrían añadir para denotar más relaciones entre las características del dataset:
 
