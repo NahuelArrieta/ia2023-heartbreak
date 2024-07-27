@@ -1,11 +1,11 @@
 
-print_results <- function(confusion_matrix, file_name, train_variables, message) {
+print_results <- function(model, confusion_matrix, file_name, train_variables, message) {
      ## Calculate the metrics
     FP <- confusion_matrix[2, 1]
     FN <- confusion_matrix[1, 2]
     TP <- confusion_matrix[1, 1]
     TN <- confusion_matrix[2, 2]
-
+        
     ## Calculate the metrics
     accuracy <- (TP + TN) / (TP + TN + FP + FN)
     precision <- TP / (TP + FP)
