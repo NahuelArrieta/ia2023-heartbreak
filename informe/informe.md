@@ -31,6 +31,9 @@ Detectar estas cuentas es de vital importancia por varias razones:
 
 Por todas estas razones, contar con un modelo que permita a Instagram detectar cuentas falsas de manera automática y eficiente es de suma importancia. El mismo contribuiría a mantener la confianza de los usuarios en la plataforma, promoviendo una experiencia más auténtica, satisfactoria y, sobre todo, más segura. 
 
+### Proceso del proyecto.
+
+Este proceso será llevado a cabo en las siguientes etapas, iniciaremos con un acercamiento al marco teórico en el que se va a trabajar, donde se describirán los algoritmos que utilizaremos en el proyecto y las razones por las que serán utilizados. Siguiente a la etapa descrita se hará un diseño experimental donde   
 
 ## Marco teórico.
 
@@ -92,7 +95,7 @@ Además, para comparar los resultados obtenidos con Random Forest, se realizará
 
 ## Diseño Experimental.
 
-### Métricas del dataset.
+### Descripción del dataset.
 
 Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual resulta ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos muy interesantes como: 
 
