@@ -33,64 +33,101 @@ Por todas estas razones, contar con un modelo que permita a Instagram detectar c
 
 ### Proceso del proyecto.
 
-Este proceso será llevado a cabo en las siguientes etapas, iniciaremos con un acercamiento al marco teórico en el que se va a trabajar, donde se describirán los algoritmos que utilizaremos en el proyecto y las razones por las que serán utilizados. Siguiente a la etapa descrita se hará un diseño experimental donde   
+Este proceso será llevado a cabo en las siguientes etapas, iniciaremos con un acercamiento al marco teórico en el que se va a trabajar, donde se describirán los algoritmos que utilizaremos en el proyecto y las razones por las que serán utilizados. Siguiente a la etapa descrita se hará un diseño experimental donde se describirá el dataset, las librerías utilizadas para la implementación, análsis de los datos obtenidos y experimentos llevados a cabo. Finalmente se realizará un análisis de los resultados y se dará una conclusión de qué tan aplicable es el modelo hoy en día. 
 
 ## Marco teórico.
 
 En la siguientes secciones se analizarán los algoritmos disponibles para cumplir el objetivo principal del proyecto y se dará una conclusión de cual algoritmo es el más apropiado; y será usado para llevar a cabo el entrenamiento del modelo. 
 
-### Análisis de los algoritmos disponibles.
+### Análisis de los algoritmos a utilizar.
 ¿Qué algoritmos podemos usar para este problema de clasificación?
 
-Para un problema de clasificación existen varios algoritmos que podemos considerar:
+Para un problema de clasificación existen varios algoritmos que vamos a considerar:
 
 - **Regresión Logística:** es un algoritmo lineal utilizado para la clasificación binaria. Estima la probabilidad de pertenecer a una clase específica.
 - **Árboles de Decisión:** este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una característica y cada rama representa una decisión o un resultado. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 - **Bosques Aleatorios (Random Forest):** es un conjunto de árboles de decisión que trabajan en paralelo y generan predicciones. Cada árbol en el bosque vota por la clase a la que pertenece, y la clase con más votos se selecciona como la predicción final.
-- **Máquinas de Vectores de Soporte (SVM):** este algoritmo encuentra un hiperplano óptimo que separa las clases en un espacio de alta dimensión. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 - **Naive Bayes:** este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí. Es rápido y eficiente en términos de recursos computacionales.
-- **Redes Neuronales Artificiales (ANN):** estas son estructuras que imitan el funcionamiento del cerebro humano. Pueden ser utilizadas para problemas de clasificación tanto binaria como multiclase, pero pueden requerir más datos y recursos computacionales.
 - **K-Nearest Neighbors (KNN):** este algoritmo clasifica un punto de datos basado en la clase de sus vecinos más cercanos. Es simple y fácil de implementar, pero puede ser lento con grandes conjuntos de datos.
-
-Cabe destacar que la elección del algoritmo adecuado depende del problema específico, los datos disponibles y las características del conjunto de datos.
 
 
 **Regresión Logística o Regresión Lineal.**
 
-Este algoritmo es una buena opción para este problema de clasificación pero debido a que queremos aprovechar el dataset amplio del que disponemos, buscaremos usar un algoritmo más potente cómo Random Forest.
+Este algoritmo es una buena opción para los problema de clasificación, ya que utilizando una combinación lineal de las variables predictoras conseguir el valor de la variable dependiente: 
+
+$$
+z = w_1 x_1 + w_2 x_2 + \ldots + w_n x_n + b
+$$
+ 
+ 
+Donde:  $z$ es la respuesta que buscamos obtener, es decir, la clasificación; $w_i$ son los pesos de la ecuación; $x_i$ son las variables predictoras y $b$ es el sesgo de la predicción. Usando también la función logística $\sigma(z)$ siguiente para obtener la probabilidad de pertenencia a la clase que se quiere predecir:
+
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
+
+Este último resultado junto a una función de umbral para definir de forma binaria la pertenencia del elemento que se está prediciendo, usando un umbral de $u$ en este caso:
+
+$$
+\text{Clase} = \begin{cases} 
+1 & \text{si } \sigma(z) \geq u \\
+0 & \text{si } \sigma(z) < u 
+\end{cases}
+$$
+
+Para nuestro caso en particular las variables predictoras son los atributos del dataset. El algoritmo consiste en buscar los pesos de la combinación real para que satisfagan los resultados del conjunto de entrenamiento y así; usando la función logística y la función de umbral, determinar si un elemento pertenece o no a la clase que se predice.[1][2][3][4]
 
 **Árboles de decisión.**
 
-Debido a la gran cantidad de valores que tenemos en el dataset buscaremos usar un algoritmo que pueda encontrar las relaciones no obvias en el dataset, además de que es sensible al sobreajuste. Para esquivar estas desventajas buscaremos usar Random Forest que es más dificil de realizar un sobreajuste y además es menos sensible al cambio de las variables.
+Este algoritmo también es útil para problemas de clasificación como el que tenemos en este proyecto, aunque es altamente sensible al sobreajuste. En el mismo construimos un árbol n-ario donde cada nodo representa un test de una de las variables predictoras y según su valor se va descendiendo por el árbor hasta llegar a las hojas del árbol donde esta representa una clasificación.[5]
+
+Para crear un árbol de decisión primero debemos seleccionar qué variables predictoras vamos a considerar. Se mide la ganancia de la información por cada variable predictora y se usa la de mayor ganancia para que sea el nodo raiz; luego con todos los datos en el nodo inicial se comienza a dividir de forma recursiva haciendo una selección de la mejor división usando la variable que maximicen la ganancia de información; y se continúa de esta forma hasta que se cumpla un criterio de parada.[6][7] 
 
 **Bósques aleatorios (Random Forest)**
 
-Este algoritmo nos parece el ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset.
+Este algoritmo nos parece el ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset. En el mismo construimos una cantidad $m$ de árboles de decisión con distintos conjuntos de $n$ variables predictoras seleccionadas de forma aleatoria, cada árbol crece hasta una altura máxima.
 
-**Máquinas de Vectores de Soporte.**
-
-El algoritmo MVS da excelentes resultados en estos problemas de clasificación pero no tiene buena performance con datasets grandes, como es nuestro caso. Además de que requiere una gran capacidad de cómputo por su complejidad temporal de O(dn<sup>2</sup>), lo cual se volvería muy costoso debido al tamaño del dataset.
+El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[8]
 
 **Algoritmo Naive Bayes.**
 
-El principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente.
+El principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente, esto supone una buena contradicción desde un principio, lo cual no hace que este algoritmo deje de ser interesante para un problema de clasificación como el nuestro.
 
-**Redes Neuronales.**
+El algoritmo se basa en el teorema de Bayes que describe la probabilidad de un evento, su fórmula es:
 
-Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
+$$
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+$$
+
+Donde:
+ - $P(A|B)$ es la probabilidad de que ocurra el evento A dado que ha ocurrido el evento B.
+ - $P(B|A)$ es la probabilidad de que ocurra el evento B dado que ocurrió el evento A.
+ - $P(A)$ es la probabilidad del evento A.
+ - $P(B)$ es la probabilidad del evento B.
+
+Y tenemos estas hipotesis:
+ - *Independencia*: Se asume que las variables no tienen ninguna correlación entre sí.
+ - *Cálculo de probabilidades*: Para clasificar una nueva instancia, el algoritmo calcula la probablidad de que la isntancia pertenezca a cada clase y selecciona la clase con la mayor probabilidad. Esto se calcula con la siguiente fórmula:
+
+$$
+P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)} 
+$$
+
+Donde: C es una clase y X es el vector de variables del elemento que se está evaluando.[9][10]
 
 **K-Nearest Neighbors.**
-La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso.
+
+La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso. Pero este algoritmo tiene la ventaja de ser simple.
+
+Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de entrenamiento. La idea fundamental de es que los puntos de datos similares están cerca los unos de los otros en un espacio n-dimensional. Y el algoritmo funciona de la siguiente manera: 
+- Primero, debe estar definido el valor de $k$.
+- Luego se calcula la distancia entre el elemento a clasificar y todos los demás puntos del conjunto de entrenamiento, usando la distancia euclidiana.
+- Se toman los $k$ vecinos más cercanos y se asigna la clase resultado como la clase mayoritaria entre los vecinos.
+[11]
 
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
-
-Además, para comparar los resultados obtenidos con Random Forest, se realizarán implementaciones sencillas con los siguientes algoritmos: 
-- Regresión Logística.
-- Árboles de Decisión.
-- KNN.
-- Naive Bayes.
 
 
 ## Diseño Experimental.
@@ -109,7 +146,7 @@ Se utilizará un algoritmo de machine learning entrenado con un dataset de la pl
 
 - Comments engagement rate: (número de comentarios) dividido por (número de publicaciones) dividido por (número de seguidores).
 
-- Cosine similarity: Similaridad coseno promedio entre cada par de publicaciones.
+- Cosine similarity: Similaridad coseno promedio entre las publicaciones de un usuario.
 
 - Follower keywords: Uso promedio de palabras "follower hunter" (follow, like, folback, follback, f4f) por publicación.
 
@@ -149,9 +186,9 @@ Las librerías de python son:
 - numpy
 - time
 
-### Análisis de los datos y conclusiones.
+### Análisis de los datos.
 
-#### Análisis de la features del dataset
+#### Features del dataset
 
 - **Average Caption length**: En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake.
 
@@ -173,7 +210,7 @@ Las librerías de python son:
 
 ![](./images/datasetMetrics/comments_er.png)
 
-- **Cosine similarity**: En este gráfico podemos comparar el promedio de similitud del coseno entre todos los pares de publicaciones que tiene un usuario. Es decir, estamos analizando la similitud entre dos posteos de un mismo usuario.
+- **Cosine similarity**: En este gráfico podemos comparar el promedio de similaridad coseno entre las publicaciones que tiene un usuario. Es decir, medimos la similitud promedio entre las publicaciones de un usuario.
 
 ![](./images/datasetMetrics/cos_similarity.png)
 
@@ -375,6 +412,18 @@ Los resultados de los experimentos han llevado a obtener información al respect
 Este trabajo no es útil en la actualidad debido a los cambios en la sociedad tras la pandemia del 2020, además de las distintas actualizaciones que ha tenido la red social desde la fecha en que se recopiló la información del dataset utilizado en este proyecto. La adición de visualización de medios como videos, la incorporación de la separación del audio del posteo y las publicaciones en conjunto de usuarios. Cambian las condiciones en las que las cuentas reales y fake se comportan, en adición, se añaden más características a cada cuenta que podrían ser relevantes en la clasificación de una cuenta. 
 
 ## Referencias.
+
+ - [1] https://www.ibm.com/es-es/topics/logistic-regression
+ - [2] https://datascientest.com/es/que-es-la-regresion-logistica
+ - [3] https://es.wikipedia.org/wiki/Regresi%C3%B3n_log%C3%ADstica
+ - [4] Stuart Russell, Peter Norvig: AIMA 4ta Edición; Pág. 684, Capítulo 19,  Sección 6, Subsección 5
+ - [5] Stuart Russell, Peter Norvig: AIMA 4ta Edición; Pág. 657, Capítulo 19,  Sección 3.
+ - [6] https://machinelearningparatodos.com/arboles-de-decision-en-python/
+ - [7] https://anderfernandez.com/blog/programar-arbol-decision-python-desde-0/
+ - [8] https://www.ibm.com/mx-es/topics/random-forest
+ - [9] https://www.freecodecamp.org/espanol/news/como-funcionan-los-clasificadores-naive-bayes-con-ejemplos-de-codigo-de-python/
+ - [10] https://aprendeia.com/algoritmo-naive-bayes-machine-learning/
+ - [11] https://www.ibm.com/es-es/topics/knn
 
  - Kaggle del dataset: https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram
  - Paper publicado por Kristo Radion Purba, David Asirvatham y R.K. Murugesan donde se realizó un ejercicio similar al hecho por este proyecto: https://www.researchgate.net/publication/341796393_Classification_of_instagram_fake_users_using_supervised_machine_learning_algorithms
