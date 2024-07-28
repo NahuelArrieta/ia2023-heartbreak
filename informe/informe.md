@@ -190,9 +190,11 @@ Las librerías de python son:
 
 #### Features del dataset
 
-- **Average Caption length**: En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake.
+- **Average Caption length**: En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake. 
 
 ![](./images/datasetMetrics/avg_caption_len.png)
+
+En el eje $y$ se corresponde a los --------------------------------
 
 - **Average Hashtags count**: En esta gráfica podemos observar la cantidad promedio de hashtags en comparativa entre las clases real y fake en un gráfico en escala logarítmica.
 
