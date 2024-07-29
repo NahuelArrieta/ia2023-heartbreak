@@ -1,4 +1,5 @@
 import time
+import numpy as np
 
 class Model:
     def __init__(self, model, name):
@@ -21,12 +22,23 @@ class Model:
         print('Average time (s):', self.avg_time)
         print('-----------------------------------')
 
-    
-    def run(self, X_train, y_train, X_test, y_test, n):
+
+    def run(self, X, y, n):
         train_time = 0
         accuracy = 0
 
         for i in range(n):
+            ## Split X and y in n folds
+            folds_X = np.array_split(X, n)
+            folds_y = np.array_split(y, n)
+
+            ## Get the train and test sets
+            X_test = folds_X[i]
+            y_test = folds_y[i]
+
+            X_train = np.concatenate(np.delete(folds_X, i, 0))
+            y_train = np.concatenate(np.delete(folds_y, i, 0))
+
             start = time.time()
             self.train(X_train, y_train)
             train_time += time.time() - start
@@ -34,7 +46,8 @@ class Model:
             accuracy += self.test(X_test, y_test)
 
         self.avg_time = train_time / n
-        self.avg_accuracy = accuracy / n 
+        self.avg_accuracy = accuracy / n
+    
 
         
 

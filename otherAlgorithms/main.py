@@ -2,6 +2,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
+import utils
 import dataset_utils
 import model as md
 
@@ -33,13 +34,14 @@ decision_tree = md.Model(DecisionTreeClassifier(), "Decision Tree")
 ## Naive Bayes
 naive_bayes = md.Model(GaussianNB(), "Naive Bayes")
 
-## Run the models
-iterations = 5
+## Set the models
 models = [logistic_regression, knn, decision_tree, naive_bayes]
-for model in models:
-    model.run(X_train, y_train, X_test, y_test, iterations)
-    model.print_results()
 
+## Train the models
+number_of_folds = 5
+# utils.trainModels(models, X_train, y_train, number_of_folds)
 
+## Test the models
+# utils.testModels(models, X_train, y_train, X_test, y_test)
 
 
