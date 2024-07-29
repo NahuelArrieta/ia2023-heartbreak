@@ -190,73 +190,86 @@ Las librerías de python son:
 
 #### Features del dataset
 
-- **Average Caption length**: En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake. 
+**Average Caption length**: 
+- En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake. En el eje $x$ se corresponde a la longitud promedio de los pie de publicación y en el eje $y$ se observa la cantidad de usuarios. La linea azul son los usuarios reales y la linea roja son usuarios fake.
 
 ![](./images/datasetMetrics/avg_caption_len.png)
 
-En el eje $y$ se corresponde a los --------------------------------
+- Por lo que podemos observar ambas clases tienen una gran similitud en la longitud de sus pie de publicación por lo que en un principio podríamos decir que no es una buena feature para diferenciar ambas clases.
 
-- **Average Hashtags count**: En esta gráfica podemos observar la cantidad promedio de hashtags en comparativa entre las clases real y fake en un gráfico en escala logarítmica.
+**Average Hashtags count**: 
+
+- En esta gráfica podemos observar la cantidad promedio de hashtags en comparativa entre las clases real y fake en un gráfico en escala logarítmica. En el eje $x$ tenemos el número de hashtags y en el eje $y$ la cantidad de usuarios.
 
 ![](./images/datasetMetrics/avg_hashtag_count.png)
 
-- **Biography length**: En la gráfica se muestra una comparación entre la longitud de la biografía de las cuentas reales y fake.
+- Lo que podemos observar en la gráfica es una similitud muy grande, entre los usuarios reales y fake, en el número de hashtags, pero luego comienzan a destacarse más los usuarios fake a partir de los 12 hashtags. Por lo que podría ser una feature muy útil para distinguir a un usuario fake de uno real.
+
+**Biography length**: 
+
+- En la gráfica se muestra una comparación entre la longitud de la biografía de las cuentas reales y fake. El eje $x$ representa la longitud de la biografía y el eje $y$ el número de usuarios.
 
 ![](./images/datasetMetrics/bio_len.png)
 
-- **Caption Zero**: Aquí se visualiza el balance entre las cuentas real y fake que tienen pies de publicación de *casi cero* caracteres, para esto se tomaron las que fueran menores o iguales que 3 de las cuentas reales y fake, siendo .  
+- Podemos ver que hay una gran cantidad de usuarios de la clase fake que 
+
+**Caption Zero**: Aquí se visualiza el balance entre las cuentas real y fake que tienen pies de publicación de *casi cero* caracteres, para esto se tomaron las que fueran menores o iguales que 3 de las cuentas reales y fake, siendo .  
 
 ![](./images/datasetMetrics/caption_zero.png)
 
-- **Comments engagement rate**: En este gráfico en escala logarítmica se puede observar una comparación de la tasa de participación de los comentarios de las cuentas real y fake. 
+**Comments engagement rate**: En este gráfico en escala logarítmica se puede observar una comparación de la tasa de participación de los comentarios de las cuentas real y fake. 
 
 ![](./images/datasetMetrics/comments_er.png)
 
-- **Cosine similarity**: En este gráfico podemos comparar el promedio de similaridad coseno entre las publicaciones que tiene un usuario. Es decir, medimos la similitud promedio entre las publicaciones de un usuario.
+**Cosine similarity**: En este gráfico podemos comparar el promedio de similaridad coseno entre las publicaciones que tiene un usuario. Es decir, medimos la similitud promedio entre las publicaciones de un usuario.
 
 ![](./images/datasetMetrics/cos_similarity.png)
 
-- **Follower keywords**: En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan 
+**Follower keywords**: En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan 
 
 ![](./images/datasetMetrics/follower_kw.png)
 
-- **Has Picture**: Es una comparativa gráfica entre las clases real y fake de las cuentas que tienen foto de perfil.
+**Has Picture**: 
+
+- Es una comparativa gráfica entre las clases real y fake de las cuentas que tienen foto de perfil. En donde 1 corresponde a que el usuario si tiene foto de perfil y 0 en caso contrario.
 
 ![](./images/datasetMetrics/has_picture.png)
 
-- **Like engagement rate**: Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake.
+- Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad.
+
+**Like engagement rate**: Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake.
 
 ![](./images/datasetMetrics/like_er.png)
 
-- **Link Availibility**: El gráfico muestra el balance de la disponibilidad de un link externo de las cuentas reales y fake.
+**Link Availibility**: El gráfico muestra el balance de la disponibilidad de un link externo de las cuentas reales y fake.
 
 ![](./images/datasetMetrics/link_available.png)
 
-- **Location tag percentage**: En la imagen se visualiza la comparativa de publicaciones con la etiqueta de la ubicación en los posteos de las cuentas reales y fake.
+**Location tag percentage**: En la imagen se visualiza la comparativa de publicaciones con la etiqueta de la ubicación en los posteos de las cuentas reales y fake.
 
 ![](./images/datasetMetrics/loc_tag_percentage.png)
 
-- **Non image post percentage**: Compara la cantidad de posteos que no son sólo imagenes, como video o carrusel, entre las clases real y fake.
+**Non image post percentage**: Compara la cantidad de posteos que no son sólo imagenes, como video o carrusel, entre las clases real y fake.
 
 ![](./images/datasetMetrics/non_image_percentage.png)
 
-- **Number of followers**: El siguiente gráfico en escala logarítmica expresa una comparación de el número de seguidores entre las clases real y fake. 
+**Number of followers**: El siguiente gráfico en escala logarítmica expresa una comparación de el número de seguidores entre las clases real y fake. 
 
 ![](./images/datasetMetrics/number_follower.png)
 
-- **Number of followings**: Este gráfico en escala logarítmica muestra una comparación de el número de seguidos entre las clases real y fake. 
+**Number of followings**: Este gráfico en escala logarítmica muestra una comparación de el número de seguidos entre las clases real y fake. 
 
 ![](./images/datasetMetrics/number_following.png)
 
-- **Number of posts**: El gráfico compara el numero de posteos de las clases real y fake en escala logarítmica.
+**Number of posts**: El gráfico compara el numero de posteos de las clases real y fake en escala logarítmica.
 
 ![](./images/datasetMetrics/number_post.png)
 
-- **Post interval**: Esta gráfica muestra el promedio de tiempo en horas entre posteos de las clases real y fake en una gráfica en escala logarítmica.
+**Post interval**: Esta gráfica muestra el promedio de tiempo en horas entre posteos de las clases real y fake en una gráfica en escala logarítmica.
 
 ![](./images/datasetMetrics/post_interval.png)
 
-- **Promotional keywords**: La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras claves promocionales de las clases real y fake.
+**Promotional keywords**: La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras claves promocionales de las clases real y fake.
 
 ![](./images/datasetMetrics/promotional_kw.png)
 
@@ -306,6 +319,17 @@ Ahora veremos qué features se pueden derivar de las actuales para ver si se pue
   - Images frequency: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 
+#### Métricas.
+
+Para medir el rendimiento de los modelos usaremos una matriz de confusión como la siguiente:
+
+ | | **Predicted Positive**| **Predicted Negative** | |
+ |:--:|:--:|:--:|:--:|
+ | **Actual Positive** | TP:  True Positives  | FN:  False Negatives  | Sensitivity:  $$\frac{TP}{TP + FN}$$   |
+ | **Actual Negative** | FP:  False Positives  | TN:  True Negatives  | Specificity:  $$\frac{FP}{FP + TN}$$  |
+ | | Precision:  $$\frac{TP}{TP + FP}$$  | Negative Predictive Value:  $$\frac{FN}{FN + TN}$$  | **Accuracy**:  $$\frac{TP + TN}{TP + TN + FP + FN}$$  |
+
+
 ### Experimentos.
 En base a los análisis realizados, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varios experimentos con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
 
@@ -324,23 +348,24 @@ Los resultados de la matriz de confusión fueron las siguientes:
 Además se obtuvo la importancia de las diferentes variables:
  | Variable | Importance |
  |:--:|:--:|
- |  Num posts |  459.761258190958  |
- |  Num followers  |  735.805088278248  |
- |  Num following  |  2091.16579555838  |
- |  Bio length  |  627.457577048002  |
- |  Has picture  |  13.2295974190987  |
- |  Link zvailability  |  2153.48815752171  |
- |  Avg caption length  |  534.722734277606  |
- |  Caption zero  |  266.496444291937  |
- |  Non image percentage  |  168.669221114669  |
- |  Like engagement rate  |  1448.20487223423  |
+ |  Link availability  |  2153.48815752171  |
  |  Comments engagement rate  |  2152.98693259071  |
+ |  Num following  |  2091.16579555838  |
+ |  Like engagement rate  |  1448.20487223423  |
+ |  Num followers  |  735.805088278248  | 
+ |  Bio length  |  627.457577048002  |
  |  Location tag percentage  |  600.213569894813  |
+ |  Avg caption length  |  534.722734277606  |
+ |  Post interval  |  495.154604529331  |
+ |  Num posts |  459.761258190958  |
+ |  Cosine similarity  |  354.513301793794  |
+ |  Caption zero  |  266.496444291937  |
  |  Average hashtag count  |  199.270343752644  |
  |  Promotional keywords   |  195.66162222508  |
+ |  Non image percentage  |  168.669221114669  |
  |  Followers keywords  |  122.984566460685  |
- |  Cosine similarity  |  354.513301793794  |
- |  Post interval  |  495.154604529331  |
+ |  Has picture  |  13.2295974190987  |
+
 
 Las primeras conclusiones que se pueden obtener de este modelo son:
 - Contrariamente a lo que se esperaba, la característica "Comments engagement rate" resultó ser una de las más importantes para la clasificación de las cuentas.
