@@ -211,23 +211,45 @@ Las librerías de python son:
 
 ![](./images/datasetMetrics/bio_len.png)
 
-- Podemos ver que hay una gran cantidad de usuarios de la clase fake que 
+- Podemos ver que hay una gran cantidad de usuarios de la clase fake que tienen una longitud de biografía pequeña, pero luego, cuando crece la longitud de biografía, se vuelve más difícil distinguir a un usuario real de otro fake.
 
-**Caption Zero**: Aquí se visualiza el balance entre las cuentas real y fake que tienen pies de publicación de *casi cero* caracteres, para esto se tomaron las que fueran menores o iguales que 3 de las cuentas reales y fake, siendo .  
+**Caption Zero**: 
+
+- Aquí se visualiza el balance entre las cuentas real y fake cuyo porcentaje de pies de publicación de *casi cero* caracteres es la mayoría, para esto se tomaron las que fueran menores o iguales que 3 de las cuentas reales y fake, El valor 1 representa las que tienen un porcentaje de mayoría de pies de publicación casi nulos y 0 los que tienen un porcentaje mayoritario de pies de publicación superior a 3.  
 
 ![](./images/datasetMetrics/caption_zero.png)
 
-**Comments engagement rate**: En este gráfico en escala logarítmica se puede observar una comparación de la tasa de participación de los comentarios de las cuentas real y fake. 
+- Podemos observar que ambas clases tienen una proporción extremadamente similar, tanto en mayoría de pies de publicación *casi nulas* como en publicaciones con pies de publicación más largos. Por lo tanto, esta feature no es de tanta utilidad por si sola para diferenciar usuarios reales de usuarios fake. 
+
+**Comments engagement rate**: 
+
+- En este gráfico en escala logarítmica se puede observar una comparación del rate de participación de los comentarios de las cuentas real y fake. Esta participación se calcula de la siguiente forma:
+
+$$
+\frac{comentarios}{\frac{posteos}{seguidores}}
+$$
+
+- En el eje de las $x$ tenemos representado el rate de participación de comentarios, mientras que en el eje $y$ el número de usuarios.
 
 ![](./images/datasetMetrics/comments_er.png)
 
-**Cosine similarity**: En este gráfico podemos comparar el promedio de similaridad coseno entre las publicaciones que tiene un usuario. Es decir, medimos la similitud promedio entre las publicaciones de un usuario.
+- Se observa en el gráfico que ambas clases tienen un rate de participación de comentarios muy similar, salvo por algunos picos de la clase real que tienen más engagement que la clase fake, pero son casos muy aislados para que sea una feature determinante por si sola.
+
+**Cosine similarity**: 
+
+- En este gráfico podemos comparar el promedio de similaridad coseno entre las publicaciones que tiene un usuario. Es decir, medimos la similitud promedio entre las publicaciones de un usuario. En el eje $x$ se visualiza el valor que de la similitud coseno y en el eje $y$ el número de usuarios.
 
 ![](./images/datasetMetrics/cos_similarity.png)
 
-**Follower keywords**: En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan 
+- El gráfico nos muestra que hay una diferencia entre la similitud coseno de los usuarios reales y fake, por lo que esta feature podría ser útil para diferenciar a ambas clases.
+
+**Follower keywords**: 
+
+- En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan obtener nuevos seguidores o likes como por ejemplo: f4f, follow for follow; follback o folback, de la expresión "follow back".
 
 ![](./images/datasetMetrics/follower_kw.png)
+
+- Podemos observar una clara diferencia entre las clases real y fake; los usuarios fake usan mayor cantidad de follower keywords. Por lo tanto esta podría ser una buena feature para diferenciar la clase de usuarios reales de los fake.
 
 **Has Picture**: 
 
@@ -237,31 +259,61 @@ Las librerías de python son:
 
 - Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad.
 
-**Like engagement rate**: Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake.
+**Like engagement rate**: 
+
+- Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake. En el eje $y$ el número de usuarios y en el eje $x$ se encuentra el rate de interacción que se calcula de la siguiente forma: 
+  
+$$
+\frac{likes}{\frac{posteos}{seguidores}}
+$$
 
 ![](./images/datasetMetrics/like_er.png)
 
-**Link Availibility**: El gráfico muestra el balance de la disponibilidad de un link externo de las cuentas reales y fake.
+- En el gráfico vemos que ambas clases tienen un distribución similar en el plano por lo que esta feature puede no ser muy útil para clasificar a los usuarios reales y fake.
+
+**Link Availibility**: 
+
+- El gráfico muestra el balance de la disponibilidad de un link externo de las cuentas reales y fake. El valor 1 representa que la cuenta tiene un link externo asociado a ella y el valor 0 representa lo contrario.
 
 ![](./images/datasetMetrics/link_available.png)
 
-**Location tag percentage**: En la imagen se visualiza la comparativa de publicaciones con la etiqueta de la ubicación en los posteos de las cuentas reales y fake.
+- Podemos ver que los usuarios fake son los que menos links externos tienen, por lo que esta feature podría ser muy útil para nuestro problema de clasificación.
+
+**Location tag percentage**: 
+
+- En la imagen se visualiza la comparativa de publicaciones con la etiqueta de la ubicación en los posteos de las cuentas reales y fake. Los usuarios con valor 1 se muestran los usuarios que tienen un gran porcentaje de etiquetas de ubicación en sus publicaciones; mientras que los que tienen valor 0, no. 
 
 ![](./images/datasetMetrics/loc_tag_percentage.png)
 
-**Non image post percentage**: Compara la cantidad de posteos que no son sólo imagenes, como video o carrusel, entre las clases real y fake.
+- Por lo que se observa, no se puede diferenciar claramente a ambas clases por esta feature, lo que prueba que no es de gran utilidad.
+
+**Non image post percentage**: 
+
+- Compara la cantidad de posteos que no son sólo imagenes, como video o carrusel, entre las clases real y fake. Donde el valor 1 representa a los usuarios con un porcentaje mayoritario de publicaciones que no son sólo imágenes, mientras que 0 representa a lo contrario.
 
 ![](./images/datasetMetrics/non_image_percentage.png)
 
-**Number of followers**: El siguiente gráfico en escala logarítmica expresa una comparación de el número de seguidores entre las clases real y fake. 
+- Por lo que se puede ver en la gráfica, ambos grupos están muy igualados por lo que esta feature no resulta de utilidad por si sola.
+
+**Number of followers**: 
+
+- El siguiente gráfico en escala logarítmica expresa una comparación de el número de seguidores entre las clases real y fake. El eje $x$ representa el número de seguidores, mientras que el eje $y$ representa al número de usuarios.
 
 ![](./images/datasetMetrics/number_follower.png)
 
-**Number of followings**: Este gráfico en escala logarítmica muestra una comparación de el número de seguidos entre las clases real y fake. 
+- Los usuarios reales son más distinguibles de los fake cuando los seguidores sobrepasan los 2500 seguidores; por lo cual esta feature puede ser muy útil.
+
+**Number of followings**: 
+
+- Este gráfico en escala logarítmica muestra una comparación de el número de seguidos entre las clases real y fake. En el eje $x$ se presenta el número de seguidos, mientras que el eje $y$ es el número de usuarios.
 
 ![](./images/datasetMetrics/number_following.png)
 
-**Number of posts**: El gráfico compara el numero de posteos de las clases real y fake en escala logarítmica.
+- En el gráfico se observa que en un número bajo y alto de seguidos se diferencian claramente los usuarios reales de los fake. Por lo que esta feature puede llegar a ser fructífero.
+
+**Number of posts**: 
+
+- El gráfico compara el numero de posteos de las clases real y fake en escala logarítmica. El eje $x$ representa el número de posts, el eje $y$ muestra el número de usuarios
 
 ![](./images/datasetMetrics/number_post.png)
 
