@@ -317,14 +317,23 @@ $$
 
 ![](./images/datasetMetrics/number_post.png)
 
-**Post interval**: Esta gráfica muestra el promedio de tiempo en horas entre posteos de las clases real y fake en una gráfica en escala logarítmica.
+- Lo que se puede observar es que no hay una diferencia clara entre el número de posteos de ambas clases por lo que no puede ser una feature de gran utilidad por si sola. 
+
+**Post interval**: 
+
+- Esta gráfica muestra el promedio de tiempo en horas entre posteos de las clases real y fake en una gráfica en escala logarítmica. En el eje $x$ se reflejan los promedios de tiempo, en horas, entre posteos; mientras que el eje $y$ representa el número de usuarios.
 
 ![](./images/datasetMetrics/post_interval.png)
 
-**Promotional keywords**: La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras claves promocionales de las clases real y fake.
+- Por lo que podemos observar es que el promedio de tiempo entre posteos entre las clases real y fake son distintas, por lo que esta feature puede llegar a ser productiva para clasificar a los usuarios.
+
+**Promotional keywords**: 
+
+- La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras claves promocionales de las clases real y fake. El eje $x$ se corresponde con el uso promedio de palabras promocionales en posteos y en el eje $y$ es corresponde con el número de usuarios.
 
 ![](./images/datasetMetrics/promotional_kw.png)
 
+- En el gráfico podemos ver claramente que se diferencia la clase de usuarios reales de los fake por el promedio de palabras promocionales, por lo que esta feature prueba ser de utilidad para nuestro problema de clasificación.
 
 #### Conclusiones del análisis de las features del dataset
 
