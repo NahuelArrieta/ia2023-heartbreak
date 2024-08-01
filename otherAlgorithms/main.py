@@ -39,7 +39,7 @@ models = [logistic_regression, knn, decision_tree, naive_bayes]
 
 ## Train the models
 number_of_folds = 5
-# utils.trainModels(models, X_train, y_train, number_of_folds)
+utils.trainModels(models, X_train, y_train, number_of_folds)
 
 ## Test the models
 # utils.testModels(models, X_train, y_train, X_test, y_test)
