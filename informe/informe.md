@@ -190,7 +190,8 @@ Las librerías de python son:
 
 #### Features del dataset
 
-**Average Caption length**: 
+**Average Caption length**:
+
 - En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake. En el eje $x$ se corresponde a la longitud promedio de los pie de publicación y en el eje $y$ se observa la cantidad de usuarios. La linea azul son los usuarios reales y la linea roja son usuarios fake.
 
 ![](./images/datasetMetrics/avg_caption_len.png)
@@ -211,7 +212,7 @@ Las librerías de python son:
 
 ![](./images/datasetMetrics/bio_len.png)
 
-- Podemos ver que hay una gran cantidad de usuarios de la clase fake que tienen una longitud de biografía pequeña, pero luego, cuando crece la longitud de biografía, se vuelve más difícil distinguir a un usuario real de otro fake.
+- Podemos ver que hay una gran cantidad de usuarios de la clase fake que tienen una longitud de biografía pequeña, pero luego, cuando crece la longitud de biografía, se vuelve más difícil distinguir a un usuario real de otro fake. Por lo cual esta feature puede llegar a ser útil para la clasificación.
 
 **Caption Zero**: 
 
@@ -257,7 +258,7 @@ $$
 
 ![](./images/datasetMetrics/has_picture.png)
 
-- Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad.
+- Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad de forma individual.
 
 **Like engagement rate**: 
 
@@ -309,7 +310,7 @@ $$
 
 ![](./images/datasetMetrics/number_following.png)
 
-- En el gráfico se observa que en un número bajo y alto de seguidos se diferencian claramente los usuarios reales de los fake. Por lo que esta feature puede llegar a ser fructífero.
+- En el gráfico se observa que en un número bajo y alto de seguidos se diferencian claramente los usuarios reales de los fake. Por lo que esta feature puede llegar a ser fructífera.
 
 **Number of posts**: 
 
@@ -337,14 +338,21 @@ $$
 
 #### Conclusiones del análisis de las features del dataset
 
-- La distribución de las clases (real o fake) es muy equitativa, lo cual es bueno para el entrenamiento del modelo y ayudará a evitar el sesgo del modelo.
+- La distribución de las clases (real o fake) es muy equitativa, lo cual es bueno para el entrenamiento del modelo y ayudará a evitar el sesgo del modelo. Esto último se visualiza en la siguiente gráfica:
 
 ![](./images/datasetMetrics/class_dist.png)
 
 - Podría considerarse utilizar como feature la diferencia entre el número de seguidores y seguidos (followers - following).
 
+- En la siguiente gráfica se observa la diferencia entre followers y following en los valores negativos, es decir, aquellos usuarios que tienen más seguidos que seguidores.
+  
 ![](./images/datasetMetrics/followers_following_diff_1.png)
+
+- En la gráfica próxima veremos la diferencia entre followers y following en los valores positivos, es decir, aquellos usuarios que tienen más seguidores que seguidos.
+
 ![](./images/datasetMetrics/followers_following_diff_2.png)
+
+- Podemos concluir que la diferencia entre seguidores y seguidos logra diferenciar de forma más clara a ambas clases se logran diferenciar mejor combinando estas dos features.
 
 - La característica "Caption Zero" no es muy útil ya que los unicos valores que toma son 0 y 1. Además algunos datos son incorrectos ya que hay 83 cuentas que no tienen descripcion en sus publicaciones (la longitud promedio de descripción en publicaciones es 0) pero el valor de la característica es 0.
 
