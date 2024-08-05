@@ -8,7 +8,6 @@ source("code/cross_validation.R")
 source("code/validate.R")
 source("code/print_results.R")
 
-library(doParallel)
 library(readr)
 library(randomForest)
 library(dplyr)
@@ -38,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = TRUE
 )
 
-file_name <- "test"
+file_name <- "test_validated"
 
 # train(train_variables, file_name)
 

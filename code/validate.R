@@ -8,8 +8,11 @@ validate <- function(train_variables, file_name) {
     preprocess_data <- preprocess(dataframe, train_variables)
     dataframe <- preprocess_data$dataframe
 
+
     ## Train the model
+    print("Start training")
     model <- get_model(dataframe, train_variables)
+    print("End training")
 
     ## get validation dataframe
     test_dataframe <- get_test_df()
@@ -29,5 +32,5 @@ validate <- function(train_variables, file_name) {
     ## Create confusion matrix
     confusion_matrix <- table(test_dataframe$is_fake, test_dataframe$prediction_class)
 
-    print_results(confusion_matrix, file_name, train_variables, message)
+    print_results(model, confusion_matrix, file_name, train_variables, message)
 }
