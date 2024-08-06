@@ -31,68 +31,108 @@ Detectar estas cuentas es de vital importancia por varias razones:
 
 Por todas estas razones, contar con un modelo que permita a Instagram detectar cuentas falsas de manera automática y eficiente es de suma importancia. El mismo contribuiría a mantener la confianza de los usuarios en la plataforma, promoviendo una experiencia más auténtica, satisfactoria y, sobre todo, más segura. 
 
+### Proceso del proyecto.
+
+Este proceso será llevado a cabo en las siguientes etapas, iniciaremos con un acercamiento al marco teórico en el que se va a trabajar, donde se describirán los algoritmos que utilizaremos en el proyecto y las razones por las que serán utilizados. Siguiente a la etapa descrita se hará un diseño experimental donde se describirá el dataset, las librerías utilizadas para la implementación, análsis de los datos obtenidos y experimentos llevados a cabo. Finalmente se realizará un análisis de los resultados y se dará una conclusión de qué tan aplicable es el modelo hoy en día. 
 
 ## Marco teórico.
 
 En la siguientes secciones se analizarán los algoritmos disponibles para cumplir el objetivo principal del proyecto y se dará una conclusión de cual algoritmo es el más apropiado; y será usado para llevar a cabo el entrenamiento del modelo. 
 
-### Análisis de los algoritmos disponibles.
+### Análisis de los algoritmos a utilizar.
 ¿Qué algoritmos podemos usar para este problema de clasificación?
 
-Para un problema de clasificación existen varios algoritmos que podemos considerar:
+Para un problema de clasificación existen varios algoritmos que vamos a considerar:
 
 - **Regresión Logística:** es un algoritmo lineal utilizado para la clasificación binaria. Estima la probabilidad de pertenecer a una clase específica.
 - **Árboles de Decisión:** este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una característica y cada rama representa una decisión o un resultado. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 - **Bosques Aleatorios (Random Forest):** es un conjunto de árboles de decisión que trabajan en paralelo y generan predicciones. Cada árbol en el bosque vota por la clase a la que pertenece, y la clase con más votos se selecciona como la predicción final.
-- **Máquinas de Vectores de Soporte (SVM):** este algoritmo encuentra un hiperplano óptimo que separa las clases en un espacio de alta dimensión. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 - **Naive Bayes:** este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí. Es rápido y eficiente en términos de recursos computacionales.
-- **Redes Neuronales Artificiales (ANN):** estas son estructuras que imitan el funcionamiento del cerebro humano. Pueden ser utilizadas para problemas de clasificación tanto binaria como multiclase, pero pueden requerir más datos y recursos computacionales.
 - **K-Nearest Neighbors (KNN):** este algoritmo clasifica un punto de datos basado en la clase de sus vecinos más cercanos. Es simple y fácil de implementar, pero puede ser lento con grandes conjuntos de datos.
-
-Cabe destacar que la elección del algoritmo adecuado depende del problema específico, los datos disponibles y las características del conjunto de datos.
 
 
 **Regresión Logística o Regresión Lineal.**
 
-Este algoritmo es una buena opción para este problema de clasificación pero debido a que queremos aprovechar el dataset amplio del que disponemos, buscaremos usar un algoritmo más potente cómo Random Forest.
+Este algoritmo es una buena opción para los problema de clasificación, ya que utilizando una combinación lineal de las variables predictoras conseguir el valor de la variable dependiente: 
+
+$$
+z = w_1 x_1 + w_2 x_2 + \ldots + w_n x_n + b
+$$
+ 
+ 
+Donde:  $z$ es la respuesta que buscamos obtener, es decir, la clasificación; $w_i$ son los pesos de la ecuación; $x_i$ son las variables predictoras y $b$ es el sesgo de la predicción. Usando también la función logística $\sigma(z)$ siguiente para obtener la probabilidad de pertenencia a la clase que se quiere predecir:
+
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
+
+Este último resultado junto a una función de umbral para definir de forma binaria la pertenencia del elemento que se está prediciendo, usando un umbral de $u$ en este caso:
+
+$$
+\text{Clase} = \begin{cases} 
+1 & \text{si } \sigma(z) \geq u \\
+0 & \text{si } \sigma(z) < u 
+\end{cases}
+$$
+
+Para nuestro caso en particular las variables predictoras son los atributos del dataset. El algoritmo consiste en buscar los pesos de la combinación real para que satisfagan los resultados del conjunto de entrenamiento y así; usando la función logística y la función de umbral, determinar si un elemento pertenece o no a la clase que se predice.[1][2][3][4]
 
 **Árboles de decisión.**
 
-Debido a la gran cantidad de valores que tenemos en el dataset buscaremos usar un algoritmo que pueda encontrar las relaciones no obvias en el dataset, además de que es sensible al sobreajuste. Para esquivar estas desventajas buscaremos usar Random Forest que es más dificil de realizar un sobreajuste y además es menos sensible al cambio de las variables.
+Este algoritmo también es útil para problemas de clasificación como el que tenemos en este proyecto, aunque es altamente sensible al sobreajuste. En el mismo construimos un árbol n-ario donde cada nodo representa un test de una de las variables predictoras y según su valor se va descendiendo por el árbor hasta llegar a las hojas del árbol donde esta representa una clasificación.[5]
+
+Para crear un árbol de decisión primero debemos seleccionar qué variables predictoras vamos a considerar. Se mide la ganancia de la información por cada variable predictora y se usa la de mayor ganancia para que sea el nodo raiz; luego con todos los datos en el nodo inicial se comienza a dividir de forma recursiva haciendo una selección de la mejor división usando la variable que maximicen la ganancia de información; y se continúa de esta forma hasta que se cumpla un criterio de parada.[6][7] 
 
 **Bósques aleatorios (Random Forest)**
 
-Este algoritmo nos parece el ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset.
+Este algoritmo nos parece el ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset. En el mismo construimos una cantidad $m$ de árboles de decisión con distintos conjuntos de $n$ variables predictoras seleccionadas de forma aleatoria, cada árbol crece hasta una altura máxima.
 
-**Máquinas de Vectores de Soporte.**
-
-El algoritmo MVS da excelentes resultados en estos problemas de clasificación pero no tiene buena performance con datasets grandes, como es nuestro caso. Además de que requiere una gran capacidad de cómputo por su complejidad temporal de O(dn<sup>2</sup>), lo cual se volvería muy costoso debido al tamaño del dataset.
+El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[8]
 
 **Algoritmo Naive Bayes.**
 
-El principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente.
+El principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente, esto supone una buena contradicción desde un principio, lo cual no hace que este algoritmo deje de ser interesante para un problema de clasificación como el nuestro.
 
-**Redes Neuronales.**
+El algoritmo se basa en el teorema de Bayes que describe la probabilidad de un evento, su fórmula es:
 
-Estos algoritmos quedan descartados ya que exceden el alcance de la cátedra.
+$$
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+$$
+
+Donde:
+ - $P(A|B)$ es la probabilidad de que ocurra el evento A dado que ha ocurrido el evento B.
+ - $P(B|A)$ es la probabilidad de que ocurra el evento B dado que ocurrió el evento A.
+ - $P(A)$ es la probabilidad del evento A.
+ - $P(B)$ es la probabilidad del evento B.
+
+Y tenemos estas hipotesis:
+ - *Independencia*: Se asume que las variables no tienen ninguna correlación entre sí.
+ - *Cálculo de probabilidades*: Para clasificar una nueva instancia, el algoritmo calcula la probablidad de que la isntancia pertenezca a cada clase y selecciona la clase con la mayor probabilidad. Esto se calcula con la siguiente fórmula:
+
+$$
+P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)} 
+$$
+
+Donde: C es una clase y X es el vector de variables del elemento que se está evaluando.[9][10]
 
 **K-Nearest Neighbors.**
-La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso.
+
+La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso. Pero este algoritmo tiene la ventaja de ser simple.
+
+Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de entrenamiento. La idea fundamental de es que los puntos de datos similares están cerca los unos de los otros en un espacio n-dimensional. Y el algoritmo funciona de la siguiente manera: 
+- Primero, debe estar definido el valor de $k$.
+- Luego se calcula la distancia entre el elemento a clasificar y todos los demás puntos del conjunto de entrenamiento, usando la distancia euclidiana.
+- Se toman los $k$ vecinos más cercanos y se asigna la clase resultado como la clase mayoritaria entre los vecinos.
+[11]
 
 #### Conclusión.
 
 Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
 
-Además, para comparar los resultados obtenidos con Random Forest, se realizarán implementaciones sencillas con los siguientes algoritmos: 
-- Regresión Logística.
-- Árboles de Decisión.
-- KNN.
-- Naive Bayes.
-
 
 ## Diseño Experimental.
 
-### Métricas del dataset.
+### Descripción del dataset.
 
 Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual resulta ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos muy interesantes como: 
 
@@ -106,7 +146,7 @@ Se utilizará un algoritmo de machine learning entrenado con un dataset de la pl
 
 - Comments engagement rate: (número de comentarios) dividido por (número de publicaciones) dividido por (número de seguidores).
 
-- Cosine similarity: Similaridad coseno promedio entre cada par de publicaciones.
+- Cosine similarity: Similaridad coseno promedio entre las publicaciones de un usuario.
 
 - Follower keywords: Uso promedio de palabras "follower hunter" (follow, like, folback, follback, f4f) por publicación.
 
@@ -146,89 +186,173 @@ Las librerías de python son:
 - numpy
 - time
 
-### Análisis de los datos y conclusiones.
+### Análisis de los datos.
 
-#### Análisis de la features del dataset
+#### Features del dataset
 
-- **Average Caption length**: En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake.
+**Average Caption length**:
+
+- En la siguiente gráfica podemos ver una comparativa de la longitud promedio del pie de una publicación de las clases real y fake. En el eje $x$ se corresponde a la longitud promedio de los pie de publicación y en el eje $y$ se observa la cantidad de usuarios. La linea azul son los usuarios reales y la linea roja son usuarios fake.
 
 ![](./images/datasetMetrics/avg_caption_len.png)
 
-- **Average Hashtags count**: En esta gráfica podemos observar la cantidad promedio de hashtags en comparativa entre las clases real y fake en un gráfico en escala logarítmica.
+- Por lo que podemos observar ambas clases tienen una gran similitud en la longitud de sus pie de publicación por lo que en un principio podríamos decir que no es una buena feature para diferenciar ambas clases.
+
+**Average Hashtags count**: 
+
+- En esta gráfica podemos observar la cantidad promedio de hashtags en comparativa entre las clases real y fake en un gráfico en escala logarítmica. En el eje $x$ tenemos el número de hashtags y en el eje $y$ la cantidad de usuarios.
 
 ![](./images/datasetMetrics/avg_hashtag_count.png)
 
-- **Biography length**: En la gráfica se muestra una comparación entre la longitud de la biografía de las cuentas reales y fake.
+- Lo que podemos observar en la gráfica es una similitud muy grande, entre los usuarios reales y fake, en el número de hashtags, pero luego comienzan a destacarse más los usuarios fake a partir de los 12 hashtags. Por lo que podría ser una feature muy útil para distinguir a un usuario fake de uno real.
+
+**Biography length**: 
+
+- En la gráfica se muestra una comparación entre la longitud de la biografía de las cuentas reales y fake. El eje $x$ representa la longitud de la biografía y el eje $y$ el número de usuarios.
 
 ![](./images/datasetMetrics/bio_len.png)
 
-- **Caption Zero**: Aquí se visualiza el balance entre las cuentas real y fake que tienen pies de publicación de *casi cero* caracteres, para esto se tomaron las que fueran menores o iguales que 3 de las cuentas reales y fake, siendo .  
+- Podemos ver que hay una gran cantidad de usuarios de la clase fake que tienen una longitud de biografía pequeña, pero luego, cuando crece la longitud de biografía, se vuelve más difícil distinguir a un usuario real de otro fake. Por lo cual esta feature puede llegar a ser útil para la clasificación.
+
+**Caption Zero**: 
+
+- Aquí se visualiza el balance entre las cuentas real y fake cuyo porcentaje de pies de publicación de *casi cero* caracteres es la mayoría, para esto se tomaron las que fueran menores o iguales que 3 de las cuentas reales y fake, El valor 1 representa las que tienen un porcentaje de mayoría de pies de publicación casi nulos y 0 los que tienen un porcentaje mayoritario de pies de publicación superior a 3.  
 
 ![](./images/datasetMetrics/caption_zero.png)
 
-- **Comments engagement rate**: En este gráfico en escala logarítmica se puede observar una comparación de la tasa de participación de los comentarios de las cuentas real y fake. 
+- Podemos observar que ambas clases tienen una proporción extremadamente similar, tanto en mayoría de pies de publicación *casi nulas* como en publicaciones con pies de publicación más largos. Por lo tanto, esta feature no es de tanta utilidad por si sola para diferenciar usuarios reales de usuarios fake. 
+
+**Comments engagement rate**: 
+
+- En este gráfico en escala logarítmica se puede observar una comparación del rate de participación de los comentarios de las cuentas real y fake. Esta participación se calcula de la siguiente forma:
+
+$$
+\frac{comentarios}{\frac{posteos}{seguidores}}
+$$
+
+- En el eje de las $x$ tenemos representado el rate de participación de comentarios, mientras que en el eje $y$ el número de usuarios.
 
 ![](./images/datasetMetrics/comments_er.png)
 
-- **Cosine similarity**: En este gráfico podemos comparar el promedio de similitud del coseno entre todos los pares de publicaciones que tiene un usuario. Es decir, estamos analizando la similitud entre dos posteos de un mismo usuario.
+- Se observa en el gráfico que ambas clases tienen un rate de participación de comentarios muy similar, salvo por algunos picos de la clase real que tienen más engagement que la clase fake, pero son casos muy aislados para que sea una feature determinante por si sola.
+
+**Cosine similarity**: 
+
+- En este gráfico podemos comparar el promedio de similaridad coseno entre las publicaciones que tiene un usuario. Es decir, medimos la similitud promedio entre las publicaciones de un usuario. En el eje $x$ se visualiza el valor que de la similitud coseno y en el eje $y$ el número de usuarios.
 
 ![](./images/datasetMetrics/cos_similarity.png)
 
-- **Follower keywords**: En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan 
+- El gráfico nos muestra que hay una diferencia entre la similitud coseno de los usuarios reales y fake, por lo que esta feature podría ser útil para diferenciar a ambas clases.
+
+**Follower keywords**: 
+
+- En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan obtener nuevos seguidores o likes como por ejemplo: f4f, follow for follow; follback o folback, de la expresión "follow back".
 
 ![](./images/datasetMetrics/follower_kw.png)
 
-- **Has Picture**: Es una comparativa gráfica entre las clases real y fake de las cuentas que tienen foto de perfil.
+- Podemos observar una clara diferencia entre las clases real y fake; los usuarios fake usan mayor cantidad de follower keywords. Por lo tanto esta podría ser una buena feature para diferenciar la clase de usuarios reales de los fake.
+
+**Has Picture**: 
+
+- Es una comparativa gráfica entre las clases real y fake de las cuentas que tienen foto de perfil. En donde 1 corresponde a que el usuario si tiene foto de perfil y 0 en caso contrario.
 
 ![](./images/datasetMetrics/has_picture.png)
 
-- **Like engagement rate**: Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake.
+- Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad de forma individual.
+
+**Like engagement rate**: 
+
+- Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake. En el eje $y$ el número de usuarios y en el eje $x$ se encuentra el rate de interacción que se calcula de la siguiente forma: 
+  
+$$
+\frac{likes}{\frac{posteos}{seguidores}}
+$$
 
 ![](./images/datasetMetrics/like_er.png)
 
-- **Link Availibility**: El gráfico muestra el balance de la disponibilidad de un link externo de las cuentas reales y fake.
+- En el gráfico vemos que ambas clases tienen un distribución similar en el plano por lo que esta feature puede no ser muy útil para clasificar a los usuarios reales y fake.
+
+**Link Availibility**: 
+
+- El gráfico muestra el balance de la disponibilidad de un link externo de las cuentas reales y fake. El valor 1 representa que la cuenta tiene un link externo asociado a ella y el valor 0 representa lo contrario.
 
 ![](./images/datasetMetrics/link_available.png)
 
-- **Location tag percentage**: En la imagen se visualiza la comparativa de publicaciones con la etiqueta de la ubicación en los posteos de las cuentas reales y fake.
+- Podemos ver que los usuarios fake son los que menos links externos tienen, por lo que esta feature podría ser muy útil para nuestro problema de clasificación.
+
+**Location tag percentage**: 
+
+- En la imagen se visualiza la comparativa de publicaciones con la etiqueta de la ubicación en los posteos de las cuentas reales y fake. Los usuarios con valor 1 se muestran los usuarios que tienen un gran porcentaje de etiquetas de ubicación en sus publicaciones; mientras que los que tienen valor 0, no. 
 
 ![](./images/datasetMetrics/loc_tag_percentage.png)
 
-- **Non image post percentage**: Compara la cantidad de posteos que no son sólo imagenes, como video o carrusel, entre las clases real y fake.
+- Por lo que se observa, no se puede diferenciar claramente a ambas clases por esta feature, lo que prueba que no es de gran utilidad.
+
+**Non image post percentage**: 
+
+- Compara la cantidad de posteos que no son sólo imagenes, como video o carrusel, entre las clases real y fake. Donde el valor 1 representa a los usuarios con un porcentaje mayoritario de publicaciones que no son sólo imágenes, mientras que 0 representa a lo contrario.
 
 ![](./images/datasetMetrics/non_image_percentage.png)
 
-- **Number of followers**: El siguiente gráfico en escala logarítmica expresa una comparación de el número de seguidores entre las clases real y fake. 
+- Por lo que se puede ver en la gráfica, ambos grupos están muy igualados por lo que esta feature no resulta de utilidad por si sola.
+
+**Number of followers**: 
+
+- El siguiente gráfico en escala logarítmica expresa una comparación de el número de seguidores entre las clases real y fake. El eje $x$ representa el número de seguidores, mientras que el eje $y$ representa al número de usuarios.
 
 ![](./images/datasetMetrics/number_follower.png)
 
-- **Number of followings**: Este gráfico en escala logarítmica muestra una comparación de el número de seguidos entre las clases real y fake. 
+- Los usuarios reales son más distinguibles de los fake cuando los seguidores sobrepasan los 2500 seguidores; por lo cual esta feature puede ser muy útil.
+
+**Number of followings**: 
+
+- Este gráfico en escala logarítmica muestra una comparación de el número de seguidos entre las clases real y fake. En el eje $x$ se presenta el número de seguidos, mientras que el eje $y$ es el número de usuarios.
 
 ![](./images/datasetMetrics/number_following.png)
 
-- **Number of posts**: El gráfico compara el numero de posteos de las clases real y fake en escala logarítmica.
+- En el gráfico se observa que en un número bajo y alto de seguidos se diferencian claramente los usuarios reales de los fake. Por lo que esta feature puede llegar a ser fructífera.
+
+**Number of posts**: 
+
+- El gráfico compara el numero de posteos de las clases real y fake en escala logarítmica. El eje $x$ representa el número de posts, el eje $y$ muestra el número de usuarios
 
 ![](./images/datasetMetrics/number_post.png)
 
-- **Post interval**: Esta gráfica muestra el promedio de tiempo en horas entre posteos de las clases real y fake en una gráfica en escala logarítmica.
+- Lo que se puede observar es que no hay una diferencia clara entre el número de posteos de ambas clases por lo que no puede ser una feature de gran utilidad por si sola. 
+
+**Post interval**: 
+
+- Esta gráfica muestra el promedio de tiempo en horas entre posteos de las clases real y fake en una gráfica en escala logarítmica. En el eje $x$ se reflejan los promedios de tiempo, en horas, entre posteos; mientras que el eje $y$ representa el número de usuarios.
 
 ![](./images/datasetMetrics/post_interval.png)
 
-- **Promotional keywords**: La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras claves promocionales de las clases real y fake.
+- Por lo que podemos observar es que el promedio de tiempo entre posteos entre las clases real y fake son distintas, por lo que esta feature puede llegar a ser productiva para clasificar a los usuarios.
+
+**Promotional keywords**: 
+
+- La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras claves promocionales de las clases real y fake. El eje $x$ se corresponde con el uso promedio de palabras promocionales en posteos y en el eje $y$ es corresponde con el número de usuarios.
 
 ![](./images/datasetMetrics/promotional_kw.png)
 
+- En el gráfico podemos ver claramente que se diferencia la clase de usuarios reales de los fake por el promedio de palabras promocionales, por lo que esta feature prueba ser de utilidad para nuestro problema de clasificación.
 
 #### Conclusiones del análisis de las features del dataset
 
-- La distribución de las clases (real o fake) es muy equitativa, lo cual es bueno para el entrenamiento del modelo y ayudará a evitar el sesgo del modelo.
+- La distribución de las clases (real o fake) es muy equitativa, lo cual es bueno para el entrenamiento del modelo y ayudará a evitar el sesgo del modelo. Esto último se visualiza en la siguiente gráfica:
 
 ![](./images/datasetMetrics/class_dist.png)
 
 - Podría considerarse utilizar como feature la diferencia entre el número de seguidores y seguidos (followers - following).
 
+- En la siguiente gráfica se observa la diferencia entre followers y following en los valores negativos, es decir, aquellos usuarios que tienen más seguidos que seguidores.
+  
 ![](./images/datasetMetrics/followers_following_diff_1.png)
+
+- En la gráfica próxima veremos la diferencia entre followers y following en los valores positivos, es decir, aquellos usuarios que tienen más seguidores que seguidos.
+
 ![](./images/datasetMetrics/followers_following_diff_2.png)
+
+- Podemos concluir que la diferencia entre seguidores y seguidos logra diferenciar de forma más clara a ambas clases se logran diferenciar mejor combinando estas dos features.
 
 - La característica "Caption Zero" no es muy útil ya que los unicos valores que toma son 0 y 1. Además algunos datos son incorrectos ya que hay 83 cuentas que no tienen descripcion en sus publicaciones (la longitud promedio de descripción en publicaciones es 0) pero el valor de la característica es 0.
 
@@ -264,6 +388,17 @@ Ahora veremos qué features se pueden derivar de las actuales para ver si se pue
   - Images frequency: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 
+#### Métricas.
+
+Para medir el rendimiento de los modelos usaremos una matriz de confusión como la siguiente:
+
+ | | **Predicted Positive**| **Predicted Negative** | |
+ |:--:|:--:|:--:|:--:|
+ | **Actual Positive** | TP:  True Positives  | FN:  False Negatives  | Sensitivity:  $$\frac{TP}{TP + FN}$$   |
+ | **Actual Negative** | FP:  False Positives  | TN:  True Negatives  | Specificity:  $$\frac{FP}{FP + TN}$$  |
+ | | Precision:  $$\frac{TP}{TP + FP}$$  | Negative Predictive Value:  $$\frac{FN}{FN + TN}$$  | **Accuracy**:  $$\frac{TP + TN}{TP + TN + FP + FN}$$  |
+
+
 ### Experimentos.
 En base a los análisis realizados, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varios experimentos con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
 
@@ -282,23 +417,24 @@ Los resultados de la matriz de confusión fueron las siguientes:
 Además se obtuvo la importancia de las diferentes variables:
  | Variable | Importance |
  |:--:|:--:|
- |  Num posts |  459.761258190958  |
- |  Num followers  |  735.805088278248  |
- |  Num following  |  2091.16579555838  |
- |  Bio length  |  627.457577048002  |
- |  Has picture  |  13.2295974190987  |
- |  Link zvailability  |  2153.48815752171  |
- |  Avg caption length  |  534.722734277606  |
- |  Caption zero  |  266.496444291937  |
- |  Non image percentage  |  168.669221114669  |
- |  Like engagement rate  |  1448.20487223423  |
+ |  Link availability  |  2153.48815752171  |
  |  Comments engagement rate  |  2152.98693259071  |
+ |  Num following  |  2091.16579555838  |
+ |  Like engagement rate  |  1448.20487223423  |
+ |  Num followers  |  735.805088278248  | 
+ |  Bio length  |  627.457577048002  |
  |  Location tag percentage  |  600.213569894813  |
+ |  Avg caption length  |  534.722734277606  |
+ |  Post interval  |  495.154604529331  |
+ |  Num posts |  459.761258190958  |
+ |  Cosine similarity  |  354.513301793794  |
+ |  Caption zero  |  266.496444291937  |
  |  Average hashtag count  |  199.270343752644  |
  |  Promotional keywords   |  195.66162222508  |
+ |  Non image percentage  |  168.669221114669  |
  |  Followers keywords  |  122.984566460685  |
- |  Cosine similarity  |  354.513301793794  |
- |  Post interval  |  495.154604529331  |
+ |  Has picture  |  13.2295974190987  |
+
 
 Las primeras conclusiones que se pueden obtener de este modelo son:
 - Contrariamente a lo que se esperaba, la característica "Comments engagement rate" resultó ser una de las más importantes para la clasificación de las cuentas.
@@ -372,6 +508,18 @@ Los resultados de los experimentos han llevado a obtener información al respect
 Este trabajo no es útil en la actualidad debido a los cambios en la sociedad tras la pandemia del 2020, además de las distintas actualizaciones que ha tenido la red social desde la fecha en que se recopiló la información del dataset utilizado en este proyecto. La adición de visualización de medios como videos, la incorporación de la separación del audio del posteo y las publicaciones en conjunto de usuarios. Cambian las condiciones en las que las cuentas reales y fake se comportan, en adición, se añaden más características a cada cuenta que podrían ser relevantes en la clasificación de una cuenta. 
 
 ## Referencias.
+
+ - [1] https://www.ibm.com/es-es/topics/logistic-regression
+ - [2] https://datascientest.com/es/que-es-la-regresion-logistica
+ - [3] https://es.wikipedia.org/wiki/Regresi%C3%B3n_log%C3%ADstica
+ - [4] Stuart Russell, Peter Norvig: AIMA 4ta Edición; Pág. 684, Capítulo 19,  Sección 6, Subsección 5
+ - [5] Stuart Russell, Peter Norvig: AIMA 4ta Edición; Pág. 657, Capítulo 19,  Sección 3.
+ - [6] https://machinelearningparatodos.com/arboles-de-decision-en-python/
+ - [7] https://anderfernandez.com/blog/programar-arbol-decision-python-desde-0/
+ - [8] https://www.ibm.com/mx-es/topics/random-forest
+ - [9] https://www.freecodecamp.org/espanol/news/como-funcionan-los-clasificadores-naive-bayes-con-ejemplos-de-codigo-de-python/
+ - [10] https://aprendeia.com/algoritmo-naive-bayes-machine-learning/
+ - [11] https://www.ibm.com/es-es/topics/knn
 
  - Kaggle del dataset: https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram
  - Paper publicado por Kristo Radion Purba, David Asirvatham y R.K. Murugesan donde se realizó un ejercicio similar al hecho por este proyecto: https://www.researchgate.net/publication/341796393_Classification_of_instagram_fake_users_using_supervised_machine_learning_algorithms
