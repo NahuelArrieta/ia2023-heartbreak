@@ -258,7 +258,7 @@ $$
 
 ![](./images/datasetMetrics/has_picture.png)
 
-- Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad de forma individual.
+- Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, pero la proporción de usuarios fake que no tienen una imagen de perfil es clara y la feature puede llegar a ser útil para identificar una usuario fake.
 
 **Like engagement rate**: 
 
@@ -367,10 +367,15 @@ $$
 
 - Las siguientes características tienen una distribución muy diferente entre las clases real y fake. Podrían ser muy útiles para el entrenamiento del modelo.
 
+  - Average hashtag count
   - Biography length 
+  - Cosine Similarity
   - Follower keywords
-  - Has Picture
   - Link Availibility
+  - Number of followers
+  - Number of followings
+  - Post Interval
+  - Has Picture
   - Promotional keywords 
 
 #### Features que se pueden añadir.
@@ -379,13 +384,13 @@ Ahora veremos qué features se pueden derivar de las actuales para ver si se pue
 
 - Las siguientes características se podrían añadir para denotar más relaciones entre las características del dataset:
 
-  - Follow difference: Diferencia entre el número de seguidores y seguidos.
-  - Rate of follows: Cantidad de followers dividida la cantidad de following.
-  - Post frecuency: Cantidad de posts dividida el post interval(intervalo de posteos). 
-  - Account age: Antigüedad de la cuenta. Se puede calcular en base a la cantidad de posts y el post interval.
-  - Follower frequency: Cantidad de followers dividida la antigüedad de la cuenta.
-  - Following frequency: Cantidad de following dividida la antigüedad de la cuenta.
-  - Images frequency: Cantidad de imágenes dividida la antigüedad de la cuenta.
+  - *Follow difference*: Diferencia entre el número de seguidores y seguidos.
+  - *Rate of follows*: Cantidad de followers dividida la cantidad de following.
+  - *Post frecuency*: Cantidad de posts dividida el post interval(intervalo de posteos). 
+  - *Account age*: Antigüedad de la cuenta. Se puede calcular en base a la cantidad de posts y el post interval.
+  - *Follower frequency*: Cantidad de followers dividida la antigüedad de la cuenta.
+  - *Following frequency*: Cantidad de following dividida la antigüedad de la cuenta.
+  - *Images frequency*: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 
 #### Métricas.
@@ -398,6 +403,7 @@ Para medir el rendimiento de los modelos usaremos una matriz de confusión como 
  | **Actual Negative** | FP:  False Positives  | TN:  True Negatives  | Specificity:  $$\frac{FP}{FP + TN}$$  |
  | | Precision:  $$\frac{TP}{TP + FP}$$  | Negative Predictive Value:  $$\frac{FN}{FN + TN}$$  | **Accuracy**:  $$\frac{TP + TN}{TP + TN + FP + FN}$$  |
 
+Estas métricas nos dan información muy útil. Además de la exactitud (Accuracy) del modelo; obtenemos metricas como la precisión de los valores predichos positivos (Precision), la precisión de los valores predichos negativos (Negative predictive value); la sensibilidad y especificidad son también muy útiles debido a que ambas permiten identificar la proporción de positivos y negativos correctamente predichos. 
 
 ### Experimentos.
 En base a los análisis realizados, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varios experimentos con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
