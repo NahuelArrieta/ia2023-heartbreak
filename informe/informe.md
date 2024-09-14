@@ -8,19 +8,19 @@
 
 **Repositorio:** https://github.com/NahuelArrieta/ia2023-heartbreak
 
-## Introducción.
+# Introducción.
 
 En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un módelo capaz de detectar cuentas falsas de Instagram.
 
 Instagram es una red social con una gran popularidad, cuya principal función es compartir fotos y videos. El sistema de interacción se basa en seguir a otros usarios, por lo cual cada cuenta tiene seguidores y seguidos. Además de las publicaciones, cada cuenta tiene una biografía, una imagen de perfil y puede tener un link externo. Y este proyecto apunta a realizar un modelo de IA que ayude a encontrar características en cuentas falsas de Instagram.
 
 
-### ¿Qué es una cuenta falsa? 
+## ¿Qué es una cuenta falsa? 
 Una cuenta falsa es una cuenta de usuario en una red social que no representa a una persona real. Si bien pueden parecer fácil de identificar debido a ciertas características, como la falta de una imagen de perfil o poca actividad, muchos usuarios reales poseen también este comportamiento.  Dar una definición precisa de que es una cuenta falsa no es sencillo, ya que no existe un criterio único que permita identificarlas de manera inequívoca. Esto va a decantar en un gran desafío a la hora de testear la performance del modelo en un entorno real.
 
 Como se indicó anteriormente, el modelo que se propone en este proyecto no tiene como objetivo identificar cuentas falsas de manera absoluta, sino detectar patrones y características comunes en cuentas que han sido identificadas como falsas en el pasado.
 
-### Objetivo.
+## Objetivo.
 La masificación de las redes sociales ha llevado a la creación de cuentas falsas que buscan engañar a los usuarios. 
 
 Detectar estas cuentas es de vital importancia por varias razones:
@@ -31,15 +31,15 @@ Detectar estas cuentas es de vital importancia por varias razones:
 
 Por todas estas razones, contar con un modelo que permita a Instagram detectar cuentas falsas de manera automática y eficiente es de suma importancia. El mismo contribuiría a mantener la confianza de los usuarios en la plataforma, promoviendo una experiencia más auténtica, satisfactoria y, sobre todo, más segura. 
 
-### Proceso del proyecto.
+## Proceso del proyecto.
 
-Este proceso será llevado a cabo en las siguientes etapas, iniciaremos con un acercamiento al marco teórico en el que se va a trabajar, donde se describirán los algoritmos que utilizaremos en el proyecto y las razones por las que serán utilizados. Siguiente a la etapa descrita se hará un diseño experimental donde se describirá el dataset, las librerías utilizadas para la implementación, análsis de los datos obtenidos y experimentos llevados a cabo. Finalmente se realizará un análisis de los resultados y se dará una conclusión de qué tan aplicable es el modelo hoy en día. 
+Este proceso será llevado a cabo en las siguientes etapas: iniciaremos con un acercamiento al **marco teórico** en el que se va a trabajar, donde se describirán los algoritmos que utilizaremos en el proyecto y las razones por las que serán utilizados; luego se hará un **diseño experimental** donde se describirá el dataset, las librerías utilizadas para la implementación, análsis de los datos obtenidos y experimentos llevados a cabo; finalmente se realizará un **análisis de los resultados** y se dará una **conclusión** de qué tan aplicable es el modelo hoy en día. 
 
-## Marco teórico.
+# Marco teórico.
 
 En la siguientes secciones se analizarán los algoritmos disponibles para cumplir el objetivo principal del proyecto y se dará una conclusión de cual algoritmo es el más apropiado; y será usado para llevar a cabo el entrenamiento del modelo. 
 
-### Análisis de los algoritmos a utilizar.
+## Análisis de los algoritmos a utilizar.
 ¿Qué algoritmos podemos usar para este problema de clasificación?
 
 Para un problema de clasificación existen varios algoritmos que vamos a considerar:
@@ -125,14 +125,14 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 - Se toman los $k$ vecinos más cercanos y se asigna la clase resultado como la clase mayoritaria entre los vecinos.
 [11]
 
-#### Conclusión.
+### Conclusión del análisis de algoritmos.
 
-Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following.
+Debido al gran tamaño del dataset y la gran cantidad de parámetros, podemos aprovecharlos en Random Forest generando árboles con conjuntos variables predictoras distintas que denotarán relaciones que sean altamente efectivas en la detección de si un perfil de instagram es real o falsa, como por ejemplo: Número de followers y following. Además, es un algoritmo extremadamente entendible y fácil de ajustar.
 
 
-## Diseño Experimental.
+# Diseño Experimental.
 
-### Descripción del dataset.
+## Descripción del dataset.
 
 Se utilizará un algoritmo de machine learning entrenado con un dataset de la plataforma kaggle (https://www.kaggle.com/datasets/krpurba/fakeauthentic-user-instagram) el cuál ha recopilado datos de 65326 usuarios reales o auténticos y falsos desde el 1 al 20 de septiembre de 2019, lo cual resulta ser de grán utilidad ya que contiene muchas métricas de cada usuario. Además de ser muy extensa, contiene datos muy interesantes como: 
 
@@ -170,7 +170,7 @@ Se utilizará un algoritmo de machine learning entrenado con un dataset de la pl
 
 - Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
 
-### Implementación.
+## Implementación.
 
 Para llevar a cabo este proyecto se van a utilizar dos lenguajes de programación R y Python. La razón para usar R es por sus librerías orientadas al machine learning y en especial la del algoritmo Random Forest que vamos a estar utilizando para este proyecto. Además python tiene una sintaxis sencilla y librerías útiles para obtener modelos con los algoritmos que vamos a realizar implementaciones sencillas y también librerías para manipular datos y archivos.
 
@@ -186,9 +186,9 @@ Las librerías de python son:
 - numpy
 - time
 
-### Análisis de los datos.
+## Análisis de los datos.
 
-#### Features del dataset
+### Features del dataset
 
 **Average Caption length**:
 
@@ -336,7 +336,7 @@ $$
 
 - En el gráfico podemos ver claramente que se diferencia la clase de usuarios reales de los fake por el promedio de palabras promocionales, por lo que esta feature prueba ser de utilidad para nuestro problema de clasificación.
 
-#### Conclusiones del análisis de las features del dataset
+### Conclusiones del análisis de las features del dataset
 
 - La distribución de las clases (real o fake) es muy equitativa, lo cual es bueno para el entrenamiento del modelo y ayudará a evitar el sesgo del modelo. Esto último se visualiza en la siguiente gráfica:
 
@@ -378,7 +378,7 @@ $$
   - Has Picture
   - Promotional keywords 
 
-#### Features que se pueden añadir.
+### Features que se pueden añadir.
 
 Ahora veremos qué features se pueden derivar de las actuales para ver si se pueden generar features con relevancia.
 
@@ -393,7 +393,7 @@ Ahora veremos qué features se pueden derivar de las actuales para ver si se pue
   - *Images frequency*: Cantidad de imágenes dividida la antigüedad de la cuenta.
 
 
-#### Métricas.
+### Métricas.
 
 Para medir el rendimiento de los modelos usaremos una matriz de confusión como la siguiente:
 
@@ -405,12 +405,29 @@ Para medir el rendimiento de los modelos usaremos una matriz de confusión como 
 
 Estas métricas nos dan información muy útil. Además de la exactitud (Accuracy) del modelo; obtenemos metricas como la precisión de los valores predichos positivos (Precision), la precisión de los valores predichos negativos (Negative predictive value); la sensibilidad y especificidad son también muy útiles debido a que ambas permiten identificar la proporción de positivos y negativos correctamente predichos. 
 
-### Experimentos.
+La **exactitud (Accuracy)** es el valor que más nos interesa, ya que nos indica cuales valores hemos predicho con certeza.
+
+La **precisión (Precision)** es un valor que es de utilidad ya que nos puede indicar cuantas predicciones positivas son realmente positivas.
+
+El **Negative Predictive Value** Nos ayuda a ver que tan mal estamos prediciendo los valores negativos.
+
+La **especificidad (Specificity)** nos ayuda con una métrica para ver que porcentaje de los negativos reales fueron correctamente identificados.
+
+La **sensibilidad (Sensitivity)** o también llamada **Recall** mide la capacidad del modelo para identificar correctamente los casos positivos. 
+
+Y además para los otros algoritmos que vamos a probar vamos a verlos a menos detalle, pero si veremos la exactitud, su media y desviación estándar.
+
+
+# Experimentos.
 En base a los análisis realizados, se desarolló código para poder aplicar las modificaciones y se entrenó el modelo con el algoritmo Random Forest. Se realizaron varios experimentos con distintas configuraciones de hiperparámetros y se evaluaron los resultados obtenidos.
 
-A continuación se presentan los de las pruebas realizadas:
+A continuación se presentan los de las pruebas realizadas con los distintos algoritmos:
+- **Bosques Aleatorios (Random Forest):** Es donde haremos mayor cantidad de experimentos, ya que es el algoritmo en el que nos queremos enfocar.
+- **Regresión Logística, Árboles de Decisión, Naive Bayes, K-Nearest Neighbors (KNN):** Haremos un modelo secillo y evaluaremos su exactitud (accuracy) 
 
-#### 1- Modelo sin preprocesamiento.
+## Random Forest
+
+### 1- Modelo sin preprocesamiento.
 El primer modelo se entrenó sin realizar ningún tipo de preprocesamiento en los datos, con el objetivo de evaluar las modificaciones que se pueden realizar en el dataset para mejorar el rendimiento del modelo. Se utilizaron 100 árboles y 5 variables predictoras en cada árbol.
 
 Los resultados de la matriz de confusión fueron las siguientes:
@@ -447,7 +464,7 @@ Las primeras conclusiones que se pueden obtener de este modelo son:
 - Las características "Follower keywords",  "Has Picture" y "Non image percentage" son las menos importantes para el modelo.
 - Las variables "Location tag percentage", "Bio length", "Post interval" y "Promotional keywords" no tuvieron el impacto que esperábamos cuando analizamos el dataset.
 
-#### 2- Dataset con followers-following ratio.
+### 2- Dataset con followers-following ratio.
 
 Al dataset se le incluyó una feature denominada "follow_rate" que representa la relación entre el número de seguidores y seguidos de una cuenta. 
 
@@ -455,30 +472,30 @@ La importancia que tuvo esta nueva característica en el modelo fue de 2366.98, 
 
 En cuanto a los resultados, el se obtuvo una mejora en la accuracy del modelo, pasando de 0.8953 a 0.8973.
 
-#### 3- Dataset con antigüedad de la cuenta.
+### 3- Dataset con antigüedad de la cuenta.
 Se agregó una característica al dataset denominada "account_age" que representa la antigüedad de la cuenta. Se calculó multiplicando el número de publicaciones por el intervalo de tiempo entre publicaciones, lo cual nos da un indicio de cuánto tiempo lleva la cuenta activa; sin embargo si la cuenta no ha publicado nada, la antigüedad será 0.
 
 Esta nueva feature no fue muy útil ya que su importancia fue de 437.20 y la accuracy disminuyó ligéramente a 0.8941.
 
-#### 4- Dataset con followers frequency.
+### 4- Dataset con followers frequency.
 En esta prueba se añadió una nueva feature al dataset denominada "followers_frequency" que representa la cantidad de seguidores dividida la antigüedad de la cuenta.
 
 Al igual que la prueba anterior, esta nueva característica tuvo una baja  importancia en el modelo (355.15) y el accuracy disminuyó a 0.8937.
 
-#### 5- Dataset con following frequency.
+### 5- Dataset con following frequency.
 Para este entrenamiento se añadió una feature denominada "following_frequency" que representa la cantidad de seguidos dividida la antigüedad de la cuenta. 
 
 En esta caso la variable tuvo una importancia alta (1177.64) y la importancia de "Num following" disminuyó a 1598.15. La accuracy del modelo fue de 0.8960.
 
-#### 6- Dataset con image frequency.
+### 6- Dataset con image frequency.
 Se añadió una nueva feature al dataset denominada "image_frequency" calculada como la cantidad de imágenes dividida la antigüedad de la cuenta. Nuevamente, los resultados no fueron los esperados ya que la importancia de la variable fue de 332.48 y la accuracy del modelo bajó a 0.8944.
 
-#### 7- Escalado de variables.
+### 7- Escalado de variables.
 En esta prueba se escaló el dataset utilizando la función `scale` de la librería `sklearn.preprocessing`, con el objetivo de normalizar las variables y mejorar el rendimiento del modelo.
 
 Sin embargo, los resultados no fueron los esperados ya que la cantidad de falsos negativos aumentó considerablemente (de 285 a 1805), lo que se tradujo en una disminución de la accuracy del modelo a 0.7766.
 
-#### 8- Eliminación de variables. 
+### 8- Eliminación de variables. 
 En base al primer análisis de las variables del dataset se consideró eliminar las siguientes variables debido a que su distribución era muy similar entre las clases real y fake:
 - Non image post percentage
 - Location tag percentage
@@ -487,12 +504,12 @@ En base al primer análisis de las variables del dataset se consideró eliminar 
 
 En este caso la accuracy del modelo decreció notablemente a 0.8733 y la importancia de "Post Interval" cambió de 495.15 a 877.80. El resto de las variables no tuvieron cambios significativos en su importancia.
 
-#### 9- Dataset con diferencia entre followers y following.
+### 9- Dataset con diferencia entre followers y following.
 En este modelo se añadió una feature al dataset llamada "follow_differece" obtenida de la resta entre el número de seguidores y seguidos de una cuenta.
 
 Esta prueba tuvo un buen resultado: La accuracy mejoró a 0.8966 y la importancia de la variable fue de 1967.10. Además cabe destaccar que la importancia de "Num following" bajó a la mitad (de 2091.16 a 1002.19), mientras que la de "Num followers" se mantuvo.
 
-#### 10- Dataset sin non_image_post_percentage, location_tag_percentage y caption_zero.
+### 10- Dataset sin non_image_post_percentage, location_tag_percentage y caption_zero.
 Esta prueba es similar a la número 8, pero se decidió mantener la variable "Comments engagement rate" debido a la importancia que tuvo en el modelo sin preprocesamiento. 
 
 Si bien el modelo tuvo un mucho mejor rendimiento que el modelo de la prueba 8, tuvo una accuracy similar al modelo sin preprocesamiento (0.8954) y la importancia de las variables no tuvo cambios significativos.
