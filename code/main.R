@@ -28,7 +28,7 @@ train_variables <- list(
     add_follower_frequency = FALSE,
     add_following_frequency = FALSE,
     add_image_frequency = FALSE,
-    remove_num_of_followers = FALSE,
+    remove_num_of_followers = TRUE,
     remove_num_of_following = FALSE,
     remove_follower_keywords = FALSE,
     remove_has_picture = FALSE,
@@ -37,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "add_follow_rate"
+file_name <- "add_f_rate__remove_flw"
 
 train(train_variables, file_name)
 
