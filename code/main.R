@@ -16,7 +16,7 @@ library(dplyr)
 train_variables <- list(
     ntree = 100,
     mtry = 5,
-    nfolds = 2,
+    nfolds = 5,
     scale_data = FALSE,
     remove_non_image_post_percentage = FALSE,
     remove_location_tag_percentage = FALSE,
