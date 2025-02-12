@@ -22,7 +22,7 @@ train_variables <- list(
     remove_location_tag_percentage = FALSE,
     remove_comments_engagement_rate = FALSE,
     remove_caption_zero = FALSE, 
-    add_follow_difference = FALSE,
+    add_follow_difference = TRUE,
     add_follow_rate = FALSE,
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
@@ -37,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "no_preprocessing"
+file_name <- "add_follow_difference"
 
 train(train_variables, file_name)
 
