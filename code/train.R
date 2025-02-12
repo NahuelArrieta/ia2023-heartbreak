@@ -30,6 +30,7 @@ train <- function(train_variables, file_name) {
 
     ## Start empty confusion matrix
     all_confusion_matrix <- matrix(0, 2, 2)
+    accuracy_results <- c()
 
     ## Start empty map to track the importance of each variable
     variable_importance <- new.env()
