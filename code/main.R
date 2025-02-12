@@ -37,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "add_follow_difference"
+file_name <- "add_follow_rate"
 
 train(train_variables, file_name)
 
