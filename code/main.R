@@ -32,13 +32,12 @@ train_variables <- list(
     remove_num_of_following = FALSE,
     remove_follower_keywords = FALSE,
     remove_has_picture = FALSE,
-    remove_bio_length = TRUE,
-    remove_post_interval = FALSE,
+    remove_bio_length = FALSE,
+    remove_post_interval = TRUE,
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "remove_has_picture"
-
+file_name <- "remove_post_interval"
 
 train(train_variables, file_name)
 
