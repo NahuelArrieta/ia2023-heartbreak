@@ -37,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = TRUE
 )
 
-file_name <- "remove_post_interval"
+file_name <- "remove_promotional_keywords"
 
 train(train_variables, file_name)
 
