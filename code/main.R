@@ -27,17 +27,17 @@ train_variables <- list(
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
     add_following_frequency = FALSE,
-    add_image_frequency = TRUE,
+    add_image_frequency = FALSE,
     remove_num_of_followers = FALSE,
     remove_num_of_following = FALSE,
     remove_follower_keywords = FALSE,
     remove_has_picture = FALSE,
-    remove_bio_length = FALSE,
+    remove_bio_length = TRUE,
     remove_post_interval = FALSE,
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "add_following_frequency"
+file_name <- "remove_has_picture"
 
 
 train(train_variables, file_name)
