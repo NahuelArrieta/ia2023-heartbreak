@@ -18,9 +18,9 @@ train_variables <- list(
     mtry = 5,
     nfolds = 5,
     scale_data = FALSE,
-    remove_non_image_post_percentage = TRUE,
-    remove_location_tag_percentage = TRUE,
-    remove_comments_engagement_rate = TRUE,
+    remove_non_image_post_percentage = FALSE,
+    remove_location_tag_percentage = FALSE,
+    remove_comments_engagement_rate = FALSE,
     remove_caption_zero = TRUE, 
     add_follow_difference = FALSE,
     add_follow_rate = FALSE,
@@ -37,7 +37,8 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "remove_ni_lt_erc_cz"
+file_name <- "remove_cz_ni"
+
 
 train(train_variables, file_name)
 
