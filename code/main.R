@@ -21,13 +21,13 @@ train_variables <- list(
     remove_non_image_post_percentage = FALSE,
     remove_location_tag_percentage = FALSE,
     remove_comments_engagement_rate = FALSE,
-    remove_caption_zero = TRUE, 
+    remove_caption_zero = FALSE, 
     add_follow_difference = FALSE,
     add_follow_rate = FALSE,
     add_account_age = FALSE,
     add_follower_frequency = FALSE,
     add_following_frequency = FALSE,
-    add_image_frequency = FALSE,
+    add_image_frequency = TRUE,
     remove_num_of_followers = FALSE,
     remove_num_of_following = FALSE,
     remove_follower_keywords = FALSE,
@@ -37,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "remove_cz_ni"
+file_name <- "add_following_frequency"
 
 
 train(train_variables, file_name)
