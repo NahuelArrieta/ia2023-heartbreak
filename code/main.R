@@ -15,7 +15,7 @@ library(dplyr)
 ## create train_variables 
 train_variables <- list(
     ntree = 175,
-    mtry = 5,
+    mtry = 8,
     nfolds = 5,
     scale_data = FALSE,
     remove_non_image_post_percentage = FALSE,
@@ -37,7 +37,7 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "fr_cz_flw__n_175__m_5"
+file_name <- "fr_cz_flw__n_175__m_8"
 
 train(train_variables, file_name)
 
