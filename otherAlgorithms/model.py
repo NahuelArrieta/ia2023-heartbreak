@@ -23,7 +23,7 @@ class Model:
         
         print('\n')
         print('Model:', self.name)
-        print('Time list:', self.time_list)
+        print("Accuracy list:", self.accuracy_list)
         print('Average accuracy:', avg_accuracy)
         print('Standard deviation of accuracy:', sd_accuracy)
         print('Average time (s):', avg_time)
