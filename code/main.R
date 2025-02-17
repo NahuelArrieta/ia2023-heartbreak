@@ -15,7 +15,7 @@ library(dplyr)
 ## create train_variables 
 train_variables <- list(
     ntree = 175,
-    mtry = 8,
+    mtry = 5,
     nfolds = 5,
     scale_data = FALSE,
     remove_non_image_post_percentage = FALSE,
@@ -37,9 +37,9 @@ train_variables <- list(
     remove_promotional_keywords = FALSE
 )
 
-file_name <- "fr_cz_flw__n_175__m_8"
+file_name <- "model_validation"
 
-train(train_variables, file_name)
+# train(train_variables, file_name)
 
-# validate(train_variables, file_name)
+validate(train_variables, file_name)
 
