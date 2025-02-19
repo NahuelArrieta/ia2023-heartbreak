@@ -1,4 +1,8 @@
-# Proyecto Final - Modelo para la Detección de Cuentas Falsas en Instagram
+# Proyecto Final - Heartbreak
+
+- *Carrera*: Licenciatura en Ciencias de la Computación
+- *Materia*: Inteligencia Artificial I
+- *Alumno*: Nahuel Arrieta
 
 ## Introducción
 
