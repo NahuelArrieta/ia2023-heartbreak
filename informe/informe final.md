@@ -8,7 +8,7 @@
 
 Las redes sociales han transformado la manera en que las personas interactúan y consumen contenido en línea. Instagram, en particular, es una de las plataformas más populares, utilizada tanto por individuos como por empresas para marketing e influencia digital. Sin embargo, la proliferación de cuentas falsas y bots plantea un problema significativo, afectando la autenticidad del engagement y perjudicando a marcas y usuarios legítimos.
 
-En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un módelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar ("Classification of instagram fake users using supervised machine learning algorithms") de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
+En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un modelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar ("Classification of instagram fake users using supervised machine learning algorithms") de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
 
 A lo largo del documento, se detallará el marco teórico sobre la detección de cuentas falsas y los algoritmos utilizados, seguido del diseño experimental que incluye la selección de características, el preprocesamiento de datos y la metodología de entrenamiento y validación. Posteriormente, se presentará un análisis de los resultados obtenidos y las conclusiones finales, así como posibles mejoras futuras. 
 
@@ -324,7 +324,7 @@ En el gráfico podemos ver claramente que se diferencia la clase de usuarios rea
 
 ### Herramientas Utilizadas 
 
-Para este proyecto se utlizaron las siguientes herramientas:
+Para este proyecto se utilizaron las siguientes herramientas:
 
 El algorithm de Random Forest se implementó en el lenguaje de programación R debido a que es un lenguaje muy utilizado en el ámbito de la ciencia de datos y machine learning. Además, R cuenta con una gran cantidad de librerías y funciones que facilitan la implementación de algoritmos de machine learning. Se necesitaron las siguientes librerías:
 - randomForest
