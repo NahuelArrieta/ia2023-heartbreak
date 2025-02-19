@@ -309,43 +309,106 @@ La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras
 En el gráfico podemos ver claramente que se diferencia la clase de usuarios reales de los fake por el promedio de palabras promocionales, por lo que esta feature prueba ser de utilidad para nuestro problema de clasificación.
 
 
-### Herramientas Utilizadas -- TODO
-El modelo se ha implementado en **Python**, utilizando las siguientes bibliotecas:
-#### **Scikit-learn Para la implementación del modelo de Random Forest y métricas de evaluación.
-#### **Pandas y NumPy Para manipulación y análisis de datos.
-#### **Matplotlib y Seaborn Para la visualización de datos y resultados.
+### Herramientas Utilizadas 
 
-### Preprocesamiento de Datos -- TODO
-El conjunto de datos fue obtenido de Kaggle y contenía información sobre más de 65,000 cuentas etiquetadas como reales o falsas. Se realizaron las siguientes etapas de preprocesamiento:
-- **Eliminación de características irrelevantes o redundantes**.
-- **Conversión de variables categóricas a numéricas**.
-- **Normalización y escalado de valores numéricos**.
-- **División del conjunto de datos en entrenamiento (80%) y validación (20%)**.
+Para este proyecto se utlizaron las siguientes herramientas:
 
-### Experimentos Realizados -- TODO
-Se probaron distintas configuraciones del modelo ajustando el número de árboles (`ntree`) y las características seleccionadas (`mtry`). Se realizaron pruebas eliminando y agregando diversas características, como:
-- *Remove caption zero*
-- *Add follow rate*
-- *Remove number of followers*
+El algorithm de Random Forest se implementó en el lenguaje de programación R debido a que es un lenguaje muy utilizado en el ámbito de la ciencia de datos y machine learning. Además, R cuenta con una gran cantidad de librerías y funciones que facilitan la implementación de algoritmos de machine learning. Se necesitaron las siguientes librerías:
+- randomForest
+- readr
+- dplyr
 
-El modelo final con **Random Forest (ntree=175, mtry=5)** mostró los mejores resultados en términos de precisión y estabilidad.
+Por otro lado, se utilizó Python para los otros modelos (Regresión Logística, Árboles de Decisión, Naive Bayes, K-Nearest Neighbors) y para el preprocesamiento de datos. Las librerías utilizadas en Python fueron:
+- os
+- random
+- sklearn
+- numpy
+- time
+
+### Preprocesamiento de Datos 
+El conjunto de datos fue obtenido de Kaggle y contenía información sobre más de 65,000 cuentas etiquetadas como reales o falsas. 
+
+Se dividió el conjunto de datos en dos partes: un conjunto de entrenamiento (80%) y un conjunto de validación (20%). 
+
+Este dataset habia sido previamente limpiado y no contenía valores nulos o faltantes, y la distribución de clases estaba balanceada. Por esta razón, no fue necesario realizar otro tipo de preprocesamiento adicional.
+
+
+
+
+### Experimentos Realizados
+Para todos los modelos se utilizó una configuración de 5-fold cross-validation para evaluar el rendimiento del modelo en el conjunto de entrenamiento. 
+
+En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones:
+
+- **Variacion hipermarametros**: 
+    - ntree
+    - mtry
+- **Eliminación de características potencialmente irrelevantes o redundantes**.
+    - non_image_post_percentage
+    - location_tag_percentage
+    - comments_engagement_rate
+    - caption_zero
+    - number_of_followers
+    - number_of_following
+    - follower_keywords
+    - has_picture
+    - bio_length
+    - post_interval
+    - promotional_keywords
+- **Agregar nuevas características**.
+    - follow_rate = number_of_followers / number_of_following
+    - follow_difference = number_of_followers  - number_of_following
+    - account_age = post_interval * number_of_posts
+    - follower_frequency = number_of_followers / account_age
+    - folowing_frequency = number_of_following / account_age
+    - image_frequency = (number_of_posts - non_image_post_percentage) / account_age
+
+Para el resto de los modelos, se realizaron experimentos sencillos con configuraciones básicas, sin ajuste de hiperparámetros ni selección de características.
+
+A continuación se presentan los resultados obtenidos en los experimentos más relevantes:
+| Id | Algoritmo | Variables | Modificaciones | Accuracy | Desviación Estándar |
+|----|-----------|-----------|----------------|----------|---------------------|
+| 005 | Random Forest | - mtry: 5 <br> - ntree: 100 |   - Add follow rate <br>  - Remove number of following | 0.9022 | 0.0045 |
+| 006 | Random Forest | - mtry: 5 <br> - ntree: 100 |   - Add follow rate  <br>  - Remove number of following | 0.9023 | 0.0034 |
+| 011 | Random Forest | - mtry: 5 <br> - ntree: 100 |   - Remove caption zero | 0.9020 | 0.0025 | 
+| 021 | Random Forest | - mtry: 5 <br> - ntree: 100 |  - Remove caption zero  <br>  - Add follow rate  <br>  - Remove number of followers | 0.9027 | 0.0007 |
+| 022 | Random Forest | - mtry: 5 <br> - ntree: 100 |  - Remove non image post percentage <br>  - Remove caption zero <br>  - Add follow rate  <br> - Remove number of followers  | 0.9023 | 0.0035 |
+| 023 | Random Forest | - mtry: 5 <br> - ntree: 100 |    - Remove non image post percentage <br>  - Add follow rate <br>  - Remove number of followers | 0.9027 | 0.0023 |
+| 024 | Random Forest | - mtry: 8 <br> - ntree: 175 |   - Remove caption zero <br>  - Add follow rate  <br>  - Remove number of followers | 0.9020 | 0.0033 |
+| 028 | Random Forest | - mtry: 5 <br> - ntree: 175 | - Remove caption zero <br>  - Add follow rate  <br>  - Remove number of followers | 0.9035 | 0.0022 |
+| 030 | Random Forest | - mtry: 10 <br> - ntree: 175 | - Remove caption zero <br>  - Add follow rate  <br>  - Remove number of followers | 0.9025 | 0.0022 |
+| LR | Regresión Logística | --- | --- |  0.8100 |  0.0049 |
+| KNN | K-Nearest Neighbors | - k: 5 | --- | 0.8139 | 0.0046 |
+| NB | Naive Bayes | --- | --- | 0.8561 | 0.0040 |
+| DT | Árbol de Decisión | --- | --- | 0.7140 |0.0171 |
 
 ## Análisis y Discusión de Resultados
+Durante el entrenamiento, el que obtuvo los mejores resultados fue Random Forest 030 con una precisión del 90.35% y una desviación estándar de 0.0022. Entonces, se validó el modelo con el conjunto de validación y se obtuvo la siguiente matriz de confusión:
 
-El modelo seleccionado logró una precisión del **89.65%** en el conjunto de validación, con una sensibilidad del **95.53%** y una especificidad del **83.76%**. Estos resultados indican que el modelo es altamente efectivo en la detección de cuentas falsas, aunque con una tasa moderada de falsos positivos.
+| | **Predicted Positive**| **Predicted Negative** | |
+ |:--:|:--:|:--:|:--:|
+ | **Actual Positive** | TP:  6218  | FN:  291  | Sensitivity:  0.955292671685359  |
+ | **Actual Negative** | FP:  1055  | TN:  5443  | Specificity:  0.837642351492767  |
+ | | Precision:  0.854942939639764  | Negative Predictive Value:  0.949250087199163  | **Accuracy**:  0.896517259936957  |
+
+
+Estos resultados indican que el modelo es altamente efectivo en la detección de cuentas falsas, aunque con una tasa moderada de falsos positivos. La sensibilidad del modelo es del 95.5%, lo que significa que es capaz de detectar la gran mayoría de cuentas falsas en el conjunto de validación. La especificidad del 83.7% indica que el modelo también es capaz de identificar cuentas reales con una precisión razonable. La precisión del modelo es del 85.5%, lo que significa que la mayoría de las cuentas clasificadas como falsas son verdaderamente falsas.
+
 
 Se identificó que las características más importantes para la clasificación fueron:
-1. **Follow Rate** (Tasa de Seguimiento)
-2. **Link Availability** (Disponibilidad de Enlaces)
-3. **Engagement Rate - Likes**
-4. **Number of Posts**
-5. **Biography Length**
+1. Follow Rate 
+2. Link Availability 
+3. Engagement Rate Comments
+4. Engagement Rate Likes
+5. Biography Length
 
-La matriz de confusión mostró un mayor número de falsos positivos (1,055 casos), lo que podría indicar la necesidad de un ajuste fino del umbral de clasificación para reducir errores en cuentas reales mal clasificadas.
+
 
 ## Conclusiones Finales
 
 El presente estudio ha demostrado que la inteligencia artificial es una herramienta efectiva para la detección de cuentas falsas en Instagram. Mediante el uso de **Random Forest**, se logró una precisión cercana al 90%, destacando la importancia de ciertos atributos como la tasa de seguimiento y la disponibilidad de enlaces externos.
+
+Además, proyectos relacionados han obtenidos resultados similares en la detección de bots y cuentas falsas en redes sociales, lo que sugiere que los algoritmos de aprendizaje automático pueden ser una solución viable para este problema.
 
 Posibles mejoras futuras incluyen:
 - **Exploración de modelos más complejos como XGBoost o Redes Neuronales**.
