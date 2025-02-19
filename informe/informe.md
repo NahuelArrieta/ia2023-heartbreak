@@ -511,7 +511,7 @@ Este trabajo no es útil en la actualidad debido a los cambios en la sociedad tr
 
  - [1] https://www.ibm.com/es-es/topics/logistic-regression
  - [2] https://datascientest.com/es/que-es-la-regresion-logistica
- - [3] https://es.wikipedia.org/wiki/Regresi%C3%B3n_log%C3%ADstica
+
  - [4] Stuart Russell, Peter Norvig: AIMA 4ta Edición; Pág. 684, Capítulo 19,  Sección 6, Subsección 5
  - [5] Stuart Russell, Peter Norvig: AIMA 4ta Edición; Pág. 657, Capítulo 19,  Sección 3.
  - [6] https://machinelearningparatodos.com/arboles-de-decision-en-python/

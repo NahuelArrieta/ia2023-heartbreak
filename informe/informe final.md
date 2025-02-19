@@ -4,7 +4,7 @@
 
 Las redes sociales han transformado la manera en que las personas interactúan y consumen contenido en línea. Instagram, en particular, es una de las plataformas más populares, utilizada tanto por individuos como por empresas para marketing e influencia digital. Sin embargo, la proliferación de cuentas falsas y bots plantea un problema significativo, afectando la autenticidad del engagement y perjudicando a marcas y usuarios legítimos.
 
-En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un módelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características.
+En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un módelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar ("Classification of instagram fake users using supervised machine learning algorithms") de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
 
 A lo largo del documento, se detallará el marco teórico sobre la detección de cuentas falsas y los algoritmos utilizados, seguido del diseño experimental que incluye la selección de características, el preprocesamiento de datos y la metodología de entrenamiento y validación. Posteriormente, se presentará un análisis de los resultados obtenidos y las conclusiones finales, así como posibles mejoras futuras. 
 
@@ -40,17 +40,17 @@ $$
 \end{cases}
 $$
 
-Para nuestro caso en particular las variables predictoras son los atributos del dataset. El algoritmo consiste en buscar los pesos de la combinación real para que satisfagan los resultados del conjunto de entrenamiento y así; usando la función logística y la función de umbral, determinar si un elemento pertenece o no a la clase que se predice.[1][2][3][4]
+Para nuestro caso en particular las variables predictoras son los atributos del dataset. El algoritmo consiste en buscar los pesos de la combinación real para que satisfagan los resultados del conjunto de entrenamiento y así; usando la función logística y la función de umbral, determinar si un elemento pertenece o no a la clase que se predice.[2][3][4]
 
 #### Árboles de decisión
 
-Este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una característica y cada rama representa una decisión o un resultado. Es utilizado tanto para clasificación binaria como para clasificación multiclase.[5]
+Este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una característica y cada rama representa una decisión o un resultado. Es utilizado tanto para clasificación binaria como para clasificación multiclase.
 
-Para crear un árbol de decisión primero debemos seleccionar qué variables predictoras vamos a considerar. Se mide la ganancia de la información por cada variable predictora y se usa la de mayor ganancia para que sea el nodo raiz; luego con todos los datos en el nodo inicial se comienza a dividir de forma recursiva haciendo una selección de la mejor división usando la variable que maximicen la ganancia de información; y se continúa de esta forma hasta que se cumpla un criterio de parada.[6][7] 
+Para crear un árbol de decisión primero debemos seleccionar qué variables predictoras vamos a considerar. Se mide la ganancia de la información por cada variable predictora y se usa la de mayor ganancia para que sea el nodo raiz; luego con todos los datos en el nodo inicial se comienza a dividir de forma recursiva haciendo una selección de la mejor división usando la variable que maximicen la ganancia de información; y se continúa de esta forma hasta que se cumpla un criterio de parada.[5][6]
 
 #### Bósques aleatorios (Random Forest)
 
-El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[8]
+El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[7]
 
 Random Forest parece el algoritmo ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset. En el mismo construimos una cantidad $m$ de árboles de decisión con distintos conjuntos de $n$ variables predictoras seleccionadas de forma aleatoria, cada árbol crece hasta una altura máxima.
 
@@ -77,9 +77,9 @@ $$
 P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)} 
 $$
 
-Donde: C es una clase y X es el vector de variables del elemento que se está evaluando.[9][10]
+Donde: C es una clase y X es el vector de variables del elemento que se está evaluando.
 
-Es rápido y eficiente en términos de recursos computacionales. Sin embargo, el principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente, esto supone una buena contradicción desde un principio, lo cual no hace que este algoritmo deje de ser interesante para un problema de clasificación como el nuestro.
+Es rápido y eficiente en términos de recursos computacionales. Sin embargo, el principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente, esto supone una buena contradicción desde un principio, lo cual no hace que este algoritmo deje de ser interesante para un problema de clasificación como el nuestro.[8][9]
 
 #### K-Nearest Neighbors
 
@@ -89,10 +89,10 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 - Primero, debe estar definido el valor de $k$.
 - Luego se calcula la distancia entre el elemento a clasificar y todos los demás puntos del conjunto de entrenamiento, usando la distancia euclidiana.
 - Se toman los $k$ vecinos más cercanos y se asigna la clase resultado como la clase mayoritaria entre los vecinos.
-[11]
+[10]
 
 #### Redes Neuronales
-Modelos avanzados que consisten en capas de nodos (neuronas) interconectados, capaces de capturar relaciones complejas entre características. Las redes neuronales pueden aprender patrones no lineales y son especialmente útiles para tareas de clasificación y reconocimiento de patrones. En el contexto de la detección de cuentas falsas, pueden analizar múltiples características simultáneamente y mejorar la precisión del modelo al identificar patrones sutiles que otros algoritmos podrían pasar por alto.
+Modelos avanzados que consisten en capas de nodos (neuronas) interconectados, capaces de capturar relaciones complejas entre características. Las redes neuronales pueden aprender patrones no lineales y son especialmente útiles para tareas de clasificación y reconocimiento de patrones. En el contexto de la detección de cuentas falsas, pueden analizar múltiples características simultáneamente y mejorar la precisión del modelo al identificar patrones sutiles que otros algoritmos podrían pasar por alto.[11]
 
 
 #### Conclusión
@@ -101,8 +101,19 @@ En este trabajo, se ha elegido **Random Forest** como algoritmo principal, ya qu
 
 Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo **Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes**. No se implementaron redes neuronales debido a  que queda fuera del alcance de la materia.
 
-### Estudios Relacionados -- TODO
-Se han considerado diversos estudios previos sobre la detección de bots y cuentas falsas, incluyendo trabajos que han utilizado Twitter y otras plataformas. Un estudio relevante [1] logró una precisión del 91.76% con Random Forest en la clasificación de cuentas falsas en Instagram, utilizando un conjunto de datos similar al del presente trabajo. Otro estudio [2] exploró el uso de redes neuronales para la detección de bots en Twitter, obteniendo una precisión del 88.5%, destacando la importancia de analizar patrones de interacción. Asimismo, investigaciones previas [3] han aplicado técnicas de análisis de grafos para detectar comunidades de cuentas falsas, con resultados prometedores en la identificación de redes de bots. Finalmente, un trabajo reciente [4] ha demostrado que la combinación de modelos supervisados con técnicas de aprendizaje profundo puede mejorar significativamente la detección de cuentas fraudulentas en plataformas sociales.
+### Estudios Relacionados 
+
+Se han considerado diversos estudios previos sobre la detección de bots y cuentas falsas, incluyendo trabajos que han utilizado Twitter, Instagram y otras plataformas. A continuación, se resumen algunos estudios relevantes:
+
+ - **Purba et al.** (2019) [1] analizaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. Compararon cinco modelos de Machine Learning, concluyendo que Random Forest ofrecía la mejor precisión (91.76%). También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
+
+- **Rico Martínez** (2021) [12] desarrolló un modelo basado en Inteligencia Artificial para distinguir entre bots y humanos en Twitter. Aplicaron modelos de aprendizaje profundo y técnicas de selección de características obtenidas de la API de Twitter, logrando una precisión elevada mediante redes neuronales.
+
+- **Hristova** (2022) [13] exploró la predicción de noticias falsas mediante Machine Learning, analizando la propagación de información errónea en redes sociales. Se evaluaron múltiples algoritmos, destacando que los árboles de decisión y Random Forest lograban una alta precisión en la identificación de contenido manipulado.
+
+Estos estudios proporcionan una base sólida para la detección de cuentas falsas en redes sociales, resaltando la importancia del uso de modelos de aprendizaje automático para la clasificación precisa de usuarios falsos. 
+
+
 
 ## Diseño Experimental
 
@@ -406,7 +417,7 @@ Se identificó que las características más importantes para la clasificación 
 
 El presente estudio ha demostrado que la inteligencia artificial es una herramienta efectiva para la detección de cuentas falsas en Instagram. Mediante el uso de **Random Forest**, se logró una precisión cercana al 90%, destacando la importancia de ciertos atributos como la tasa de seguimiento y la disponibilidad de enlaces externos.
 
-Además, proyectos relacionados han obtenidos resultados similares en la detección de bots y cuentas falsas en redes sociales, lo que sugiere que los algoritmos de aprendizaje automático pueden ser una solución viable para este problema.
+Además, proyectos relacionados han obtenidos resultados similares en la detección de bots y cuentas falsas en redes sociales, lo que sugiere que los algoritmos de aprendizaje automático pueden ser una solución viable para este problema. [1][12][13]
 
 Posibles mejoras futuras incluyen:
 - **Exploración de modelos más complejos como XGBoost o Redes Neuronales**.
@@ -414,11 +425,30 @@ Posibles mejoras futuras incluyen:
 - **Uso de técnicas de ajuste de umbrales para reducir falsos positivos**.
 
 ## Bibliografía
-[1] Kristo Radion Purba, David Asirvatham, Raja Kumar Murugesan. "Classification of Instagram Fake Users Using Supervised Machine Learning Algorithms", *International Journal of Electrical and Computer Engineering*, 2020.
 
-[2] Efthimion, Payne, Proferes. "Supervised Machine Learning Bot Detection Techniques to Identify Social Twitter Bots", *SMU Data Science Review*, 2018.
+- [1] Kristo Radion Purba, David Asirvatham, Raja Kumar Murugesan. *Classification of Instagram Fake Users Using Supervised Machine Learning Algorithms*, International Journal of Electrical and Computer Engineering, 2019.
 
-[3] Gurajala, White, Hudson, Voter, Matthews. "Profile Characteristics of Fake Twitter Accounts", *Big Data & Society*, 2016.
+- [2] DataScientest. *¿Qué es la regresión logística?* Recuperado de [https://datascientest.com/es/que-es-la-regresion-logistica](https://datascientest.com/es/que-es-la-regresion-logistica)
 
-[4] Khaled, Mokhtar, El-Tazi. "Detecting Fake Accounts on Social Media", *IEEE International Conference on Big Data*, 2018.
+- [3] IBM. *Regresión logística*. Recuperado de [https://www.ibm.com/es-es/topics/logistic-regression](https://www.ibm.com/es-es/topics/logistic-regression)
+
+- [4] Stuart Russell, Peter Norvig. *Artificial Intelligence: A Modern Approach* (4ª ed., p. 684, cap. 19, sec. 6, subsec. 5).
+
+- [5] Stuart Russell, Peter Norvig. *Artificial Intelligence: A Modern Approach* (4ª ed., p. 657, cap. 19, sec. 3).
+
+- [6] Machine Learning para Todos. *Árboles de decisión en Python*. Recuperado de [https://machinelearningparatodos.com/arboles-de-decision-en-python/](https://machinelearningparatodos.com/arboles-de-decision-en-python/)
+
+- [7] IBM. *Random Forest*. Recuperado de [https://www.ibm.com/mx-es/topics/random-forest](https://www.ibm.com/mx-es/topics/random-forest)
+
+- [8] Aprende IA. *Algoritmo Naive Bayes en Machine Learning*. Recuperado de [https://aprendeia.com/algoritmo-naive-bayes-machine-learning/](https://aprendeia.com/algoritmo-naive-bayes-machine-learning/)
+
+- [9] FreeCodeCamp. *¿Cómo funcionan los clasificadores Naive Bayes?* Recuperado de [https://www.freecodecamp.org/espanol/news/como-funcionan-los-clasificadores-naive-bayes-con-ejemplos-de-codigo-de-python/](https://www.freecodecamp.org/espanol/news/como-funcionan-los-clasificadores-naive-bayes-con-ejemplos-de-codigo-de-python/)
+
+- [10] IBM. *K-Nearest Neighbors (KNN)*. Recuperado de [https://www.ibm.com/es-es/topics/knn](https://www.ibm.com/es-es/topics/knn)
+
+- [11] IBM. *Redes neuronales*. Recuperado de [https://www.ibm.com/es-es/topics/neural-networks](https://www.ibm.com/es-es/topics/neural-networks)
+
+- [12] María Esther Rico Martínez. *Distinción de bots y humanos en Twitter con Inteligencia Artificial*, Trabajo Fin de Máster en Ingeniería Informática, 2021.
+
+- [13] Inna Krasimirova Hristova. *Predicción de noticias falsas mediante Machine Learning*, Trabajo Fin de Grado, 2022.
 
