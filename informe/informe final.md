@@ -18,7 +18,7 @@ La detección de cuentas falsas en redes sociales es un problema de clasificaci�
 
 #### Regresión Logística o Regresión Lineal
 
-Un modelo lineal simple que estima la probabilidad de un elemento de pertenecer a una clase específica. Es una buena opción para los problema de clasificación, ya que utilizando una combinación lineal de las variables predictoras conseguir el valor de la variable dependiente: 
+Un modelo lineal simple que estima la probabilidad de un elemento de pertenecer a una clase específica. Es una buena opción para los problema de clasificación, ya que utilizando una combinación lineal de las variables predictoras busca conseguir el valor de la variable dependiente: 
 
 $$
 z = w_1 x_1 + w_2 x_2 + \ldots + w_n x_n + b
@@ -57,11 +57,7 @@ Random Forest parece el algoritmo ideal ya que puede aprovecharse de las relacio
 
 #### Algoritmo Naive Bayes
 
-Este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí. Es rápido y eficiente en términos de recursos computacionales.s
-
-El principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente, esto supone una buena contradicción desde un principio, lo cual no hace que este algoritmo deje de ser interesante para un problema de clasificación como el nuestro.
-
-El algoritmo se basa en el teorema de Bayes que describe la probabilidad de un evento, su fórmula es:
+Este algoritmo se basa en el teorema de Bayes y asume que todas las características son independientes entre sí, su fórmula es:
 
 $$
 P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
@@ -83,6 +79,8 @@ $$
 
 Donde: C es una clase y X es el vector de variables del elemento que se está evaluando.[9][10]
 
+Es rápido y eficiente en términos de recursos computacionales. Sin embargo, el principal problema del uso de este algoritmo es que se asume que las variables no tienen ninguna correlación entre sí, lo cual es falso en nuestro dataset, por ejemplo, la cantidad de seguidores y el comments engagement rate estarán relacionados implícitamente, esto supone una buena contradicción desde un principio, lo cual no hace que este algoritmo deje de ser interesante para un problema de clasificación como el nuestro.
+
 #### K-Nearest Neighbors
 
 Un algoritmo que clasifica un punto de datos basado en la clase de sus vecinos más cercanos. La principal desventaja de este algoritmo es que es lento en la fase de predicción, ya que necesita calcular la distancia entre el punto a clasificar y todos los puntos del conjunto de entrenamiento. Además, no es muy efectivo con datasets grandes, como es nuestro caso. Pero este algoritmo tiene la ventaja de ser simple.
@@ -101,7 +99,7 @@ Modelos avanzados que consisten en capas de nodos (neuronas) interconectados, ca
 
 En este trabajo, se ha elegido **Random Forest** como algoritmo principal, ya que ha demostrado ser robusto en tareas de clasificación con múltiples características. Random Forest es un conjunto de árboles de decisión que combina predicciones de varios modelos individuales para reducir el riesgo de sobreajuste y mejorar la generalización. Además, proporciona una medida de importancia de características, lo que permite evaluar cuáles atributos son más relevantes para la clasificación.
 
-Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes. Si bien estos modelos presentaron resultados aceptables, ninguno logró igualar la precisión y estabilidad de Random Forest en la tarea de detección de cuentas falsas en Instagram. No se implementaron redes neuronales debido a  que queda fuera del alcance de la materia.
+Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo **Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes**. No se implementaron redes neuronales debido a  que queda fuera del alcance de la materia.
 
 ### Estudios Relacionados -- TODO
 Se han considerado diversos estudios previos sobre la detección de bots y cuentas falsas, incluyendo trabajos que han utilizado Twitter y otras plataformas. Un estudio relevante [1] logró una precisión del 91.76% con Random Forest en la clasificación de cuentas falsas en Instagram, utilizando un conjunto de datos similar al del presente trabajo. Otro estudio [2] exploró el uso de redes neuronales para la detección de bots en Twitter, obteniendo una precisión del 88.5%, destacando la importancia de analizar patrones de interacción. Asimismo, investigaciones previas [3] han aplicado técnicas de análisis de grafos para detectar comunidades de cuentas falsas, con resultados prometedores en la identificación de redes de bots. Finalmente, un trabajo reciente [4] ha demostrado que la combinación de modelos supervisados con técnicas de aprendizaje profundo puede mejorar significativamente la detección de cuentas fraudulentas en plataformas sociales.
