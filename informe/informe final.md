@@ -95,15 +95,8 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 - Se toman los $k$ vecinos más cercanos y se asigna la clase resultado como la clase mayoritaria entre los vecinos.
 [10]
 
-#### Redes Neuronales
-Modelos avanzados que consisten en capas de nodos (neuronas) interconectados, capaces de capturar relaciones complejas entre características. Las redes neuronales pueden aprender patrones no lineales y son especialmente útiles para tareas de clasificación y reconocimiento de patrones. En el contexto de la detección de cuentas falsas, pueden analizar múltiples características simultáneamente y mejorar la precisión del modelo al identificar patrones sutiles que otros algoritmos podrían pasar por alto.[11]
 
 
-#### Conclusión
-
-En este trabajo, se ha elegido **Random Forest** como algoritmo principal, ya que ha demostrado ser robusto en tareas de clasificación con múltiples características. Random Forest es un conjunto de árboles de decisión que combina predicciones de varios modelos individuales para reducir el riesgo de sobreajuste y mejorar la generalización. Además, proporciona una medida de importancia de características, lo que permite evaluar cuáles atributos son más relevantes para la clasificación.
-
-Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo **Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes**. No se implementaron redes neuronales debido a  que queda fuera del alcance de la materia.
 
 ### Estudios Relacionados 
 
@@ -321,6 +314,13 @@ La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras
 
 En el gráfico podemos ver claramente que se diferencia la clase de usuarios reales de los fake por el promedio de palabras promocionales, por lo que esta feature prueba ser de utilidad para nuestro problema de clasificación.
 
+## Algoritmos Utilizados
+
+En este trabajo, se ha elegido **Random Forest** como algoritmo principal, ya que ha demostrado ser robusto en tareas de clasificación con múltiples características. Random Forest es un conjunto de árboles de decisión que combina predicciones de varios modelos individuales para reducir el riesgo de sobreajuste y mejorar la generalización. Además, proporciona una medida de importancia de características, lo que permite evaluar cuáles atributos son más relevantes para la clasificación.
+
+Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo **Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes**. Pero la implementación de estos algoritmos no ha sido tan exhaustiva como en el caso de Random Forest, ya que se ha priorizado la evaluación de este último debido a su eficacia en problemas de clasificación.
+
+
 
 ### Herramientas Utilizadas 
 
@@ -351,34 +351,56 @@ Este dataset habia sido previamente limpiado y no contenía valores nulos o falt
 ### Experimentos Realizados
 Para todos los modelos se utilizó una configuración de 5-fold cross-validation para evaluar el rendimiento del modelo en el conjunto de entrenamiento. 
 
-En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones:
+Para los modelos de Naive Bayes, Regresión Logística y K-Nearest Neighbors, se realizaron experimentos sencillos con configuraciones básicas, sin ajuste de hiperparámetros ni selección de características.
 
-- **Variacion hipermarametros**: 
-    - ntree
-    - mtry
-- **Eliminación de características potencialmente irrelevantes o redundantes**.
-    - non_image_post_percentage
-    - location_tag_percentage
-    - comments_engagement_rate
-    - caption_zero
-    - number_of_followers
-    - number_of_following
-    - follower_keywords
-    - has_picture
-    - bio_length
-    - post_interval
-    - promotional_keywords
-- **Agregar nuevas características**.
-    - follow_rate = number_of_followers / number_of_following
-    - follow_difference = number_of_followers  - number_of_following
-    - account_age = post_interval * number_of_posts
-    - follower_frequency = number_of_followers / account_age
-    - folowing_frequency = number_of_following / account_age
-    - image_frequency = (number_of_posts - non_image_post_percentage) / account_age
+En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones: selección de características, eliminación de características irrelevantes, ajuste de hiperparámetros y adición de nuevas características. 
 
-Para el resto de los modelos, se realizaron experimentos sencillos con configuraciones básicas, sin ajuste de hiperparámetros ni selección de características.
+La metodología para elegir las configuraciones de los experimentos fue la siguiente: se fueron eliminando o agregando características al modelo de forma individual y se evaluaba el impacto en la precisión del modelo. Luego, se combinaban las características que habían demostrado ser más relevantes y se evaluaba nuevamente la performance. Durante este proceso, se ajustaron los hiperparámetros `mtry` y `ntree` para encontrar la configuración que maximizara la precisión del modelo y minimizara la desviación estándar.
 
-A continuación se presentan los resultados obtenidos en los experimentos más relevantes:
+A continuación se describen las modificaciones realizadas:
+
+#### Selección de características
+Algunas features del dataset original no variaban significativamente entre las clases real y fake, por lo que se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Las características eliminadas fueron:
+
+  - Non image post percentage
+  - Location tag percentage
+  - Caption zero
+  - Comments engagement rate
+
+#### Agregar nuevas características
+Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidores pero sigue a muy pocos, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las características agregadas fueron:
+
+  - follow_rate = number_of_followers / number_of_following
+  - follow_difference = number_of_followers  - number_of_following
+  - account_age = post_interval * number_of_posts
+  - follower_frequency = number_of_followers / account_age
+  - folowing_frequency = number_of_following / account_age
+  - image_frequency = (number_of_posts - non_image_post_percentage) / account_age
+
+#### Eliminación de características potencialmente irrelevantes en el entrenamiento
+Durante el entrenamiento, algunas características no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo. Las características eliminadas fueron:
+
+  - Number of followers
+  - Number of following
+  - Follower keywords
+  - Has picture
+  - Bio length
+  - Post interval
+  - Promotional keywords
+  
+#### Variación de hiperparámetros
+Se variaron los valores de los hiperparámetros `mtry` y `ntree` para evaluar su impacto en el rendimiento del modelo. Se probaron diferentes combinaciones de valores para estos hiperparámetros, buscando la configuración que maximizara la precisión del modelo, sin perder estabilidad.
+
+  - ntree: 100, 150, 175, 200
+  - mtry: 5, 8, 10
+
+
+### Evaluación de Modelos
+Si bien se realizaron 30 experimentos con Random Forest, se presentan a continuación los resultados que obtuvieron una precisión superior al 90% en el conjunto de entrenamiento. Para cada experimento, se muestra la configuración de hiperparámetros, las características utilizadas, la precisión y la desviación estándar obtenidas en el conjunto de entrenamiento.
+
+Además se muestran los experimentos realizados con los otros algoritmos, incluyendo Regresión Logística, K-Nearest Neighbors, Naive Bayes y Árboles de Decisión. 
+
+
 | Id | Algoritmo | Variables | Modificaciones | Accuracy | Desviación Estándar |
 |----|-----------|-----------|----------------|----------|---------------------|
 | 005 | Random Forest | - mtry: 5 <br> - ntree: 100 |   - Add follow rate <br>  - Remove number of following | 0.9022 | 0.0045 |
