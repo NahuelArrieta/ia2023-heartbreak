@@ -353,9 +353,43 @@ Para todos los modelos se utilizó una configuración de 5-fold cross-validation
 
 En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones:
 
-- **Variacion hipermarametros**: 
-    - ntree
-    - mtry
+#### Variación de hiperparámetros
+Se variaron los valores de los hiperparámetros `mtry` y `ntree` para evaluar su impacto en el rendimiento del modelo. Se probaron diferentes combinaciones de valores para estos hiperparámetros, buscando la configuración que maximizara la precisión del modelo, sin perder estabilidad.
+
+  - ntree: 100, 150, 175
+  - mtry: 5, 8, 10
+
+
+#### Eliminación de características potencialmente irrelevantes en el dataset
+Algunas features del dataset original no variaban significativamente entre las clases real y fake, por lo que se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Las características eliminadas fueron:
+
+  - Non image post percentage
+  - Location tag percentage
+  - Caption zero
+  - Comments engagement rate
+
+#### Agregar nuevas características
+Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidores pero sigue a muy pocos,, o una cuenta que publica con mucha frecuencia. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las características agregadas fueron:
+
+  - follow_rate = number_of_followers / number_of_following
+  - follow_difference = number_of_followers  - number_of_following
+  - account_age = post_interval * number_of_posts
+  - follower_frequency = number_of_followers / account_age
+  - folowing_frequency = number_of_following / account_age
+  - image_frequency = (number_of_posts - non_image_post_percentage) / account_age
+
+##### Eliminación de características potencialmente irrelevantes en el entrenamiento
+Durante el entrenamiento, algunas características no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo. Las características eliminadas fueron:
+
+  - Number of followers
+  - Number of following
+  - Follower keywords
+  - Has picture
+  - Bio length
+  - Post interval
+  - Promotional keywords
+  
+
 - **Eliminación de características potencialmente irrelevantes o redundantes**.
     - non_image_post_percentage
     - location_tag_percentage
