@@ -95,15 +95,8 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 - Se toman los $k$ vecinos más cercanos y se asigna la clase resultado como la clase mayoritaria entre los vecinos.
 [10]
 
-#### Redes Neuronales
-Modelos avanzados que consisten en capas de nodos (neuronas) interconectados, capaces de capturar relaciones complejas entre características. Las redes neuronales pueden aprender patrones no lineales y son especialmente útiles para tareas de clasificación y reconocimiento de patrones. En el contexto de la detección de cuentas falsas, pueden analizar múltiples características simultáneamente y mejorar la precisión del modelo al identificar patrones sutiles que otros algoritmos podrían pasar por alto.[11]
 
 
-#### Conclusión
-
-En este trabajo, se ha elegido **Random Forest** como algoritmo principal, ya que ha demostrado ser robusto en tareas de clasificación con múltiples características. Random Forest es un conjunto de árboles de decisión que combina predicciones de varios modelos individuales para reducir el riesgo de sobreajuste y mejorar la generalización. Además, proporciona una medida de importancia de características, lo que permite evaluar cuáles atributos son más relevantes para la clasificación.
-
-Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo **Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes**. No se implementaron redes neuronales debido a  que queda fuera del alcance de la materia.
 
 ### Estudios Relacionados 
 
@@ -320,6 +313,13 @@ La gráfica en escala logarítmica siguiente expresa el uso promedio de palabras
 ![](./images/datasetMetrics/promotional_kw.png)
 
 En el gráfico podemos ver claramente que se diferencia la clase de usuarios reales de los fake por el promedio de palabras promocionales, por lo que esta feature prueba ser de utilidad para nuestro problema de clasificación.
+
+## Algoritmos Utilizados
+
+En este trabajo, se ha elegido **Random Forest** como algoritmo principal, ya que ha demostrado ser robusto en tareas de clasificación con múltiples características. Random Forest es un conjunto de árboles de decisión que combina predicciones de varios modelos individuales para reducir el riesgo de sobreajuste y mejorar la generalización. Además, proporciona una medida de importancia de características, lo que permite evaluar cuáles atributos son más relevantes para la clasificación.
+
+Además de Random Forest, se han probado otros algoritmos de clasificación, incluyendo **Regresión Logística, K-Nearest Neighbors (KNN), Árboles de Decisión y Naive Bayes**. Pero la implementación de estos algoritmos no ha sido tan exhaustiva como en el caso de Random Forest, ya que se ha priorizado la evaluación de este último debido a su eficacia en problemas de clasificación.
+
 
 
 ### Herramientas Utilizadas 
