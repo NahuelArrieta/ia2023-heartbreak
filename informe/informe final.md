@@ -357,7 +357,7 @@ En el caso de Random Forest, se realizaron 30 experimentos distintos en los que 
 
 La metodología para elegir las configuraciones de los experimentos fue la siguiente: se fueron eliminando o agregando características al modelo de forma individual y se evaluaba el impacto en la precisión del modelo. Luego, se combinaban las características que habían demostrado ser más relevantes y se evaluaba nuevamente la performance. Durante este proceso, se ajustaron los hiperparámetros `mtry` y `ntree` para encontrar la configuración que maximizara la precisión del modelo y minimizara la desviación estándar.
 
-A continuación se describen las configuraciones realizadas:
+A continuación se describen las modificaciones realizadas:
 
 #### Selección de características
 Algunas features del dataset original no variaban significativamente entre las clases real y fake, por lo que se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Las características eliminadas fueron:
