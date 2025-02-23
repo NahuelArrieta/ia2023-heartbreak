@@ -417,8 +417,29 @@ Además se muestran los experimentos realizados con los otros algoritmos, incluy
 | NB | Naive Bayes | --- | --- | 0.8561 | 0.0040 |
 | DT | Árbol de Decisión | --- | --- | 0.7140 |0.0171 |
 
+### Selección de Modelo
+Al momento de elegir el modelo, los dos candidatos son **Random Forest 028** por tener la mayor precisión y **Random Forest 021** por tener la menor desviación estándar. 
+
+Para poder elegir uno de los dos modelos, se hizo una validación de 10 folds en el conjunto de entrenamiento, y se evaluó si estadísticamente hay una diferencia significativa entre ambos modelos en términos de **precisión (accuracy)** y **F1-score**. Se utilizó la prueba de Mann-Whitney con una hipótesis bilateral. Los resultados obtenidos fueron los siguientes:  
+
+- **Precisión (Accuracy)**:  
+  - Estadístico W = 49  
+  - Valor p = **0.9705**  
+- **F1-score**:  
+  - Estadístico W = 46  
+  - Valor p = **0.7959**  
+
+Dado que en ambos casos los valores p son muy altos (muy superiores al umbral típico de 0.05), no se puede rechazar la hipótesis nula, lo que indica que no hay evidencia suficiente para afirmar que uno de los modelos tenga un desempeño significativamente diferente al otro.  
+
+Los siguientes gráficos de boxplot refuerzan esta conclusión, mostrando distribuciones similares para ambos modelos:
+
+![Comparación de Accuracy](./images/accuacy_comparison.png)
+![Comparación de F1 Score](./images/f1_comparison.png)
+
+No obstante, se ha decidido elegir el modelo **Random Forest 028** debido a que muestra una precisión ligeramente mayor y una menor variabilidad en sus resultados, lo que sugiere un comportamiento más estable en comparación al modelo 021.
+
 ## Análisis y Discusión de Resultados
-Durante el entrenamiento, el que obtuvo los mejores resultados fue Random Forest 030 con una precisión del 90.35% y una desviación estándar de 0.0022. Entonces, se validó el modelo con el conjunto de validación y se obtuvo la siguiente matriz de confusión:
+Se ha seleccionado el modelo **Random Forest 028** como el modelo final para la detección de cuentas falsas en Instagram. A continuación, se presentan los resultados obtenidos en el conjunto de validación:
 
 | | **Predicted Positive**| **Predicted Negative** | |
  |:--:|:--:|:--:|:--:|

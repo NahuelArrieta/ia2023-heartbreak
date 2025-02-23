@@ -26,8 +26,8 @@ print("Test if the f1 of models A and B are significantly different")
 wilcox.test(model_A_f1, model_B_f1, alternative = "two.sided")
 
 ## Make box plots
-boxplot(model_A_accuracy, model_B_accuracy, names = c("Model A (28)", "Model B (21)"), ylab = "Accuracy", main = "Accuracy comparison between Model A and Model B")
+boxplot(model_A_accuracy, model_B_accuracy, names = c("Random Forest 028", "Random Forest 021"), ylab = "Accuracy", main = "Accuracy comparison")
 
-boxplot(model_A_f1, model_B_f1, names = c("Model A (28)", "Model B (21)"), ylab = "F1", main = "F1 comparison between Model A and Model B")
+boxplot(model_A_f1, model_B_f1, names = c("Random Forest 028", "Random Forest 021"), ylab = "F1", main = "F1 comparison")
 
 
