@@ -3,6 +3,7 @@
 - *Carrera*: Licenciatura en Ciencias de la Computación
 - *Materia*: Inteligencia Artificial I
 - *Alumno*: Nahuel Arrieta
+- *Profesores*: Carlos Catania, Tatiana Parlanti
 
 ## Introducción
 
@@ -368,7 +369,7 @@ Algunas features del dataset original no variaban significativamente entre las c
   - Comments engagement rate
 
 #### Agregar nuevas características
-Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidores pero sigue a muy pocos, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las características agregadas fueron:
+Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidos y pocos seguidores, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las características agregadas fueron:
 
   - follow_rate = number_of_followers / number_of_following
   - follow_difference = number_of_followers  - number_of_following
@@ -420,7 +421,7 @@ Además se muestran los experimentos realizados con los otros algoritmos, incluy
 ### Selección de Modelo
 Al momento de elegir el modelo, los dos candidatos son **Random Forest 028** por tener la mayor precisión y **Random Forest 021** por tener la menor desviación estándar. 
 
-Para poder elegir uno de los dos modelos, se hizo una validación de 10 folds en el conjunto de entrenamiento, y se evaluó si estadísticamente hay una diferencia significativa entre ambos modelos en términos de **precisión (accuracy)** y **F1-score**. Se utilizó la prueba de Mann-Whitney con una hipótesis bilateral. Los resultados obtenidos fueron los siguientes:  
+Para poder elegir uno de los dos modelos, se hizo una validación de 10 folds en el conjunto de entrenamiento, y se evaluó si estadísticamente hay una diferencia significativa entre ambos modelos en términos de **precisión (accuracy)** y **F1-score**. Se utilizó la prueba de Mann-Whitney con una hipótesis bilateral y los resultados obtenidos fueron los siguientes:  
 
 - **Precisión (Accuracy)**:  
   - Estadístico W = 49  
@@ -429,7 +430,7 @@ Para poder elegir uno de los dos modelos, se hizo una validación de 10 folds en
   - Estadístico W = 46  
   - Valor p = **0.7959**  
 
-Dado que en ambos casos los valores p son muy altos (muy superiores al umbral típico de 0.05), no se puede rechazar la hipótesis nula, lo que indica que no hay evidencia suficiente para afirmar que uno de los modelos tenga un desempeño significativamente diferente al otro.  
+Dado que en ambos casos los valores p son muy altos (muy superiores al umbral de 0.05), no se puede rechazar la hipótesis nula, lo que indica que no hay evidencia suficiente para afirmar que uno de los modelos tenga un desempeño significativamente diferente al otro.  
 
 Los siguientes gráficos de boxplot refuerzan esta conclusión, mostrando distribuciones similares para ambos modelos:
 
