@@ -145,3 +145,66 @@ print_results_train <- function(file_name, train_variables, message, accuracy_re
 
     write(message_to_save, file = file_name, append = FALSE, sep = "\n")
 }
+
+
+check_model <- function(train_variables) {
+     ## Get dataset
+    dataframe <- get_train_df()
+
+    ## Preprocess the dataframe
+    preprocess_data <- preprocess(dataframe, train_variables)
+    dataframe <- preprocess_data$dataframe
+
+    ## Do cross validation
+    folds <- create_folds(dataframe, train_variables$nfolds)
+
+    ## Start empty confusion matrix
+    all_confusion_matrix <- matrix(0, 2, 2)
+    accuracy_results <- c()
+    f1_results <- c()
+
+    ## Start empty map to track the importance of each variable
+    variable_importance <- new.env()
+
+    print("Start training") 
+
+    ## Train the models
+    for (i in 1:train_variables$nfolds) {
+
+        print(paste("Fold: ", i))
+
+        ## Get the train and test data
+        train_data <- folds %>% filter(fold != i)
+        test_data <- folds %>% filter(fold == i)
+
+        ## Train the model
+        model <- get_model(train_data, train_variables)
+
+        ## Test the model
+        confusion_matrix <- test(model, test_data, train_variables)
+
+        ## Add the accuracy
+        current_accuracy <- confusion_matrix[1, 1] + confusion_matrix[2, 2]
+        current_accuracy <- current_accuracy / sum(confusion_matrix)
+
+        accuracy_results <- c(accuracy_results, current_accuracy)
+
+        ## Calculate the F1 score
+        recall <- confusion_matrix[1, 1] / (confusion_matrix[1, 1] + confusion_matrix[1, 2])
+        precision <- confusion_matrix[1, 1] / (confusion_matrix[1, 1] + confusion_matrix[2, 1])
+
+        f1_score <- 2 * (precision * recall) / (precision + recall)
+
+        f1_results <- c(f1_results, f1_score)
+    }
+
+    ## Print results
+    print("Results")
+
+    print("Accuracy")
+    print(accuracy_results)
+
+
+    print("F1 Score")
+    print(f1_results)
+}
