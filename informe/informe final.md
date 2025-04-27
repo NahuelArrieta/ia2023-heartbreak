@@ -21,9 +21,9 @@ La detección de cuentas falsas en redes sociales es un problema de clasificaci�
 
 
 
-#### Regresión Logística o Regresión Lineal
+#### Regresión Logística
 
-Un modelo lineal simple que estima la probabilidad de un elemento de pertenecer a una clase específica. Es una buena opción para los problema de clasificación, ya que utilizando una combinación lineal de las variables predictoras busca conseguir el valor de la variable dependiente: 
+Un modelo aprendizaje supervisado que estima la probabilidad de un elemento de pertenecer a una clase específica. Es una opción adecuada para problemas de clasificación, ya que utiliza una combinación lineal de las variables predictoras para modelar la probabilidad de ocurrencia de una determinada categoría de la variable dependiente: 
 
 $$
 z = w_1 x_1 + w_2 x_2 + \ldots + w_n x_n + b
