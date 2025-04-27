@@ -175,7 +175,7 @@ En la siguiente gráfica podemos ver una comparativa de la longitud promedio del
 
 ![](./images/datasetMetrics/avg_caption_len.png)
 
-Por lo que podemos observar ambas clases tienen una gran similitud en la longitud de sus pie de publicación por lo que en un principio podríamos decir que no es una buena feature para diferenciar ambas clases.
+Por lo que podemos observar una sutil diferencia entre ambas clases que podría ser útil para la clasificación. 
 
 #### Average Hashtags count 
 
@@ -237,7 +237,7 @@ Es una comparativa gráfica entre las clases real y fake de las cuentas que tien
 
 ![](./images/datasetMetrics/has_picture.png)
 
-Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad de forma individual.
+Esta feature parece ser muy relevnate para distinguir a un usario falso, especialmente en los casos en los que el perfil no tiene foto.
 
 #### Like engagement rate 
 
@@ -249,7 +249,7 @@ $$
 
 ![](./images/datasetMetrics/like_er.png)
 
-En el gráfico vemos que ambas clases tienen un distribución similar en el plano por lo que esta feature puede no ser muy útil para clasificar a los usuarios reales y fake.
+En el gráfico vemos que ambas clses tienen diferentes distribuciones, puede ser muy para clasificar a los usuarios reales y fake.
 
 #### Link Availibility 
 
@@ -297,7 +297,7 @@ El gráfico compara el numero de posteos de las clases real y fake en escala log
 
 ![](./images/datasetMetrics/number_post.png)
 
-Lo que se puede observar es que no hay una diferencia clara entre el número de posteos de ambas clases por lo que no puede ser una feature de gran utilidad por si sola. 
+Lo que se puede observar es que no hay una diferencia clara entre el número de posteos de ambas clases, pero no descartamos su posibilidad de ser útil para la clasificación. 
 
 #### Post interval 
 
