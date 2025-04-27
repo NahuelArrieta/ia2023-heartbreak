@@ -53,7 +53,7 @@ Este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una
 
 Para crear un árbol de decisión primero debemos seleccionar qué variables predictoras vamos a considerar. Se mide la ganancia de la información por cada variable predictora y se usa la de mayor ganancia para que sea el nodo raiz; luego con todos los datos en el nodo inicial se comienza a dividir de forma recursiva haciendo una selección de la mejor división usando la variable que maximicen la ganancia de información; y se continúa de esta forma hasta que se cumpla un criterio de parada.[5][6]
 
-#### Bósques aleatorios (Random Forest)
+#### Bosques aleatorios (Random Forest)
 
 El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[7]
 
@@ -117,7 +117,6 @@ Estos estudios proporcionan una base sólida para la detección de cuentas falsa
 
 ### Métricas de Evaluación
 Para evaluar el rendimiento del modelo, se han utilizado las siguientes métricas:
-Se utilizarán las siguientes métricas:
 
 - **Exactitud (Accuracy):** Cantidad de cuentas identificadas correctamente como falsas en comparación con todas las cuentas clasificadas.
 
@@ -125,7 +124,7 @@ Se utilizarán las siguientes métricas:
 
 - **Precisión (Precisión):** Cuántas de las cuentas que el modelo etiqueta como falsas son verdaderamente falsas.
 
-- **Especificidad (Specificity):** Cuántas de las cuentas que el modelo etiqueta como falsas son verdaderamente falsas.
+- **Especificidad (Specificity):** Cuántas de las cuentas verdaderamente reales el modelo identifica correctamente como reales..
 
 ### Descripción del dataset.
 
