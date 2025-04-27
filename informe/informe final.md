@@ -103,7 +103,7 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 
 Se han considerado diversos estudios previos sobre la detección de bots y cuentas falsas, incluyendo trabajos que han utilizado Twitter, Instagram y otras plataformas. A continuación, se resumen algunos estudios relevantes:
 
- - **Purba et al.** (2019) [1] analizaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. Compararon cinco modelos de Machine Learning, concluyendo que Random Forest ofrecía la mejor precisión (91.76%). También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
+ - **Purba et al.** (2019) [1]nvestigaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. El estudio abordó dos escenarios: uno de clasificación binaria (cuentas falsas y reales) y otro de clasificación multiclase (falsas activas, falsas inactivas, reales y spam). Se compararon cinco modelos de Machine Learning, concluyendo que Random Forest obtuvo el mejor desempeño, con una precisión del 91,76% en la clasificación de cuatro clases y del 90,09% en la clasificación binaria. También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
 
 - **Rico Martínez** (2021) [12] desarrolló un modelo basado en Inteligencia Artificial para distinguir entre bots y humanos en Twitter. Aplicaron modelos de aprendizaje profundo y técnicas de selección de características obtenidas de la API de Twitter, logrando una precisión elevada mediante redes neuronales.
 
@@ -488,6 +488,10 @@ Se identificó que las características más importantes para la clasificación 
 El presente estudio ha demostrado que la inteligencia artificial es una herramienta efectiva para la detección de cuentas falsas en Instagram. Mediante el uso de **Random Forest**, se logró una precisión cercana al 90%, destacando la importancia de ciertos atributos como la tasa de seguimiento y la disponibilidad de enlaces externos.
 
 Además, proyectos relacionados han obtenidos resultados similares en la detección de bots y cuentas falsas en redes sociales, lo que sugiere que los algoritmos de aprendizaje automático pueden ser una solución viable para este problema. [1][12][13]
+
+En comparación al estudio que utilizó el mismo dataset (Purba et al., 2019[1]), se logró un rendimiento ligeralmente inferior, con una diferencia de 0.44% en la precisión. Esto puede atribuirse a que si bien se utilizó el mismo dataset, la división de los datos de entrenamiento y validación fue diferente. Además diferencias entre las librerías utilizadas y la implementación de los algoritmos pueden haber influido en los resultados.
+
+Es importante tener en cuenta que la detección de cuentas falsas es un campo en constante evolución, y los métodos utilizados hoy pueden no ser efectivos en el futuro. Por lo tanto, es fundamental seguir investigando y mejorando los algoritmos de detección para adaptarse a las nuevas tácticas utilizadas por los creadores de cuentas falsas.
 
 Posibles mejoras futuras incluyen:
 - **Exploración de modelos más complejos como XGBoost o Redes Neuronales**.
