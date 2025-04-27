@@ -352,52 +352,74 @@ Este dataset habia sido previamente limpiado y no contenía valores nulos o falt
 ### Experimentos Realizados
 Para todos los modelos se utilizó una configuración de 5-fold cross-validation para evaluar el rendimiento del modelo en el conjunto de entrenamiento. 
 
-Para los modelos de Naive Bayes, Regresión Logística y K-Nearest Neighbors, se realizaron experimentos sencillos con configuraciones básicas, sin ajuste de hiperparámetros ni selección de características.
+Para los modelos de Naive Bayes, Regresión Logística y K-Nearest Neighbors, se realizaron experimentos con configuraciones básicas. Esto significa que se utilizaron los valores predeterminados o estándar de los parámetros que controlan el comportamiento de cada algoritmo, sin probar diferentes combinaciones. Tampoco se aplicó una selección de características, sino que se utilizaron todas las disponibles del dataset para entrenar estos modelos.
 
-En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones: selección de características, eliminación de características irrelevantes, ajuste de hiperparámetros y adición de nuevas características. 
+En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones: selección de características, ajuste de hiperparámetros y adición de nuevas características. A continuación se describen los experimentos realizados, divididos en las siguientes etapas:
 
-La metodología para elegir las configuraciones de los experimentos fue la siguiente: se fueron eliminando o agregando características al modelo de forma individual y se evaluaba el impacto en la precisión del modelo. Luego, se combinaban las características que habían demostrado ser más relevantes y se evaluaba nuevamente la performance. Durante este proceso, se ajustaron los hiperparámetros `mtry` y `ntree` para encontrar la configuración que maximizara la precisión del modelo y minimizara la desviación estándar.
+#### Etapa 0: Sin modificaciones
+Se evaluó el rendimiento del modelo utilizando el dataset original. Esta etapa sirvió como referencia para comparar los resultados obtenidos en las etapas posteriores. El eperimento fue:
+- 001: Ningún tipo de modificación, se usaron todas las características del dataset.
 
-A continuación se describen las modificaciones realizadas:
+#### Etapa 1: Relación entre seguidos y seguidores
+En las redes sociales, es común que las cuentas falsas tengan un número desproporcionado de seguidos en comparación con el número de seguidores. Por lo tanto, se realizaron experimentos para evaluar la relación entre estas dos características. Se realizaron los siguientes experimentos:
+- 002: Se agregó al dataset original la feature "follow_difference" (number_of_followers  - number_of_following).
+- 003: Se agregó al dataset original la feature "follow_rate" (number_of_followers / number_of_following).
+- 004: Debido al rendimiento que se obtuvo en el experimento 003, se decidió agregar la feature "follow_rate" al dataset original y eliminar las feautures "number_of_followers" y "number_of_following". Esto se hizo para evitar el sobreajuste del modelo, ya que estas dos últimas características no aportaban información adicional al modelo.
+- 005: Se agregó nuevamente la feature "follow_rate" al dataset original, pero en esta ocasión se eliminó solamente la feature "number_of_following".
+- 006: Se agregó nuevamente la feature "follow_rate" al dataset original, pero se eliminó la feature "number_of_followers".
 
-#### Selección de características
-Algunas features del dataset original no variaban significativamente entre las clases real y fake, por lo que se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Las características eliminadas fueron:
+#### Etapa 2: Eliminación de características irrelevantes
+Algunas features del dataset original no variaban significativamente entre las clases real y fake("non_image_post_percentage", "location_tag_percentage", "comments_engagement_rate", "caption_zero"). Entonces se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Por eso fueron elminadas en los siguientes experimentos:
+- 007: Eliminación de todas las features que no aportaban información relevante al modelo.
 
-  - Non image post percentage
-  - Location tag percentage
-  - Caption zero
-  - Comments engagement rate
+También se exploró la posibilidad de eliminar las características una a una:
+- 008: Eliminación de la feature "non_image_post_percentage".
+- 009: Eliminación de la feature "location_tag_percentage".
+- 010: Eliminación de la feature "comments_engagement_rate".
+- 011: Eliminación de la feature "caption_zero".
 
-#### Agregar nuevas características
-Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidos y pocos seguidores, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las características agregadas fueron:
 
-  - follow_rate = number_of_followers / number_of_following
-  - follow_difference = number_of_followers  - number_of_following
-  - account_age = post_interval * number_of_posts
-  - follower_frequency = number_of_followers / account_age
-  - folowing_frequency = number_of_following / account_age
-  - image_frequency = (number_of_posts - non_image_post_percentage) / account_age
+Debido a que las únicas features cuya eliminación tuvo un impacto positivo en el rendimiento del modelo fueron "caption_zero" y "non_image_post_percentage", se decidió eliminar ambas características en los siguientes experimentos:
+- 012: Eliminación de las features "caption_zero" y "non_image_post_percentage".
 
-#### Eliminación de características potencialmente irrelevantes en el entrenamiento
-Durante el entrenamiento, algunas características no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo. Las características eliminadas fueron:
 
-  - Number of followers
-  - Number of following
-  - Follower keywords
-  - Has picture
-  - Bio length
-  - Post interval
-  - Promotional keywords
-  
-#### Variación de hiperparámetros
-Se variaron los valores de los hiperparámetros `mtry` y `ntree` para evaluar su impacto en el rendimiento del modelo. Se probaron diferentes combinaciones de valores para estos hiperparámetros, buscando la configuración que maximizara la precisión del modelo, sin perder estabilidad.
+#### Etapa 3: Agregar nuevas características
+Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidos y pocos seguidores, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las experimentos realizados son:
+- 013: Se agregó la feature "account_age" (días desde la creación de la cuenta) al dataset original.
+- 014: Se agregó la feature "follower_frequency" (number_of_followers / account_age) al dataset original.
+- 015: Se agregó la feature "following_frequency" (number_of_following / account_age) al dataset original.
+- 016: Se agregó la feature "image_frequency" (number_of_posts / number_of_following) al dataset original.
 
-  - ntree: 100, 150, 175, 200
-  - mtry: 5, 8, 10
+
+####  Etapa 4: Eliminación de características en el entrenamiento
+En la librería randomForest, la importancia de variables mide cuánto contribuye cada variable a mejorar la precisión de las predicciones. Se calcula midiendo cuánto aumenta el error del modelo cuando se desordena aleatoriamente una variable.
+
+Durante el entrenamiento, algunas características tenían poca importancia. Es decir, no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo:
+- 017: Se eliminó la feature "has_picture" del dataset original.
+- 018: Se eliminó la feature "bio_length" del dataset original.
+- 019: Se eliminó la feature "post_interval" del dataset original.
+- 020: Se eliminó la feature "promotional_keywords" del dataset original.
+
+#### Etapa 5: Combinación de modificaciones
+Una vez realizadas las modificaciones anteriores, se realizaron experimentos combinando las características eliminadas y agregadas, dependiendo de los resultados obtenidos en los experimentos anteriores. Se realizaron los siguientes experimentos:
+- 021: Al dataset original se le eliminaron las features "caption_zero" y "number_of_followers" y se le agregó la feature "follow_rate".
+- 022: Al dataset original se le eliminaron las features "caption_zero", "non_image_post_percentage" y "number_of_followers" y se le agregó la feature "follow_rate".
+- 022: Al dataset original se le eliminaron las features "non_image_post_percentage" y "number_of_followers" y se le agregó la feature "follow_rate".
+- 024: Al dataset original se le eliminaron las features "caption_zero" y "non_image_post_percentage" y se le agregó la feature "follow_rate".
+ 
+#### Etapa 6: Variación de hiperparámetros
+Todos los modelos anteriores se entrenaron utilizando los valores `mtry` = 5 y `ntree` = 100. Para evaluar su impacto en el rendimiento del modelo, se variaron los valores de los hiperparámetros `mtry` y `ntree`.
+Como el mejor modelo fue el 021, se decidió variar los hiperparámetros de este modelo, buscando la configuración que maximizara la precisión del modelo, sin perder estabilidad. Se realizaron los siguientes experimentos:
+- 025: Se varió el valor de `mtry` a 5 y `ntree` a 50.
+- 026: Se varió el valor de `mtry` a 5 y `ntree` a 150.
+- 027: Se varió el valor de `mtry` a 5 y `ntree` a 120.
+- 028: Se varió el valor de `mtry` a 5 y `ntree` a 175.
+- 029: Se varió el valor de `mtry` a 8 y `ntree` a 175.
+- 030: Se varió el valor de `mtry` a 10 y `ntree` a 175.
 
 
 ### Evaluación de Modelos
-Si bien se realizaron 30 experimentos con Random Forest, se presentan a continuación los resultados que obtuvieron una precisión superior al 90% en el conjunto de entrenamiento. Para cada experimento, se muestra la configuración de hiperparámetros, las características utilizadas, la precisión y la desviación estándar obtenidas en el conjunto de entrenamiento.
+Si bien se realizaron 30 experimentos con Random Forest, se presentan a continuación los resultados que obtuvieron una precisión superior al 90% en el conjunto de entrenamiento. Para cada experimento, se muestra la configuración de hiperparámetros, las modificaciones realizadas al dataset original, la precisión y la desviación estándar obtenidas en el conjunto de entrenamiento.
 
 Además se muestran los experimentos realizados con los otros algoritmos, incluyendo Regresión Logística, K-Nearest Neighbors, Naive Bayes y Árboles de Decisión. 
 
