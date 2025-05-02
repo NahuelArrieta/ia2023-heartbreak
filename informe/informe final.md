@@ -103,7 +103,7 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 
 Se han considerado diversos estudios previos sobre la detección de bots y cuentas falsas, incluyendo trabajos que han utilizado Twitter, Instagram y otras plataformas. A continuación, se resumen algunos estudios relevantes:
 
- - **Purba et al.** (2019) [1]nvestigaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. El estudio abordó dos escenarios: uno de clasificación binaria (cuentas falsas y reales) y otro de clasificación multiclase (falsas activas, falsas inactivas, reales y spam). Se compararon cinco modelos de Machine Learning, concluyendo que Random Forest obtuvo el mejor desempeño, con una precisión del 91,76% en la clasificación de cuatro clases y del 90,09% en la clasificación binaria. También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
+ - **Purba et al.** (2019) [1] investigaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. El estudio abordó dos escenarios: uno de clasificación binaria (cuentas falsas y reales) y otro de clasificación multiclase (falsas activas, falsas inactivas, reales y spam). Se compararon cinco modelos de Machine Learning, concluyendo que Random Forest obtuvo el mejor desempeño, con una precisión del 91,76% en la clasificación de cuatro clases y del 90,09% en la clasificación binaria. También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
 
 - **Rico Martínez** (2021) [12] desarrolló un modelo basado en Inteligencia Artificial para distinguir entre bots y humanos en Twitter. Aplicaron modelos de aprendizaje profundo y técnicas de selección de características obtenidas de la API de Twitter, logrando una precisión elevada mediante redes neuronales.
 
@@ -124,7 +124,7 @@ Para evaluar el rendimiento del modelo, se han utilizado las siguientes métrica
 
 - **Precisión (Precisión):** Cuántas de las cuentas que el modelo etiqueta como falsas son verdaderamente falsas.
 
-- **Especificidad (Specificity):** Cuántas de las cuentas verdaderamente reales el modelo identifica correctamente como reales..
+- **Especificidad (Specificity):** Cuántas de las cuentas verdaderamente reales el modelo identifica correctamente como reales.
 
 ### Descripción del dataset.
 
@@ -174,7 +174,7 @@ En la siguiente gráfica podemos ver una comparativa de la longitud promedio del
 
 ![](./images/datasetMetrics/avg_caption_len.png)
 
-Por lo que podemos observar una sutil diferencia entre ambas clases que podría ser útil para la clasificación. 
+Podemos observar una sutil diferencia entre ambas clases que podría ser útil para la clasificación. 
 
 #### Average Hashtags count 
 
@@ -236,7 +236,7 @@ Es una comparativa gráfica entre las clases real y fake de las cuentas que tien
 
 ![](./images/datasetMetrics/has_picture.png)
 
-Esta feature parece ser muy relevnate para distinguir a un usario falso, especialmente en los casos en los que el perfil no tiene foto.
+Esta feature parece ser muy relevante para distinguir a un usario falso, especialmente en los casos en los que el perfil no tiene foto.
 
 #### Like engagement rate 
 
@@ -248,7 +248,7 @@ $$
 
 ![](./images/datasetMetrics/like_er.png)
 
-En el gráfico vemos que ambas clses tienen diferentes distribuciones, puede ser muy para clasificar a los usuarios reales y fake.
+En el gráfico vemos que ambas clases tienen diferentes distribuciones, puede ser muy para clasificar a los usuarios reales y fake.
 
 #### Link Availibility 
 
