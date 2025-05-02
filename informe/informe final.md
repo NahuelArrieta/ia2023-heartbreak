@@ -9,7 +9,7 @@
 
 Las redes sociales han transformado la manera en que las personas interactúan y consumen contenido en línea. Instagram, en particular, es una de las plataformas más populares, utilizada tanto por individuos como por empresas para marketing e influencia digital. Sin embargo, la proliferación de cuentas falsas y bots plantea un problema significativo, afectando la autenticidad del engagement y perjudicando a marcas y usuarios legítimos.
 
-En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un modelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar (`Classification of instagram fake users using supervised machine learning algorithms`) de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
+En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un modelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar ("Classification of instagram fake users using supervised machine learning algorithms") de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
 
 A lo largo del documento, se detallará el marco teórico sobre la detección de cuentas falsas y los algoritmos utilizados, seguido del diseño experimental que incluye la selección de características, el preprocesamiento de datos y la metodología de entrenamiento y validación. Posteriormente, se presentará un análisis de los resultados obtenidos y las conclusiones finales, así como posibles mejoras futuras. 
 
@@ -55,7 +55,7 @@ Para crear un árbol de decisión primero debemos seleccionar qué variables pre
 
 #### Bosques aleatorios (Random Forest)
 
-El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un `voto` para la pertenencia a una clase; al finalizar la `votación` se toma la clase que haya adquirido la mayor cantidad de votos.[7]
+El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[7]
 
 Random Forest parece el algoritmo ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset. En el mismo construimos una cantidad $m$ de árboles de decisión con distintos conjuntos de $n$ variables predictoras seleccionadas de forma aleatoria, cada árbol crece hasta una altura máxima.
 
@@ -142,7 +142,7 @@ Para el entrenamiento y validación del modelo se utilizó un cojunto de datos d
 
 - Cosine similarity: Similaridad coseno promedio entre las publicaciones de un usuario.
 
-- Follower keywords: Uso promedio de palabras `follower hunter` (follow, like, folback, follback, f4f) por publicación.
+- Follower keywords: Uso promedio de palabras "follower hunter" (follow, like, folback, follback, f4f) por publicación.
 
 - Has Picture: Si la cuenta tiene imagen de perfil.
 
@@ -162,7 +162,7 @@ Para el entrenamiento y validación del modelo se utilizó un cojunto de datos d
 
 - Post interval: Intervalo de tiempo en horas entre publicaciones.
 
-- Promotional keywords: Uso promedio de palabras `promocionales` (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
+- Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
 
 
 ### Análisis de las features
@@ -224,7 +224,7 @@ El gráfico nos muestra que hay una diferencia entre la similitud coseno de los 
 
 #### Follower keywords 
 
-En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan obtener nuevos seguidores o likes como por ejemplo: f4f, follow for follow; follback o folback, de la expresión `follow back`.
+En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan obtener nuevos seguidores o likes como por ejemplo: f4f, follow for follow; follback o folback, de la expresión "follow back".
 
 ![](./images/datasetMetrics/follower_kw.png)
 
@@ -240,7 +240,7 @@ Esta feature parece ser muy relevante para distinguir a un usario falso, especia
 
 #### Like engagement rate 
 
-Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los `me gusta` en las publicaciones hechas por las cuentas reales y fake. En el eje $y$ el número de usuarios y en el eje $x$ se encuentra el rate de interacción que se calcula de la siguiente forma: 
+Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake. En el eje $y$ el número de usuarios y en el eje $x$ se encuentra el rate de interacción que se calcula de la siguiente forma: 
   
 $$
 \frac{likes}{\frac{posteos}{seguidores}}
