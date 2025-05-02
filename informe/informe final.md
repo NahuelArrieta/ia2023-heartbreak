@@ -9,7 +9,7 @@
 
 Las redes sociales han transformado la manera en que las personas interactúan y consumen contenido en línea. Instagram, en particular, es una de las plataformas más populares, utilizada tanto por individuos como por empresas para marketing e influencia digital. Sin embargo, la proliferación de cuentas falsas y bots plantea un problema significativo, afectando la autenticidad del engagement y perjudicando a marcas y usuarios legítimos.
 
-En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un modelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar ("Classification of instagram fake users using supervised machine learning algorithms") de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
+En el marco de la materia Inteligencia Artificial I de la Licenciatura en Ciencias de la Computación de la Universidad Nacional de Cuyo, se propone la realización de un proyecto final que consiste en crear un modelo capaz de detectar cuentas falsas de Instagram.  Se ha optado por aplicar algoritmos de aprendizaje automático supervisado para desarrollar un modelo capaz de clasificar cuentas como falsas o auténticas con un alto grado de precisión. Para ello, se ha utilizado un conjunto de datos etiquetado obtenido de Kaggle, conteniendo más de 65,000 cuentas con diversas características. El dataset fue producto de un trabajo similar (`Classification of instagram fake users using supervised machine learning algorithms`) de K. R. Purba, D. Asirvatham y R. K. Murugesan [1].
 
 A lo largo del documento, se detallará el marco teórico sobre la detección de cuentas falsas y los algoritmos utilizados, seguido del diseño experimental que incluye la selección de características, el preprocesamiento de datos y la metodología de entrenamiento y validación. Posteriormente, se presentará un análisis de los resultados obtenidos y las conclusiones finales, así como posibles mejoras futuras. 
 
@@ -55,7 +55,7 @@ Para crear un árbol de decisión primero debemos seleccionar qué variables pre
 
 #### Bosques aleatorios (Random Forest)
 
-El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[7]
+El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un `voto` para la pertenencia a una clase; al finalizar la `votación` se toma la clase que haya adquirido la mayor cantidad de votos.[7]
 
 Random Forest parece el algoritmo ideal ya que puede aprovecharse de las relaciones que existen entre las variables predictoras y es menos sensible al sobreajuste, además de lograr aprovechar el tamaño de nuestro dataset. En el mismo construimos una cantidad $m$ de árboles de decisión con distintos conjuntos de $n$ variables predictoras seleccionadas de forma aleatoria, cada árbol crece hasta una altura máxima.
 
@@ -142,7 +142,7 @@ Para el entrenamiento y validación del modelo se utilizó un cojunto de datos d
 
 - Cosine similarity: Similaridad coseno promedio entre las publicaciones de un usuario.
 
-- Follower keywords: Uso promedio de palabras "follower hunter" (follow, like, folback, follback, f4f) por publicación.
+- Follower keywords: Uso promedio de palabras `follower hunter` (follow, like, folback, follback, f4f) por publicación.
 
 - Has Picture: Si la cuenta tiene imagen de perfil.
 
@@ -162,7 +162,7 @@ Para el entrenamiento y validación del modelo se utilizó un cojunto de datos d
 
 - Post interval: Intervalo de tiempo en horas entre publicaciones.
 
-- Promotional keywords: Uso promedio de palabras "promocionales" (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
+- Promotional keywords: Uso promedio de palabras `promocionales` (regrann, contest, repost, giveaway, mention, share, give away, quiz) por publicación.
 
 
 ### Análisis de las features
@@ -224,7 +224,7 @@ El gráfico nos muestra que hay una diferencia entre la similitud coseno de los 
 
 #### Follower keywords 
 
-En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan obtener nuevos seguidores o likes como por ejemplo: f4f, follow for follow; follback o folback, de la expresión "follow back".
+En la gráfica (en escala logarítmica) se compara el promedio de uso de palabras clave que buscan obtener nuevos seguidores o likes como por ejemplo: f4f, follow for follow; follback o folback, de la expresión `follow back`.
 
 ![](./images/datasetMetrics/follower_kw.png)
 
@@ -240,7 +240,7 @@ Esta feature parece ser muy relevante para distinguir a un usario falso, especia
 
 #### Like engagement rate 
 
-Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los "me gusta" en las publicaciones hechas por las cuentas reales y fake. En el eje $y$ el número de usuarios y en el eje $x$ se encuentra el rate de interacción que se calcula de la siguiente forma: 
+Es esta gráfica en escala logarítmica se compara el nivel de interacción en forma de los `me gusta` en las publicaciones hechas por las cuentas reales y fake. En el eje $y$ el número de usuarios y en el eje $x$ se encuentra el rate de interacción que se calcula de la siguiente forma: 
   
 $$
 \frac{likes}{\frac{posteos}{seguidores}}
@@ -361,50 +361,50 @@ Se evaluó el rendimiento del modelo utilizando el dataset original. Esta etapa 
 
 #### Etapa 1: Relación entre seguidos y seguidores
 En las redes sociales, es común que las cuentas falsas tengan un número desproporcionado de seguidos en comparación con el número de seguidores. Por lo tanto, se realizaron experimentos para evaluar la relación entre estas dos características. Se realizaron los siguientes experimentos:
-- 002: Se agregó al dataset original la feature "follow_difference" (number_of_followers  - number_of_following).
-- 003: Se agregó al dataset original la feature "follow_rate" (number_of_followers / number_of_following).
-- 004: Debido al rendimiento que se obtuvo en el experimento 003, se decidió agregar la feature "follow_rate" al dataset original y eliminar las feautures "number_of_followers" y "number_of_following". Esto se hizo para evitar el sobreajuste del modelo, ya que estas dos últimas características no aportaban información adicional al modelo.
-- 005: Se agregó nuevamente la feature "follow_rate" al dataset original, pero en esta ocasión se eliminó solamente la feature "number_of_following".
-- 006: Se agregó nuevamente la feature "follow_rate" al dataset original, pero se eliminó la feature "number_of_followers".
+- 002: Se agregó al dataset original la feature `follow_difference` (number_of_followers  - number_of_following).
+- 003: Se agregó al dataset original la feature `follow_rate` (number_of_followers / number_of_following).
+- 004: Debido al rendimiento que se obtuvo en el experimento 003, se decidió agregar la feature `follow_rate` al dataset original y eliminar las feautures `number_of_followers` y `number_of_following`. Esto se hizo para evitar el sobreajuste del modelo, ya que estas dos últimas características no aportaban información adicional al modelo.
+- 005: Se agregó nuevamente la feature `follow_rate` al dataset original, pero en esta ocasión se eliminó solamente la feature `number_of_following`.
+- 006: Se agregó nuevamente la feature `follow_rate` al dataset original, pero se eliminó la feature `number_of_followers`.
 
 #### Etapa 2: Eliminación de características irrelevantes
-Algunas features del dataset original no variaban significativamente entre las clases real y fake("non_image_post_percentage", "location_tag_percentage", "comments_engagement_rate", "caption_zero"). Entonces se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Por eso fueron elminadas en los siguientes experimentos:
+Algunas features del dataset original no variaban significativamente entre las clases real y fake(`non_image_post_percentage`, `location_tag_percentage`, `comments_engagement_rate`, `caption_zero`). Entonces se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Por eso fueron elminadas en los siguientes experimentos:
 - 007: Eliminación de todas las features que no aportaban información relevante al modelo.
 
 También se exploró la posibilidad de eliminar las características una a una:
-- 008: Eliminación de la feature "non_image_post_percentage".
-- 009: Eliminación de la feature "location_tag_percentage".
-- 010: Eliminación de la feature "comments_engagement_rate".
-- 011: Eliminación de la feature "caption_zero".
+- 008: Eliminación de la feature `non_image_post_percentage`.
+- 009: Eliminación de la feature `location_tag_percentage`.
+- 010: Eliminación de la feature `comments_engagement_rate`.
+- 011: Eliminación de la feature `caption_zero`.
 
 
-Debido a que las únicas features cuya eliminación tuvo un impacto positivo en el rendimiento del modelo fueron "caption_zero" y "non_image_post_percentage", se decidió eliminar ambas características en los siguientes experimentos:
-- 012: Eliminación de las features "caption_zero" y "non_image_post_percentage".
+Debido a que las únicas features cuya eliminación tuvo un impacto positivo en el rendimiento del modelo fueron `caption_zero` y `non_image_post_percentage`, se decidió eliminar ambas características en los siguientes experimentos:
+- 012: Eliminación de las features `caption_zero` y `non_image_post_percentage`.
 
 
 #### Etapa 3: Agregar nuevas características
 Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidos y pocos seguidores, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las experimentos realizados son:
-- 013: Se agregó la feature "account_age" (días desde la creación de la cuenta) al dataset original.
-- 014: Se agregó la feature "follower_frequency" (number_of_followers / account_age) al dataset original.
-- 015: Se agregó la feature "following_frequency" (number_of_following / account_age) al dataset original.
-- 016: Se agregó la feature "image_frequency" (number_of_posts / number_of_following) al dataset original.
+- 013: Se agregó la feature `account_age` (días desde la creación de la cuenta) al dataset original.
+- 014: Se agregó la feature `follower_frequency` (number_of_followers / account_age) al dataset original.
+- 015: Se agregó la feature `following_frequency` (number_of_following / account_age) al dataset original.
+- 016: Se agregó la feature `image_frequency` (number_of_posts / number_of_following) al dataset original.
 
 
 ####  Etapa 4: Eliminación de características en el entrenamiento
 En la librería randomForest, la importancia de variables mide cuánto contribuye cada variable a mejorar la precisión de las predicciones. Se calcula midiendo cuánto aumenta el error del modelo cuando se desordena aleatoriamente una variable.
 
 Durante el entrenamiento, algunas características tenían poca importancia. Es decir, no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo:
-- 017: Se eliminó la feature "has_picture" del dataset original.
-- 018: Se eliminó la feature "bio_length" del dataset original.
-- 019: Se eliminó la feature "post_interval" del dataset original.
-- 020: Se eliminó la feature "promotional_keywords" del dataset original.
+- 017: Se eliminó la feature `has_picture` del dataset original.
+- 018: Se eliminó la feature `bio_length` del dataset original.
+- 019: Se eliminó la feature `post_interval` del dataset original.
+- 020: Se eliminó la feature `promotional_keywords` del dataset original.
 
 #### Etapa 5: Combinación de modificaciones
 Una vez realizadas las modificaciones anteriores, se realizaron experimentos combinando las características eliminadas y agregadas, dependiendo de los resultados obtenidos en los experimentos anteriores. Se realizaron los siguientes experimentos:
-- 021: Al dataset original se le eliminaron las features "caption_zero" y "number_of_followers" y se le agregó la feature "follow_rate".
-- 022: Al dataset original se le eliminaron las features "caption_zero", "non_image_post_percentage" y "number_of_followers" y se le agregó la feature "follow_rate".
-- 022: Al dataset original se le eliminaron las features "non_image_post_percentage" y "number_of_followers" y se le agregó la feature "follow_rate".
-- 024: Al dataset original se le eliminaron las features "caption_zero" y "non_image_post_percentage" y se le agregó la feature "follow_rate".
+- 021: Al dataset original se le eliminaron las features `caption_zero` y `number_of_followers` y se le agregó la feature `follow_rate`.
+- 022: Al dataset original se le eliminaron las features `caption_zero`, `non_image_post_percentage` y `number_of_followers` y se le agregó la feature `follow_rate`.
+- 022: Al dataset original se le eliminaron las features `non_image_post_percentage` y `number_of_followers` y se le agregó la feature `follow_rate`.
+- 024: Al dataset original se le eliminaron las features `caption_zero` y `non_image_post_percentage` y se le agregó la feature `follow_rate`.
  
 #### Etapa 6: Variación de hiperparámetros
 Todos los modelos anteriores se entrenaron utilizando los valores `mtry` = 5 y `ntree` = 100. Para evaluar su impacto en el rendimiento del modelo, se variaron los valores de los hiperparámetros `mtry` y `ntree`.
