@@ -21,9 +21,9 @@ La detección de cuentas falsas en redes sociales es un problema de clasificaci�
 
 
 
-#### Regresión Logística o Regresión Lineal
+#### Regresión Logística
 
-Un modelo lineal simple que estima la probabilidad de un elemento de pertenecer a una clase específica. Es una buena opción para los problema de clasificación, ya que utilizando una combinación lineal de las variables predictoras busca conseguir el valor de la variable dependiente: 
+Un modelo aprendizaje supervisado que estima la probabilidad de un elemento de pertenecer a una clase específica. Es una opción adecuada para problemas de clasificación, ya que utiliza una combinación lineal de las variables predictoras para modelar la probabilidad de ocurrencia de una determinada categoría de la variable dependiente: 
 
 $$
 z = w_1 x_1 + w_2 x_2 + \ldots + w_n x_n + b
@@ -53,7 +53,7 @@ Este algoritmo crea un modelo en forma de árbol, donde cada nodo representa una
 
 Para crear un árbol de decisión primero debemos seleccionar qué variables predictoras vamos a considerar. Se mide la ganancia de la información por cada variable predictora y se usa la de mayor ganancia para que sea el nodo raiz; luego con todos los datos en el nodo inicial se comienza a dividir de forma recursiva haciendo una selección de la mejor división usando la variable que maximicen la ganancia de información; y se continúa de esta forma hasta que se cumpla un criterio de parada.[5][6]
 
-#### Bósques aleatorios (Random Forest)
+#### Bosques aleatorios (Random Forest)
 
 El algoritmo funciona igual que el de un árbol de decisión, pero es repetido hasta adquirir la cantidad de árboles que se hayan requerido con la cantidad correspondiente de variables predictoras cada uno. Para obtener un resultado, se recorre cada árbol hasta alcanzar un resultado, esto cuenta como un "voto" para la pertenencia a una clase; al finalizar la "votación" se toma la clase que haya adquirido la mayor cantidad de votos.[7]
 
@@ -103,7 +103,7 @@ Este algoritmo se basa en calcular los $k$ vecinos más cercanos del conjunto de
 
 Se han considerado diversos estudios previos sobre la detección de bots y cuentas falsas, incluyendo trabajos que han utilizado Twitter, Instagram y otras plataformas. A continuación, se resumen algunos estudios relevantes:
 
- - **Purba et al.** (2019) [1] analizaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. Compararon cinco modelos de Machine Learning, concluyendo que Random Forest ofrecía la mejor precisión (91.76%). También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
+ - **Purba et al.** (2019) [1] investigaron la detección de cuentas falsas en Instagram utilizando algoritmos de aprendizaje supervisado. El estudio abordó dos escenarios: uno de clasificación binaria (cuentas falsas y reales) y otro de clasificación multiclase (falsas activas, falsas inactivas, reales y spam). Se compararon cinco modelos de Machine Learning, concluyendo que Random Forest obtuvo el mejor desempeño, con una precisión del 91,76% en la clasificación de cuatro clases y del 90,09% en la clasificación binaria. También identificaron las características más relevantes para la clasificación, como la longitud de la biografía, el número de seguidores, el número de publicaciones y la disponibilidad de enlaces. Es relevante destacar que en este estudio se utilizó el mismo dataset que en nuestro trabajo, lo que permite una comparación directa de los resultados obtenidos.
 
 - **Rico Martínez** (2021) [12] desarrolló un modelo basado en Inteligencia Artificial para distinguir entre bots y humanos en Twitter. Aplicaron modelos de aprendizaje profundo y técnicas de selección de características obtenidas de la API de Twitter, logrando una precisión elevada mediante redes neuronales.
 
@@ -117,7 +117,6 @@ Estos estudios proporcionan una base sólida para la detección de cuentas falsa
 
 ### Métricas de Evaluación
 Para evaluar el rendimiento del modelo, se han utilizado las siguientes métricas:
-Se utilizarán las siguientes métricas:
 
 - **Exactitud (Accuracy):** Cantidad de cuentas identificadas correctamente como falsas en comparación con todas las cuentas clasificadas.
 
@@ -125,7 +124,7 @@ Se utilizarán las siguientes métricas:
 
 - **Precisión (Precisión):** Cuántas de las cuentas que el modelo etiqueta como falsas son verdaderamente falsas.
 
-- **Especificidad (Specificity):** Cuántas de las cuentas que el modelo etiqueta como falsas son verdaderamente falsas.
+- **Especificidad (Specificity):** Cuántas de las cuentas verdaderamente reales el modelo identifica correctamente como reales.
 
 ### Descripción del dataset.
 
@@ -175,7 +174,7 @@ En la siguiente gráfica podemos ver una comparativa de la longitud promedio del
 
 ![](./images/datasetMetrics/avg_caption_len.png)
 
-Por lo que podemos observar ambas clases tienen una gran similitud en la longitud de sus pie de publicación por lo que en un principio podríamos decir que no es una buena feature para diferenciar ambas clases.
+Podemos observar una sutil diferencia entre ambas clases que podría ser útil para la clasificación. 
 
 #### Average Hashtags count 
 
@@ -237,7 +236,7 @@ Es una comparativa gráfica entre las clases real y fake de las cuentas que tien
 
 ![](./images/datasetMetrics/has_picture.png)
 
-Vemos en el gráfico que la mayoría de usuarios tienen una imagen de perfil pero no hay una diferencia notable entre las clases real y fake, por lo tanto esta feature no es de mucha utilidad de forma individual.
+Esta feature parece ser muy relevante para distinguir a un usario falso, especialmente en los casos en los que el perfil no tiene foto.
 
 #### Like engagement rate 
 
@@ -249,7 +248,7 @@ $$
 
 ![](./images/datasetMetrics/like_er.png)
 
-En el gráfico vemos que ambas clases tienen un distribución similar en el plano por lo que esta feature puede no ser muy útil para clasificar a los usuarios reales y fake.
+En el gráfico vemos que ambas clases tienen diferentes distribuciones, puede ser muy para clasificar a los usuarios reales y fake.
 
 #### Link Availibility 
 
@@ -297,7 +296,7 @@ El gráfico compara el numero de posteos de las clases real y fake en escala log
 
 ![](./images/datasetMetrics/number_post.png)
 
-Lo que se puede observar es que no hay una diferencia clara entre el número de posteos de ambas clases por lo que no puede ser una feature de gran utilidad por si sola. 
+Lo que se puede observar es que no hay una diferencia clara entre el número de posteos de ambas clases, pero no descartamos su posibilidad de ser útil para la clasificación. 
 
 #### Post interval 
 
@@ -352,52 +351,74 @@ Este dataset habia sido previamente limpiado y no contenía valores nulos o falt
 ### Experimentos Realizados
 Para todos los modelos se utilizó una configuración de 5-fold cross-validation para evaluar el rendimiento del modelo en el conjunto de entrenamiento. 
 
-Para los modelos de Naive Bayes, Regresión Logística y K-Nearest Neighbors, se realizaron experimentos sencillos con configuraciones básicas, sin ajuste de hiperparámetros ni selección de características.
+Para los modelos de Naive Bayes, Regresión Logística y K-Nearest Neighbors, se realizaron experimentos con configuraciones básicas. Esto significa que se utilizaron los valores predeterminados o estándar de los parámetros que controlan el comportamiento de cada algoritmo, sin probar diferentes combinaciones. Tampoco se aplicó una selección de características, sino que se utilizaron todas las disponibles del dataset para entrenar estos modelos.
 
-En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones: selección de características, eliminación de características irrelevantes, ajuste de hiperparámetros y adición de nuevas características. 
+En el caso de Random Forest, se realizaron 30 experimentos distintos en los que se aplicaban una o más de las siguientes configuraciones: selección de características, ajuste de hiperparámetros y adición de nuevas características. A continuación se describen los experimentos realizados, divididos en las siguientes etapas:
 
-La metodología para elegir las configuraciones de los experimentos fue la siguiente: se fueron eliminando o agregando características al modelo de forma individual y se evaluaba el impacto en la precisión del modelo. Luego, se combinaban las características que habían demostrado ser más relevantes y se evaluaba nuevamente la performance. Durante este proceso, se ajustaron los hiperparámetros `mtry` y `ntree` para encontrar la configuración que maximizara la precisión del modelo y minimizara la desviación estándar.
+#### Etapa 0: Sin modificaciones
+Se evaluó el rendimiento del modelo utilizando el dataset original. Esta etapa sirvió como referencia para comparar los resultados obtenidos en las etapas posteriores. El eperimento fue:
+- 001: Ningún tipo de modificación, se usaron todas las características del dataset.
 
-A continuación se describen las modificaciones realizadas:
+#### Etapa 1: Relación entre seguidos y seguidores
+En las redes sociales, es común que las cuentas falsas tengan un número desproporcionado de seguidos en comparación con el número de seguidores. Por lo tanto, se realizaron experimentos para evaluar la relación entre estas dos características. Se realizaron los siguientes experimentos:
+- 002: Se agregó al dataset original la feature `follow_difference` (number_of_followers  - number_of_following).
+- 003: Se agregó al dataset original la feature `follow_rate` (number_of_followers / number_of_following).
+- 004: Debido al rendimiento que se obtuvo en el experimento 003, se decidió agregar la feature `follow_rate` al dataset original y eliminar las feautures `number_of_followers` y `number_of_following`. Esto se hizo para evitar el sobreajuste del modelo, ya que estas dos últimas características no aportaban información adicional al modelo.
+- 005: Se agregó nuevamente la feature `follow_rate` al dataset original, pero en esta ocasión se eliminó solamente la feature `number_of_following`.
+- 006: Se agregó nuevamente la feature `follow_rate` al dataset original, pero se eliminó la feature `number_of_followers`.
 
-#### Selección de características
-Algunas features del dataset original no variaban significativamente entre las clases real y fake, por lo que se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Las características eliminadas fueron:
+#### Etapa 2: Eliminación de características irrelevantes
+Algunas features del dataset original no variaban significativamente entre las clases real y fake(`non_image_post_percentage`, `location_tag_percentage`, `comments_engagement_rate`, `caption_zero`). Entonces se plantearon experimentos en los que se eliminaban estas características para evaluar su impacto en el rendimiento del modelo. Por eso fueron elminadas en los siguientes experimentos:
+- 007: Eliminación de todas las features que no aportaban información relevante al modelo.
 
-  - Non image post percentage
-  - Location tag percentage
-  - Caption zero
-  - Comments engagement rate
+También se exploró la posibilidad de eliminar las características una a una:
+- 008: Eliminación de la feature `non_image_post_percentage`.
+- 009: Eliminación de la feature `location_tag_percentage`.
+- 010: Eliminación de la feature `comments_engagement_rate`.
+- 011: Eliminación de la feature `caption_zero`.
 
-#### Agregar nuevas características
-Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidos y pocos seguidores, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las características agregadas fueron:
 
-  - follow_rate = number_of_followers / number_of_following
-  - follow_difference = number_of_followers  - number_of_following
-  - account_age = post_interval * number_of_posts
-  - follower_frequency = number_of_followers / account_age
-  - folowing_frequency = number_of_following / account_age
-  - image_frequency = (number_of_posts - non_image_post_percentage) / account_age
+Debido a que las únicas features cuya eliminación tuvo un impacto positivo en el rendimiento del modelo fueron `caption_zero` y `non_image_post_percentage`, se decidió eliminar ambas características en los siguientes experimentos:
+- 012: Eliminación de las features `caption_zero` y `non_image_post_percentage`.
 
-#### Eliminación de características potencialmente irrelevantes en el entrenamiento
-Durante el entrenamiento, algunas características no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo. Las características eliminadas fueron:
 
-  - Number of followers
-  - Number of following
-  - Follower keywords
-  - Has picture
-  - Bio length
-  - Post interval
-  - Promotional keywords
-  
-#### Variación de hiperparámetros
-Se variaron los valores de los hiperparámetros `mtry` y `ntree` para evaluar su impacto en el rendimiento del modelo. Se probaron diferentes combinaciones de valores para estos hiperparámetros, buscando la configuración que maximizara la precisión del modelo, sin perder estabilidad.
+#### Etapa 3: Agregar nuevas características
+Al momento de evaluar la legitimidad de cuenta de Instagram, existen agunos comportamientos que pueden ser indicativos de que una cuenta es falsa. Por ejemplo, una cuenta que tiene muchos seguidos y pocos seguidores, o una cuenta reciente con mucha interacción. Por esta razón, se agregaron nuevas características al dataset que podrían ser útiles para la clasificación. Las experimentos realizados son:
+- 013: Se agregó la feature `account_age` (días desde la creación de la cuenta) al dataset original.
+- 014: Se agregó la feature `follower_frequency` (number_of_followers / account_age) al dataset original.
+- 015: Se agregó la feature `following_frequency` (number_of_following / account_age) al dataset original.
+- 016: Se agregó la feature `image_frequency` (number_of_posts / number_of_following) al dataset original.
 
-  - ntree: 100, 150, 175, 200
-  - mtry: 5, 8, 10
+
+####  Etapa 4: Eliminación de características en el entrenamiento
+En la librería randomForest, la importancia de variables mide cuánto contribuye cada variable a mejorar la precisión de las predicciones. Se calcula midiendo cuánto aumenta el error del modelo cuando se desordena aleatoriamente una variable.
+
+Durante el entrenamiento, algunas características tenían poca importancia. Es decir, no tenían un impacto significativo en la clasificación de las cuentas. Entonces, se realizaron experimentos en los que se eliminaban estas características para evitar el sobreajuste y mejorar la generalización del modelo:
+- 017: Se eliminó la feature `has_picture` del dataset original.
+- 018: Se eliminó la feature `bio_length` del dataset original.
+- 019: Se eliminó la feature `post_interval` del dataset original.
+- 020: Se eliminó la feature `promotional_keywords` del dataset original.
+
+#### Etapa 5: Combinación de modificaciones
+Una vez realizadas las modificaciones anteriores, se realizaron experimentos combinando las características eliminadas y agregadas, dependiendo de los resultados obtenidos en los experimentos anteriores. Se realizaron los siguientes experimentos:
+- 021: Al dataset original se le eliminaron las features `caption_zero` y `number_of_followers` y se le agregó la feature `follow_rate`.
+- 022: Al dataset original se le eliminaron las features `caption_zero`, `non_image_post_percentage` y `number_of_followers` y se le agregó la feature `follow_rate`.
+- 022: Al dataset original se le eliminaron las features `non_image_post_percentage` y `number_of_followers` y se le agregó la feature `follow_rate`.
+- 024: Al dataset original se le eliminaron las features `caption_zero` y `non_image_post_percentage` y se le agregó la feature `follow_rate`.
+ 
+#### Etapa 6: Variación de hiperparámetros
+Todos los modelos anteriores se entrenaron utilizando los valores `mtry` = 5 y `ntree` = 100. Para evaluar su impacto en el rendimiento del modelo, se variaron los valores de los hiperparámetros `mtry` y `ntree`.
+Como el mejor modelo fue el 021, se decidió variar los hiperparámetros de este modelo, buscando la configuración que maximizara la precisión del modelo, sin perder estabilidad. Se realizaron los siguientes experimentos:
+- 025: Se varió el valor de `mtry` a 5 y `ntree` a 50.
+- 026: Se varió el valor de `mtry` a 5 y `ntree` a 150.
+- 027: Se varió el valor de `mtry` a 5 y `ntree` a 120.
+- 028: Se varió el valor de `mtry` a 5 y `ntree` a 175.
+- 029: Se varió el valor de `mtry` a 8 y `ntree` a 175.
+- 030: Se varió el valor de `mtry` a 10 y `ntree` a 175.
 
 
 ### Evaluación de Modelos
-Si bien se realizaron 30 experimentos con Random Forest, se presentan a continuación los resultados que obtuvieron una precisión superior al 90% en el conjunto de entrenamiento. Para cada experimento, se muestra la configuración de hiperparámetros, las características utilizadas, la precisión y la desviación estándar obtenidas en el conjunto de entrenamiento.
+Si bien se realizaron 30 experimentos con Random Forest, se presentan a continuación los resultados que obtuvieron una precisión superior al 90% en el conjunto de entrenamiento. Para cada experimento, se muestra la configuración de hiperparámetros, las modificaciones realizadas al dataset original, la precisión y la desviación estándar obtenidas en el conjunto de entrenamiento.
 
 Además se muestran los experimentos realizados con los otros algoritmos, incluyendo Regresión Logística, K-Nearest Neighbors, Naive Bayes y Árboles de Decisión. 
 
@@ -466,6 +487,10 @@ Se identificó que las características más importantes para la clasificación 
 El presente estudio ha demostrado que la inteligencia artificial es una herramienta efectiva para la detección de cuentas falsas en Instagram. Mediante el uso de **Random Forest**, se logró una precisión cercana al 90%, destacando la importancia de ciertos atributos como la tasa de seguimiento y la disponibilidad de enlaces externos.
 
 Además, proyectos relacionados han obtenidos resultados similares en la detección de bots y cuentas falsas en redes sociales, lo que sugiere que los algoritmos de aprendizaje automático pueden ser una solución viable para este problema. [1][12][13]
+
+En comparación al estudio que utilizó el mismo dataset (Purba et al., 2019[1]), se logró un rendimiento ligeralmente inferior, con una diferencia de 0.44% en la precisión. Esto puede atribuirse a que si bien se utilizó el mismo dataset, la división de los datos de entrenamiento y validación fue diferente. Además diferencias entre las librerías utilizadas y la implementación de los algoritmos pueden haber influido en los resultados.
+
+Es importante tener en cuenta que la detección de cuentas falsas es un campo en constante evolución, y los métodos utilizados hoy pueden no ser efectivos en el futuro. Por lo tanto, es fundamental seguir investigando y mejorando los algoritmos de detección para adaptarse a las nuevas tácticas utilizadas por los creadores de cuentas falsas.
 
 Posibles mejoras futuras incluyen:
 - **Exploración de modelos más complejos como XGBoost o Redes Neuronales**.
